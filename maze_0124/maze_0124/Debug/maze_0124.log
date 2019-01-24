@@ -1,0 +1,4 @@
+﻿  test.c
+c:\users\lenovo\source\repos\maze_0124\maze_0124\test.c(46): warning C4013: “strlen”未定义；假设外部返回 int
+c:\users\lenovo\source\repos\maze_0124\maze_0124\test.c(39): warning C4715: “Find_finger”: 不是所有的控件路径都返回值
+  maze_0124.vcxproj -> C:\Users\lenovo\source\repos\maze_0124\Debug\maze_0124.exe
