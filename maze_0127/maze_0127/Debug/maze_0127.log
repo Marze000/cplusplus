@@ -1,0 +1,4 @@
+﻿  test.c
+d:\c语言练习\xiaomaze\maze_0127\maze_0127\test.c(91): warning C4090: “=”: 不同的“const”限定符
+d:\c语言练习\xiaomaze\maze_0127\maze_0127\test.c(103): warning C4715: “my_strstr”: 不是所有的控件路径都返回值
+  maze_0127.vcxproj -> D:\c语言练习\xiaomaze\maze_0127\Debug\maze_0127.exe
