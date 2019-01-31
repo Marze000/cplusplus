@@ -1,0 +1,3 @@
+﻿  test.c
+d:\c语言练习\xiaomaze\maze_0131\maze_0131\test.c(12): warning C4013: “gets”未定义；假设外部返回 int
+  maze_0131.vcxproj -> D:\c语言练习\xiaomaze\maze_0131\Debug\maze_0131.exe
