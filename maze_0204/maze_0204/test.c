@@ -44,10 +44,16 @@ void paixu(char* str1, char* str2)
 
 int main()
 {
-	char* s1 = "adhlnqrto";
-	char* s2 = "cefksxz";
+	//char* s1 = "adhlnqrto";
+	//char* s2 = "cefksxz";
 
-	paixu(s1,s2);
+	//paixu(s1,s2);
+	
+
+
+
+
+
 
 	system("pause");
 	return 0;

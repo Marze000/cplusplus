@@ -1,0 +1,7 @@
+﻿  test.c
+d:\c语言练习\xiaomaze\project1\project1\test.c(10): warning C4047: “=”:“int *”与“int”的间接级别不同
+d:\c语言练习\xiaomaze\project1\project1\test.c(11): warning C4047: “<”:“int *”与“int”的间接级别不同
+d:\c语言练习\xiaomaze\project1\project1\test.c(68): warning C4047: “函数”:“int”与“int [10]”的间接级别不同
+d:\c语言练习\xiaomaze\project1\project1\test.c(68): warning C4024: “find”: 形参和实参 2 的类型不同
+d:\c语言练习\xiaomaze\project1\project1\test.c(26): warning C4715: “find”: 不是所有的控件路径都返回值
+  Project1.vcxproj -> D:\c语言练习\xiaomaze\Project1\Debug\maze_0206.exe
