@@ -83,21 +83,20 @@ void Delete(member *m)//删除联系人
 
 	printf("请输入要删除联系人的编号？");
 	scanf("%d", &serial_number);
-	if (serial_number > 0 && serial_number < m->mem_index)
-	{
-
-
-
-
-	}
-	else
+	if ((serial_number < 0) || (serial_number >= m->mem_index))
 	{
 		printf("输入有误！");
 		return;
 	}
-
-
-
+	if(serial_number== m->mem_index-1)
+	{
+		--m->mem_index;
+		printf("删除成功！");
+		return;
+	}
+	m->mem[serial_number] = m->mem[m->mem_index - 1];
+	--m->mem_index;
+	printf("删除联系人成功！");
 }
 
 void Display(member *m)//显示联系人
@@ -108,7 +107,8 @@ void Display(member *m)//显示联系人
 	}
 	for (int i = 1; i < m->mem_index; ++i)
 	{
-		printf("%d.姓名：%s\t电话：%s\n",i, m ->mem[i].name, m->mem[i].num);
+		printf("%d.姓名：%s\t电话：%s\n",
+			i, m ->mem[i].name, m->mem[i].num);
 	}
 }
 
@@ -118,6 +118,19 @@ void Find(member *m)//查找联系人
 	{
 		return;
 	}
+
+	////char name_find[4] = { 0 };
+	//printf("请输入你要查找的联系人姓名？");
+	//char ch;
+	//scanf("%s",&ch);
+	//for(int j = 0; j< m->mem_index;++j)
+	//{
+	//	if (strcmp(ch, m->mem[j].name) == 0)
+	//	{
+	//		printf("姓名：%s\t电话：%s\n",  m->mem[j].name, m->mem[j].num);
+	//		printf("查找成功！\n");
+	//	}
+	//}
 	int index = 0;
 	while (1)
 	{
@@ -137,12 +150,13 @@ void Find(member *m)//查找联系人
 
 void Modify(member *m)//修改联系人
 {
-	int index;
-	int type;
 	if (m == NULL)
 	{
 		return;
 	}
+	int index;
+	int type;
+
 	printf("请输入你要修改的联系人的编号：");
 	scanf("%d", &index);
 	if (index < 0 || index >( m->mem_index - 1))
