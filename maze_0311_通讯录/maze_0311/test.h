@@ -26,9 +26,3 @@ void Display(member *m);//显示联系人
 void Find(member *m);//查找联系人
 void Modify(member *m);//修改联系人
 void Clear(member *m);//清空联系人
-
-void Swap(infor *m1, infor *m2);//按姓名排序
-void Sort(member *m);
-
-
-

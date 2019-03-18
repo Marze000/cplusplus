@@ -1,0 +1,29 @@
+﻿  test.c
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(92): warning C4474: printf: 格式字符串中传递的参数太多
+  c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(92): note: 占位符和其参数预计 0 可变参数，但提供的却是 1 参数
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(144): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(144): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(144): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(145): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(145): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(145): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(146): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(146): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(146): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(147): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(147): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(147): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(148): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(148): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(148): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(149): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(149): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(149): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(150): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(150): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(150): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(151): warning C4047: “函数”:“char (*)[11]”与“char”的间接级别不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(151): warning C4024: “UpdateShowMap”: 形参和实参 1 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(151): warning C4024: “UpdateShowMap”: 形参和实参 3 的类型不同
+c:\users\lenovo\source\repos\maze\maze_0119\maze0119\test.c(154): warning C4717: “UpdateShowMap”: 如递归所有控件路径，函数将导致运行时堆栈溢出
+  maze0119.vcxproj -> C:\Users\lenovo\source\repos\maze\maze_0119\Debug\maze0119.exe

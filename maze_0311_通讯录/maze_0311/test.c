@@ -7,8 +7,7 @@ int main()
 	Init(&m);
 
 	typedef void(*T)(member *m);
-	//T menu[] = { Insert,Delete,Display,Find };
-	T menu[] = { Insert,Delete,Display,Find,Modify,Clear,Sort };
+	T menu[] = { Insert,Delete,Display,Find,Modify,Clear};
 	int choice = 0;
 	Menu();
 	printf("\n请输入接下来要操做的选项!\n");
@@ -40,7 +39,6 @@ void Menu()
 	printf("4.查找联系人\n");
 	printf("5.修改联系人\n");
 	printf("6.清空联系人\n");
-	printf("7.对联系人排序\n");
 	printf("0.退出\n");
 	printf("************\n");
 }
@@ -119,18 +117,6 @@ void Find(member *m)//查找联系人
 		return;
 	}
 
-	////char name_find[4] = { 0 };
-	//printf("请输入你要查找的联系人姓名？");
-	//char ch;
-	//scanf("%s",&ch);
-	//for(int j = 0; j< m->mem_index;++j)
-	//{
-	//	if (strcmp(ch, m->mem[j].name) == 0)
-	//	{
-	//		printf("姓名：%s\t电话：%s\n",  m->mem[j].name, m->mem[j].num);
-	//		printf("查找成功！\n");
-	//	}
-	//}
 	int index = 0;
 	while (1)
 	{
@@ -186,7 +172,7 @@ void Modify(member *m)//修改联系人
 		char new_num[256] = { 0 };
 		printf("请输入要修改的联系人的电话：");
 		scanf("%s", new_num);
-		strcpy(p->name, new_num);
+		strcpy(p->num, new_num);
 	}
 	printf("修改成功！");
 }
@@ -200,37 +186,3 @@ void Clear(member *m)//清空通讯录
 	m->mem_index = 0;
 	printf("通讯录已经清空！");
 }
-
-void Swap(infor* m1,infor *m2)
-{
-	char name_tmp[256] = { 0 };
-	char num_tmp[256] = { 0 };
-	strcpy(name_tmp, m1->name);
-	strcpy(m1->name, m2->name);
-	strcpy(m2->name, name_tmp);
-	strcpy(name_tmp, m1->num);
-	strcpy(m1->num, m2->name);
-	strcpy(m2->name, num_tmp);
-}
-
-void Sort(member *m)
-{
-	int i;
-	int j;
-	if (m == NULL)
-	{
-		return;
-	}
-	for (i = 0; i < m->mem_index - 1; ++i)
-	{
-		for (j = 0; j < m->mem_index - 1 - i; ++j)
-		{
-			if (strcmp(m->mem[j].name, m->mem[j + 1].name) > 0)
-			{
-				Swap(&m->mem[j], &m->mem[j + 1]);
-			}
-		}
-	}
-	printf("排序成功！");
-}
-
