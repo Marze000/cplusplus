@@ -1,0 +1,5 @@
+﻿  test.c
+f:\c_exercise\xiaomaze\maze_0317\maze_0317\test.c(51): error C2065: “pSeq_List”: 未声明的标识符
+f:\c_exercise\xiaomaze\maze_0317\maze_0317\test.c(51): error C2223: “->array”的左侧必须指向结构/联合
+f:\c_exercise\xiaomaze\maze_0317\maze_0317\test.c(52): error C2065: “pSeq_List”: 未声明的标识符
+f:\c_exercise\xiaomaze\maze_0317\maze_0317\test.c(52): error C2223: “->capacity”的左侧必须指向结构/联合
