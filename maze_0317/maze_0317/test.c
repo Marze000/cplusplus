@@ -11,12 +11,12 @@
 //}SeqList;
 
 //静态顺序表（大小固定，编译期间决定的）
-typedef struct SeqList
-{
-	int array[100];	//容量是100
-	int size;		//顺序表里的有效数据个数
-					//同时也可以表示从后数下一个可用位置的下标
-}	SeqList;
+//typedef struct SeqList
+//{
+//	int array[100];	//容量是100
+//	int size;		//顺序表里的有效数据个数
+//					//同时也可以表示从后数下一个可用位置的下标
+//}	SeqList;
 
 typedef int SLDataType;
 
@@ -28,7 +28,8 @@ typedef struct SeqList
 	int size;			//有效个数
 }	SeqList;
 
-void SeqListInit(SeqList *pSeqList)//创建
+//创建
+void SeqListInit(SeqList *pSeqList)
 {
 	//期望传进来的是一个变量的地址
 	//变量的地址肯定不是NULL
@@ -42,22 +43,40 @@ void SeqListInit(SeqList *pSeqList)//创建
 	pSeqList->size = 0;
 }
 
-void SeqListDestroy(SeqList *pSeqList)//销毁
+void SeqListInit2(SeqList *p)
+{
+	assert(p != NULL);
+
+	p->capacity = 10;
+	p->array = (int*)malloc(sizeof(SLDataType) * 10);
+	p->size = 0;
+}
+
+//销毁
+void SeqListDestroy(SeqList *pSeqList)
 {
 	assert(pSeqList != NULL);
 	assert(pSeqList->array != NULL);
+	
 	free(pSeqList->array);
-
 	pSeqList->array = NULL;
 	pSeqList->capacity = 0;
 	pSeqList->size = 0;
 }
 
+void SeqListDestroy2(SeqList *p)
+{
+	assert(p != NULL);
+	free(p->array);
+	p->array = NULL;
+	p->capacity = 0;
+	p->size = 0;
+}
 //链接属性：从外部链接属性 到 内部链属性
 static void CheckCapacity(SeqList *ps)
 {
 	//不需要扩容的情况
-	if (ps->size < ps->capacity)
+	if (ps->size <= ps->capacity)
 	{
 		return;
 	}
@@ -66,7 +85,7 @@ static void CheckCapacity(SeqList *ps)
 	int newCapacity = ps->capacity * 2;
 	SLDataType *newArray =
 		(SLDataType *)malloc(sizeof(SLDataType)* newCapacity);
-	asset(newArray != NULL);
+	assert(newArray != NULL);
 
 	//搬家
 	for (int i = 0; i < ps->size; ++i)
@@ -80,15 +99,45 @@ static void CheckCapacity(SeqList *ps)
 	ps->capacity = newCapacity;
 }
 
+void CheckCapacity2(SeqList *p)
+{
+	if (p->size < p->capacity)
+	{
+		return;
+	}
+	int NewCapacity = p->capacity * 2;
+	int *NewArray = (int*)malloc(sizeof(int)*NewCapacity);
+
+	for (int i = 0; i < p->size; ++i)
+	{
+		NewArray[i] = p->array[i];
+	}
+
+	free(p->array);
+	p->array = NewArray;
+	p->capacity = NewCapacity;
+}
 //增删查改
-void SeqListPushBack(SeqList *pSeqList, SLDataType value)//尾插
+//尾插
+void SeqListPushBack(SeqList *pSeqList, SLDataType value)
 {
 	CheckCapacity(pSeqList);
 	pSeqList->array[pSeqList->size] = value;
 	pSeqList->size++;
 }
 
-void SeqListPushFront(SeqList *pSeqList, SLDataType value)	//头插
+void SeqListPushBack2(SeqList *p, SLDataType val)
+{
+	if (p->size = p->capacity)
+	{
+		CheckCapacity2(p);
+	}
+
+	p->array[p->size] = val;
+	p->size++;
+}
+//头插
+void SeqListPushFront(SeqList *pSeqList, SLDataType value)	
 {
 	CheckCapacity(pSeqList);
 	//i 是空间的下标
@@ -101,8 +150,23 @@ void SeqListPushFront(SeqList *pSeqList, SLDataType value)	//头插
 	pSeqList->size++;
 }
 
+void SeqListPushFront2(SeqList *p, SLDataType val)
+{
+	if (p->size = p->capacity)
+	{
+		CheckCapacity2(p);
+	}
+
+	for (int i = p->size; i >0 ; --i)
+	{
+		p->array[i + 1] = p->array[i];
+	}
+	p->array[0] = val;
+	p->size++;
+}
+//根据下标pos做插入
 void SeqListPopInsert(SeqList *ps, int pos, SLDataType value)
-{//根据下标pos做插入
+{
 	CheckCapacity(ps);
 	//pos[0,size]  i 是数据的下标
 	for (int i = ps->size - 1; i >= pos; i--)
@@ -114,14 +178,42 @@ void SeqListPopInsert(SeqList *ps, int pos, SLDataType value)
 	ps->size++;
 }
 
+//  sd   f   fd	   da    e     l     w
+//   0   1   2     3     4     5     6      7
+void SeqListPopInsert2(SeqList *p, int pos, SLDataType val)
+{
+	if (p->size = p->capacity)
+	{
+		CheckCapacity2(p);
+	}
+	assert(p != NULL);
+	for (int i = p->size - 1; i > pos + 1; --i)
+	{
+		p->array[i + 1] = p->array[i];
+	}
+
+	p->array[pos] = val;
+	p->size++;
+}
+
+//尾删
 void SeqListPopBack(SeqList *ps)
-{//尾删
+{
 	assert(ps->size > 0);
 	ps->size--;
 }
 
+void SeqListPopBack2(SeqList *p)
+{
+	assert(p != NULL);
+	assert(p->size >= 0);
+
+	p->size--;
+}
+
+//头删
 void SeqListPopFront(SeqList *ps)
-{//头删
+{
 	assert(ps->size > 0);
 	for (int i = 0; i < ps->size - 1; i++)
 	{
@@ -130,8 +222,25 @@ void SeqListPopFront(SeqList *ps)
 	ps->size--;
 }
 
+
+//  sd   f   fd	   da    e     l     w
+//   0   1   2     3     4     5     6      7
+void SeqListPopFront2(SeqList *p)
+{
+	assert(p != NULL);
+	assert(p->size > 0);
+
+	for (int i = 1; i < p->size + 1; ++i)
+	{
+		p->array[i - 1] = p->array[i];
+	}
+
+	p->size--;
+}
+
+//删除pos下标所对应的值
 void SeqListErase(SeqList *ps, int pos)
-{//删除pos下标所对应的值
+{
 	assert(ps->size > 0);
 	//[0,size-1]
 
@@ -142,7 +251,22 @@ void SeqListErase(SeqList *ps, int pos)
 	ps->size--;
 }
 
-int SeqListSearch(const SeqList *ps, SLDataType value)//查找
+//  sd   f   fd	   da    e     l     w
+//   0   1   2     3     4     5     6      7
+void SeqListErase2(SeqList *p, int pos)
+{
+	//pos = 3
+	assert(p != NULL);
+
+	for (int i = pos + 1; i < p->size ; ++i)
+	{
+		p->array[i - 1] = p->array[i];
+	}
+	p ->size--;
+}
+
+//查找
+int SeqListSearch(const SeqList *ps, SLDataType value)
 {
 	for (int i = 0; i < ps->size; ++i)
 	{
@@ -154,16 +278,36 @@ int SeqListSearch(const SeqList *ps, SLDataType value)//查找
 	return -1;
 }
 
+int SeqListFind(const SeqList *p, SLDataType val)
+{
+	assert(p != NULL);
+
+	for (int i= 0;i<p->size;++i)
+	{
+		if (p->array[i] == val)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+//修改 pos 下标所在的值为 value
 void SeqListModify(SeqList *ps, int pos, SLDataType value)
 {
-	//修改 pos 下标所在的值为 value
 	assert(pos >= 0 && pos < ps->size);
 	ps->array[pos] = value;
 }
 
+void SeqListModify2(SeqList *s, int pos, SLDataType val)
+{
+	assert(s != NULL);
+	assert(pos >= 0 && pos < s->size);
+	s->array[pos] = val;
+}
+
+//删除遇到的第一个value
 void SeqListRemove(SeqList *ps, SLDataType value)
 {
-	//删除遇到的第一个value
 	int pos = SeqListSearch(ps, value);
 	if (pos != -1)
 	{
@@ -171,10 +315,26 @@ void SeqListRemove(SeqList *ps, SLDataType value)
 	}
 }
 
-
+int SeqListRemove2(SeqList *p, SLDataType val)
+{
+	assert(p != NULL);
+	for (int i = 0; i < p->size; ++i)
+	{
+		if (p->array[i] = val)
+		{
+			for (int j = i + 1; i < p->size + 1; ++j)
+			{
+				p->array[j - 1] = p->array[j];
+			}
+			p->size--;
+			return 1;
+		}
+	}
+	return 0;
+}
+//删除遇到的所有的value
 void SeqListRemoveAll(SeqList *ps, SLDataType value)
 {
-	//删除遇到的所有的value
 	int i = 0; 
 	int j = 0;
 	for (; i < ps->size; ++i)
@@ -188,7 +348,19 @@ void SeqListRemoveAll(SeqList *ps, SLDataType value)
 	ps->size = j;
 }
 
-
+void SeqListRemoveAll2(SeqList *p, SLDataType val)
+{
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < p->size; ++i)
+	{
+		if (p->array[i] != val)
+		{
+			p->array[j] = p->array[i];
+		}
+		++j;
+	}
+}
 int main()
 {
 	//线性表L是n个相同的类型数据元素构成的有限序列，当n==0是为空表
