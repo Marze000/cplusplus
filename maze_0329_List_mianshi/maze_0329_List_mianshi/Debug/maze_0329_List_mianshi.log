@@ -1,0 +1,3 @@
+﻿  test.c
+f:\c_exercise\xiaomaze\maze_0329_list_mianshi\maze_0329_list_mianshi\test.c(169): warning C4047: “=”:“ListNode *”与“int”的间接级别不同
+  maze_0329_List_mianshi.vcxproj -> F:\c_exercise\xiaomaze\maze_0329_List_mianshi\Debug\maze_0329_List_mianshi.exe
