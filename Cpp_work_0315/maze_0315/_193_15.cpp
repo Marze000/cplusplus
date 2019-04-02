@@ -5,6 +5,7 @@
 //
 ////有一个班,4个学生,5门课,求:
 //struct student
+
 //{
 //	string name[100];//名字
 //	float score1[100];//分数;

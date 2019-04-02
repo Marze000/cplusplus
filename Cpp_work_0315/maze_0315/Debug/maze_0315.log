@@ -1,2 +1,3 @@
-﻿  _193_15.cpp
+﻿  test.cpp
+f:\c_exercise\xiaomaze\cpp_work_0315\maze_0315\_193_16.h(17): warning C4101: “a”: 未引用的局部变量
   maze_0315.vcxproj -> F:\c_exercise\xiaomaze\Cpp_work_0315\Debug\maze_0315.exe

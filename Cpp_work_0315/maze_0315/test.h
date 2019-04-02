@@ -26,13 +26,4 @@ void print_score_low()//打印信息
 	}
 }
 
-void get_information()//获取信息
-{
-
-	for (int i = 0; i < 10; ++i)
-	{
-		cout << "请输入第" << i + 1 << "个学生的姓名,学号,成绩" << endl;
-		cin >> stu.name[i] >> stu.num[i] >> stu.score[i];
-	}
-}
 

@@ -46,7 +46,7 @@ typedef struct ListNode
 //	{
 //		return head;
 //	}
-//
+//3
 //	struct ListNode* node = head;
 //	while (node->next != NULL)
 //	{
@@ -151,14 +151,19 @@ ListNode* removeElements(ListNode* head, int val)
 	}
 }
 
+void print(ListNode* a1)
+{
+	ListNode *cur = a1;
+	while (cur != NULL)
+	{
+		printf("%d", cur->val);
+		cur = cur->next;		
+	}
+	printf("\n");
+}
+
 int main()
 {
-	//typedef struct ListNode
-	//{
-	//	int val;
-	//	struct ListNode* next;
-	//}	ListNode;
-
 	ListNode* a1 = (ListNode*)malloc(sizeof(ListNode));
 	ListNode* a2 = (ListNode*)malloc(sizeof(ListNode));
 	ListNode* a3 = (ListNode*)malloc(sizeof(ListNode));
@@ -166,14 +171,20 @@ int main()
 	ListNode* a5 = (ListNode*)malloc(sizeof(ListNode));
 	ListNode* a6 = (ListNode*)malloc(sizeof(ListNode));
 	ListNode* a7 = (ListNode*)malloc(sizeof(ListNode));
-	a1 = 1, a2 = 2, a3 = 6, a4 = 3, a5 = 4, a6 = 5, a7 = 6;
+	a1->val = 1, a2->val = 2, a3->val = 6, a4->val = 3;
+	a5->val = 4, a6->val = 5, a7->val = 6;
+	a1->next = a2;
+	a2->next = a3;
+	a3->next = a4;
+	a4->next = a5;
+	a5->next = a6;
+	a6->next = a7;
+	a7->next = NULL;
+	print(a1);
 	removeElements(a1, 6);
-	removeElements(a2, 6);	
-	removeElements(a3, 6);
-	removeElements(a4, 6);
-	removeElements(a5, 6);
-	removeElements(a6, 6);
-	removeElements(a7, 6);
+	print(a1);
+
+	
 	//ListNode* p = NULL;
 	//int v = 0;
 	////removeElements(head, int val)
