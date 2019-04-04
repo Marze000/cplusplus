@@ -9,6 +9,7 @@ int main()
 
 	creat();//创建链表结点
 	
+	//Student stu[5], *p;
 
 
 	system("pause");

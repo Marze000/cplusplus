@@ -1,3 +1,8 @@
 ﻿  test.cpp
 f:\c_exercise\xiaomaze\cpp_work_0315\maze_0315\_193_16.h(17): warning C4101: “a”: 未引用的局部变量
-  maze_0315.vcxproj -> F:\c_exercise\xiaomaze\Cpp_work_0315\Debug\maze_0315.exe
+f:\c_exercise\xiaomaze\cpp_work_0315\maze_0315\test.cpp(12): error C2065: “Student”: 未声明的标识符
+f:\c_exercise\xiaomaze\cpp_work_0315\maze_0315\test.cpp(12): error C2146: 语法错误: 缺少“;”(在标识符“stu”的前面)
+f:\c_exercise\xiaomaze\cpp_work_0315\maze_0315\test.cpp(12): error C2065: “p”: 未声明的标识符
+  _156_17.cpp
+  _306_4_5_8.cpp
+  正在生成代码...

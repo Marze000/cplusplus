@@ -118,11 +118,13 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="_156_17.cpp" />
     <ClCompile Include="_193_15.cpp" />
+    <ClCompile Include="_306_4_5_8.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h" />
     <ClInclude Include="_193_16.h" />
     <ClInclude Include="_219.3_5_8_9.h" />
+    <ClInclude Include="_306_4_5_8_9_11_12.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
