@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
-
 using namespace std;
+
 class Student
 {
 public:
@@ -24,6 +24,7 @@ void max (Student *pt,int n)
 	}
 	cout << "student info:" << ma.num << ' ' << ma.score << endl;
 }
+
 int main()
 {
 	//建立一个对象数组存放5个学生的数据，打印出成绩最好的那位学生信息

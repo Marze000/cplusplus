@@ -1,12 +1,12 @@
-#include "Insertpaixu.h"
-
-//插入法排序
-
-int main()
-{
-	SortTest();
-
-
-	system("pause");
-	return 0;
-}
+//#include "Insertpaixu.h"
+//
+////插入法排序
+//
+//int main()
+//{
+//	SortTest();
+//
+//
+//	system("pause");
+//	return 0;
+//}

@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="change.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="test_306_8.cpp" />
     <ClCompile Include="tset_306_5.cpp" />
   </ItemGroup>

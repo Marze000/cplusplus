@@ -21,5 +21,11 @@
     <ClCompile Include="test_306_8.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="change.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
