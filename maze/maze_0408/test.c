@@ -8,8 +8,156 @@ typedef struct ListNode
 	ListNode* next;
 }	ListNode;
 
-
 ////A   a1 a2 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////A   a1 a2 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
+////B   b1 b2 b3 c1 c2 c3
 ////B   b1 b2 b3 c1 c2 c3
 //ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
 //{
