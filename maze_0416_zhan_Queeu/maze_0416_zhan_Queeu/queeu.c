@@ -2,7 +2,7 @@
 
 int main()
 {
-	Test();
+	Test1();
 
 	system("pause");
 	return 0;
