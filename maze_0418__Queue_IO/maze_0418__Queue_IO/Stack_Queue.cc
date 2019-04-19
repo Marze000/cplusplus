@@ -278,7 +278,9 @@ public:
 		return size == 0;
 	}
 
-	/** Checks whether the circular queue is full or not. */
+
+
+	/** Checks whether the circular £»queue is full or not. */
 	bool isFull() {
 		return size == capacity;
 	}
