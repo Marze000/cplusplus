@@ -316,6 +316,7 @@ int Partion1(int* array, int left, int right)
 			Swap(&array[end], &array[begin]);
 		}
 	}
+
 	if (begin != right - 1)
 	{
 		Swap(&array[end], &array[right - 1]);
@@ -337,6 +338,7 @@ int Partion2(int *array, int left, int right)
 		{
 			begin++;
 		}
+
 		if (begin < end)
 		{
 			array[end] = array[begin];
@@ -347,6 +349,7 @@ int Partion2(int *array, int left, int right)
 		{
 			--end;
 		}
+
 		if (begin < end)
 		{
 			array[begin] = array[end];
@@ -384,23 +387,21 @@ int	Partion3(int *array, int left, int right)
 //快速排序的最佳场景--数据越随机越好~~~
 void QuickSort(int* array, int left, int right)
 {
-	//if (right - left < 16)
-	//{
-	//	InsertSort2(array, right - left);
-	//}
-	//else{}
-
-	if (right - left > 1)
+	if (right - left <= 1)
 	{
-		int div = Partion1(array, left, right);//基准值划分
-
-		QuickSort(array, left, div);
-		QuickSort(array, div + 1, right);
+		return;
 	}
+	
+	//div是一个下标
+	int div = Partion3(array, left, right);//基准值划分
+	QuickSort(array, left, div);
+	QuickSort(array, div + 1, right);
 }
 
+//#include <stack>	s;
 //void QuickSortNor(int* array, int size)
 //{
+//
 //	int left = 0;
 //	int right = size;
 //
@@ -430,6 +431,108 @@ void QuickSort(int* array, int left, int right)
 //	StackDestrony(&s);
 //}
 //===========================================================================
+
+//归并
+void MergeData(int *array, int left, int mid, int right,int *temp)
+{
+	int begin1 = left, end1 = mid;
+	int begin2 = mid, end2 = right;
+
+	int index = left;
+
+	while (begin1 < end1 && begin2<end2)
+	{
+		if (array[begin1] < array[begin2])
+		{
+			temp[index++] = array[begin1++];
+		}
+		else
+		{
+			temp[index++] = array[begin2++];
+		}
+	}
+
+	while (begin1 < end1)
+	{
+		temp[index++] = array[begin1++];
+	}
+
+	while (begin2 < end2)
+	{
+		temp[index++] = array[begin2++];
+	}
+}
+
+//空间复杂度O(N)
+void _MergeSort(int* array, int left, int right,int* temp)
+{
+	if (right - left <= 1)
+	{
+		return;
+	}
+
+	int mid = (left+right)/2;
+	_MergeSort(array, left, mid,temp);
+	_MergeSort(array, mid, right,temp);
+	MergeData(array, left, mid, right, temp);
+	memcpy(array + left, temp + left, sizeof(array[left]) * (right - left));
+}
+
+void MergeSort(int* array, int size)
+{
+	int* temp = (int*)malloc(size * sizeof(array[0]));
+	if (temp == NULL)
+	{
+		assert(0);
+		return;
+	}
+
+	_MergeSort(array, 0, size, temp);
+	free(temp);
+}
+
+//===========================================================================
+//归并循环
+void MergeSortNor(int* array, int size)
+{
+	int* temp = (int*)malloc(size * sizeof(array[0]));
+	if (NULL == temp)
+	{
+		assert(0);
+		return;
+	}
+
+	int gap = 1;
+	while (gap<size)
+	{
+		for (int i = 0; i < size; i += 2 * gap)
+		{
+			int left = i;
+			int mid = left + gap;
+			int right = mid + gap;
+			
+			if (mid >= size)
+			{
+				mid = size;
+			}
+
+			if (right >= size)
+			{
+				right = size;
+			}
+
+			MergeData(array, left, mid, right, temp);
+		}
+
+		memcpy(array, temp, sizeof(array[0])*size);
+		gap *= 2;
+	}
+	free(temp);
+}
+
+
+
+
 void printSort(int* array, int size)
 {
 	for (int i = 0; i < size; ++i)
@@ -442,7 +545,7 @@ void printSort(int* array, int size)
 
 void Test()
 {
-	int array[] = { 3, 5, 1, 15,58,65,12,32,45,85,4,2,9, 6, 2, 4, 7, 8, 0 };
+	int array[] = { 0,9,7,1,4,3,6,2,8,5 };
 	int len = sizeof(array) / sizeof(array[0]);
 	printSort(array, len);
 	//InsertSort2(array, len);
@@ -450,11 +553,12 @@ void Test()
 	//SelectSort2(array, len);
 	//BubbleSort2(array, len);
 	//HeapSort(array, len);
-	
+	//QuickSortNor(array, len);
 	//BubbleSort(array, len);
-	
-
-	QuickSort(array, 0,len);
+	/*MergeSort(array, len);*/
+	MergeSortNor(array, len);
+	//MergeSortNor(array, len);
+	//QuickSort(array, 0,len);
 	printSort(array, len);
 }
 
