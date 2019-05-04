@@ -1,16 +1,19 @@
 #include <iostream>
 #include <stdlib.h>
+
 using namespace std;
 
 //class Time
 //{
 //public:
+//	//声明构造函数,默认参数
 //	Time(int, int, int);
 //	int hour;
 //	int minute;
 //	int sec;
 //};
 //
+////定义构造函数
 //Time::Time(int h, int m, int s)
 //{
 //	hour = h;
@@ -18,6 +21,7 @@ using namespace std;
 //	sec = s;
 //}
 //
+////以引用的方式传参
 //void fun(Time &t)
 //{
 //	t.hour = 18;
@@ -33,7 +37,7 @@ using namespace std;
 //	system("pause");
 //	return 0;
 //}
-//
+
 //class Time
 //{
 //public:
@@ -71,7 +75,10 @@ using namespace std;
 //public:
 //	Box(int, int);
 //	int volume();
+//
+//	//定义一个 static 静态变量
 //	static int height;
+//
 //	int width;
 //	int length;
 //};
@@ -87,12 +94,14 @@ using namespace std;
 //	return (height*width*length);
 //}
 //
+////对属于 Box 的变量 height 初始化为10
 //int Box::height = 10;
 //
 //int main()
 //{
 //	Box a(10, 20);
 //	Box b(20, 30);
+//
 //	cout << a.height << endl;//10
 //	cout << b.height << endl;//10
 //	cout << Box::height << endl;//10
@@ -102,10 +111,13 @@ using namespace std;
 //	system("pause");
 //	return 0;
 //}
+//
 
 class Student
 {
 public:
+
+	//构造函数的参数表初始化
 	Student(int n,int a,float s):num(n),age(a),score(s){}
 	void total();
 	static float average();
@@ -133,6 +145,7 @@ int Student::count = 0;
 
 int main()
 {
+	//定义Student 数组
 	Student stud[3] = {
 		Student(1001,18,70),
 		Student(1002,19,78),

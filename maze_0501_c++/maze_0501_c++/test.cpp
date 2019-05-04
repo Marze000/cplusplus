@@ -9,7 +9,7 @@ using namespace std;
 //	left = right;
 //	right = tmp;	
 //}
-
+//
 ////声明一个名为Student的结构体类型
 //struct Student
 //{
@@ -34,42 +34,48 @@ using namespace std;
 //		cout << "sex:" << sex << endl;
 //	}
 //};
-//
-//class Time
-//{
-//public:
-//	int hour;
-//	int minute;
-//	int sec;
-//};
-//
-//int main()
-//{
-//	Time t1;
-//	cin >> t1.hour;
-//	cin >> t1.minute;
-//	cin >> t1.sec;
-//
-//	cout << t1.hour <<":"<< t1.minute <<":"<< t1.sec << endl;
-//
-//	//int a = 5;
-//	//int* p = NULL;
-//	//int& ra = a;
-//	//Swap(ra, *p);
-//
-//	/*printf("%d", ra);*/
-//
-//
-//	system("pause");
-//	return 0;
-//}
 
 //class Time
 //{
 //public:
+//	int hour;
+//	int minute;
+//	int sec;
+//};
+
+//int main()
+//{
+	//Time t1;//定义一个类对象
+
+	////因为hour minute sec 是公有的,所以可以在类外被访问
+	//cin >> t1.hour;
+	//cin >> t1.minute;
+	//cin >> t1.sec;
+
+	//cout << t1.hour <<":"<< t1.minute <<":"<< t1.sec << endl;
+
+	//int a = 5;
+	//int* p = NULL;
+	//int& ra = a;
+	//Swap(ra, *p);
+
+	/*printf("%d", ra);*/
+
+
+//	system("pause");
+//	return 0;
+//}
+
+////定义一个名称是Time 的类
+//class Time
+//{
+//public:
+//	//声明成员函数
 //	void set_time();
 //	void show_time();
 //private:
+//
+//	//定义私有变量
 //	int hour;
 //	int minute;
 //	int sec;
@@ -78,7 +84,9 @@ using namespace std;
 //int main()
 //{
 //
-//	Time t1;
+//	Time t1;//定义一个对象
+//
+//	//由于成员函数是公有的,所以可以被访问
 //	t1.set_time();
 //	t1.show_time();
 //
@@ -90,6 +98,7 @@ using namespace std;
 //	return 0;
 //}
 //
+////定义成员函数 该函数属于Time
 //void Time::set_time()
 //{
 //	cin >> hour;
@@ -97,23 +106,24 @@ using namespace std;
 //	cin >> sec;
 //}
 //
+////定义成员函数 该函数属于Time
 //void Time::show_time()
 //{
 //	cout << hour<<":" << minute << ":" << sec << endl;
 //}
 
-class V
-{
-public:
-	void shuru();
-	void calculate_v();
-	void display_v();
-private:
-	float length;
-	float width;
-	float height;
-	float v;
-};
+//class V
+//{
+//public:
+//	void shuru();
+//	void calculate_v();
+//	void display_v();
+//private:
+//	float length;
+//	float width;
+//	float height;
+//	float v;
+//};
 
 //int main()
 //{
@@ -245,10 +255,12 @@ private:
 //	system("pause");
 //	return 0;
 //}
-
+//
 //class Box
 //{
 //public:
+//
+//	//声明带参数的构造函数
 //	Box(int, int, int);
 //	int volume();
 //private:
@@ -268,9 +280,10 @@ private:
 //{
 //	return (height*width*length);
 //}
-
+//
 //int main()
 //{
+//	//定义一个对象box1,并且赋予初值
 //	Box box1(12, 25, 40);
 //	cout << box1.volume() << endl;
 //
@@ -319,17 +332,23 @@ private:
 //	system("pause");
 //	return 0;
 //}
-
+//
 class Time
 {
 public:
-	Time(int, int, int);//声明结构成员函数
+	//声明结构成员函数
+	Time(int, int, int);
+
+	//定义变量,声明方式为公有的
 	int hour;
 	int minute;
 	int sec;
-	void get_time();//声明公有成员函数
+
+	//声明公有成员函数
+	void get_time();
 };
 
+//构造函数的定义,
 Time::Time(int h, int m, int s)
 {
 	hour = h;
@@ -337,6 +356,7 @@ Time::Time(int h, int m, int s)
 	sec = s;
 }
 
+//定义成员成员函数
 void Time::get_time()
 {
 	cout << hour << ":" << minute << ":" << sec << endl;
@@ -344,17 +364,20 @@ void Time::get_time()
 
 int main()
 {
-	Time t1(10, 12, 30);//定义Time 类对象t1并初始化
+	Time t1(10, 12, 30);//定义 Time 类对象 t1 并初始化
+
 	int *p1 = &t1.hour;//定义指向整形数据的指针变量p1,
+
 	cout << *p1 << endl;//输出p1所指的数据成员t1.hour
+
 	t1.get_time();
 
 	
-	Time *p2 = &t1;
+	Time *p2 = &t1; //定义指向 Time 型数据的指针变量 p2
 	p2->get_time();
 	
-	void(Time::*p3)();
-	p3 = &Time::get_time;
+	void(Time::*p3)();//定义一个函数指针p3 
+	p3 = &Time::get_time; //指向 get_time 函数
 	(t1.*p3)();
 
 	system("pause");

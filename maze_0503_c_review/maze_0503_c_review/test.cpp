@@ -24,6 +24,7 @@
 //	system("pause");
 //	return 0;
 //}
+
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -32,25 +33,28 @@ using namespace std;
 //class Student//声明基类
 //{
 //public:
+//
+//	//函数定义
 //	void get_value()//输入基类成员函数
 //	{
-//		cin >> num >> name >> sex;
+//		cin >> num >> name >> sec;
 //	}
 //
-//	//输入基类数据的成员函数
+//	//输出基类数据的成员函数
 //	void display()
 //	{
 //		cout << "name:" << num << endl;
 //		cout << "name:" << name << endl;
-//		cout << "sex:" << sex << endl;
+//		cout << "sex:" << sec << endl;
 //	}
+//
 //private: //基类私有成员
 //	int num;
 //	string name;
 //	char sec;
 //};
-
 //
+////类  派生类名 冒号 继承方式 基类名
 ////以 public 方式声明派生类 Student1
 //class Student1:public Student
 //{
@@ -62,6 +66,7 @@ using namespace std;
 //	void display_1()
 //	{
 //		//此处不能引用基类的私有成员
+//
 //		//下面是引用派生类的私有成员
 //		cout << "age:" << age << endl;
 //		cout << "address:" << addr << endl;
@@ -101,6 +106,7 @@ using namespace std;
 //	{
 //		//调用基类的公用函数输入基类3个数据
 //		get_value();
+
 //		cin >> age >> addr;//输入派生类的两个数据
 //	}
 //
