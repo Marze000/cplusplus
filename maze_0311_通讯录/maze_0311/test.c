@@ -7,23 +7,31 @@ int main()
 	Init(&m);
 
 	typedef void(*T)(member *m);
-	T menu[] = { Insert,Delete,Display,Find,Modify,Clear};
+	T menu[] = { Insert,Delete,Display,Find,Modify,Clear };
 	int choice = 0;
 	Menu();
 	printf("\n请输入接下来要操做的选项!\n");
-	scanf("%d", &choice);
-
 	while (1)
 	{
+		scanf("%d", &choice);
 		if (choice == 0)
 		{
 			printf("再见！\n");
 			system("pause");
-			break;
+			return 0;
 		}
-		menu[choice - 1](&m);
-		printf("\n请输入接下来要操做的选项!\n");
-		scanf("%d", &choice);
+
+		if (choice < 0 || choice>7)
+		{
+			printf("输入有误，重新输入!!\n");
+			continue;
+		}
+		else 
+		{
+			menu[choice - 1](&m);
+			printf("请输入接下来要操做的选项！\n");
+			Menu();
+		}
 	}
 
 	system("pasuse");
@@ -45,68 +53,67 @@ void Menu()
 
 void Init(member *m)//初始化联系人
 {
-	if (m == NULL)
-	{
-		return;
-	}
-	m->mem_index = 1;
+	int sz = m->size = 0;
+	int cap = m->capacity = 100;
+	
+	m->mem = (infor*)malloc(sizeof(infor*)*cap);
+	if (m->mem == NULL){return;}
 }
 
 void Insert(member* m)//添加联系人
 {
-	if (m == NULL)
-	{
-		return;
-	}
+	if (m == NULL){return;}
 
-	infor *p = &(m->mem[m->mem_index]);
+	infor *p = m;
 	printf("亲,输入新的联系人的姓名\n");
 	scanf("%s", p->name);
 
 	printf("输入联系电话号码\n");
 	scanf("%s", p->num);
 
-	++(m->mem_index);//下标加1
 	printf("添加成功！\n");
-	Menu();
+	m->size++;
 }
 
 void Delete(member *m)//删除联系人
 {
-	if (m == NULL)
-	{
-		return;
-	}
+	if (m == NULL) {return;}
+	
 	int serial_number = 1;
-
 	printf("请输入要删除联系人的编号？");
-	scanf("%d", &serial_number);
-	if ((serial_number < 0) || (serial_number >= m->mem_index))
+	while (1)
 	{
-		printf("输入有误！");
-		return;
+		scanf("%d", &serial_number);
+		if ((serial_number < 0) || (serial_number >= m->mem_index))
+		{
+			printf("输入有误！\n");
+			continue;
+		}
+		else { break; }
 	}
+	
+	//如果要删的是最后一个，则直接下标--
 	if(serial_number== m->mem_index-1)
 	{
 		--m->mem_index;
-		printf("删除成功！");
-		return;
 	}
-	m->mem[serial_number] = m->mem[m->mem_index - 1];
-	--m->mem_index;
-	printf("删除联系人成功！");
+	else//否则把最后一个元素赋值到要删除的元素那里，下标--
+	{
+		m->mem[serial_number] = m->mem[m->mem_index - 1];
+		--m->mem_index;
+	}
+	printf("删除联系人成功！\n");
 }
 
-void Display(member *m)//显示联系人
+//显示联系人
+void Display(member *m)
 {
-	if(m==NULL)
+	if(m == NULL){return;}
+	
+	for (int i = 0; i < m->mem_index; ++i)
 	{
-		return;
-	}
-	for (int i = 1; i < m->mem_index; ++i)
-	{
-		printf("%d.姓名：%s\t电话：%s\n",
-			i, m ->mem[i].name, m->mem[i].num);
+		printf("编号：%d.姓名：%s\t电话：%s\n",
+			i+1, m ->mem[i].name, m->mem[i].num);
 	}
 }
 
@@ -129,9 +136,9 @@ void Find(member *m)//查找联系人
 		}
 		break;
 	}
-	printf("%d.姓名：%s\t电话：%s\n", 
-		index, m->mem[index].name, m->mem[index].num);
 	printf("查找成功！\n");
+	printf("%d.姓名：%s\t电话：%s\n", 
+		index, m->mem[index-1].name, m->mem[index-1].num);
 }
 
 void Modify(member *m)//修改联系人
@@ -150,7 +157,7 @@ void Modify(member *m)//修改联系人
 		printf("输入有误!");
 		return;
 	}
-	infor *p = &m->mem[index];
+	infor *p = &m->mem[index-1];
 	printf("1.姓名\n");
 	printf("2.电话\n");
 	printf("请输入你要修改的类型");

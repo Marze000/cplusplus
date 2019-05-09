@@ -11,11 +11,10 @@ int main()
 	fwrite("aa", 1, 4, fp);
 	fclose(fp);
 	fp = NULL;
-
-
 	system("pause");
 	return 0;
 }
+
 //int main()
 //{
 //
@@ -59,11 +58,7 @@ int main()
 //绝对路径
 
 //.txt  .c   
-
-
 //文本文件   二进制文件
-
-
 
 //缓冲区：
 
