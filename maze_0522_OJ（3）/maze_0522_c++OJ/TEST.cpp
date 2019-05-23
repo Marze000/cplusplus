@@ -1,3 +1,7 @@
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//
 #include <iostream>
 #include <string>
 using namespace std;
@@ -10,10 +14,8 @@ int main()
 	string str;
 	string s;
 	int len = 0;
-	int n = 10;
-	while (n--)
+	while (cin >> str)
 	{
-		cin >> str;
 		while (i < str.size())
 		{
 			//每一个都要赋值为0，这样才可以比较出来数字的长度
@@ -35,6 +37,7 @@ int main()
 	}
 	cout << ret << endl;
 	return 0;
+}	
 }
 
 #include <iostream>
@@ -74,3 +77,4 @@ int main()
 	system("pause");
 	return 0;
 }
+

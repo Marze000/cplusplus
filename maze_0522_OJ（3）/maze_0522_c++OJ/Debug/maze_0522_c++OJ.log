@@ -1,2 +1,3 @@
-﻿  TEST.cpp
-  maze_0522_c++OJ.vcxproj -> F:\c_exercise\xiaomaze\maze_0522_c++OJ\Debug\maze_0522_c++OJ.exe
+﻿F:\VS2017\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(maze_0522_c++OJ.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  test2.cpp
+  maze_0522_c++OJ.vcxproj -> F:\c_exercise\xiaomaze\maze_0522_OJ（3）\Debug\maze_0522_OJ（3）.exe
