@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maze_0529_c++OJ(8)", "maze_0529_c++OJ(8)\maze_0529_c++OJ(8).vcxproj", "{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Debug|x64.ActiveCfg = Debug|x64
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Debug|x64.Build.0 = Debug|x64
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Debug|x86.ActiveCfg = Debug|Win32
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Debug|x86.Build.0 = Debug|Win32
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Release|x64.ActiveCfg = Release|x64
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Release|x64.Build.0 = Release|x64
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Release|x86.ActiveCfg = Release|Win32
+		{284FAE0B-EFB4-4A03-B4F3-C3083C504ADA}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {458F32A7-2720-4815-B0A8-8A9C2C042C68}
+	EndGlobalSection
+EndGlobal
