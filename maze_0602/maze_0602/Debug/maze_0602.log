@@ -1,3 +1,0 @@
-﻿  test.cpp
-f:\c_exercise\xiaomaze\maze_0602\maze_0602\test.cpp(55): error C2084: 函数“int main(void)”已有主体
-  f:\c_exercise\xiaomaze\maze_0602\maze_0602\test.cpp(5): note: 参见“main”的前一个定义

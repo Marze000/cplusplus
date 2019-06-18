@@ -1,4 +1,0 @@
-﻿  test.cpp
-f:\c_exercise\xiaomaze\maze_0601\maze_0601\test.cpp(281): warning C4018: “<”: 有符号/无符号不匹配
-f:\c_exercise\xiaomaze\maze_0601\maze_0601\test.cpp(300): warning C4018: “<”: 有符号/无符号不匹配
-  maze_0601.vcxproj -> F:\c_exercise\xiaomaze\maze_0601\Debug\maze_0601.exe

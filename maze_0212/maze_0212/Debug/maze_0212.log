@@ -1,5 +1,0 @@
-﻿  test.c
-f:\c_exercise\xiaomaze\maze_0212\maze_0212\test.c(7): warning C4005: “max”: 宏重定义
-  f:\windows kits\10\include\10.0.17763.0\ucrt\stdlib.h(1289): note: 参见“max”的前一个定义
-f:\c_exercise\xiaomaze\maze_0212\maze_0212\test.c(99): warning C4133: “=”: 从“char *”到“FILE *”的类型不兼容
-  maze_0212.vcxproj -> F:\c_exercise\xiaomaze\maze_0212\Debug\maze_0212.exe

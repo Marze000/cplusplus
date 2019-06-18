@@ -1,3 +1,0 @@
-﻿  test.c
-f:\c_exercise\xiaomaze\maze_0215\maze_0215\test.c(58): warning C4013: “strcpy”未定义；假设外部返回 int
-  maze_0215.vcxproj -> F:\c_exercise\xiaomaze\maze_0215\Debug\maze_0215.exe

@@ -1,4 +1,0 @@
-﻿  test.c
-f:\c_exercise\xiaomaze\maze_0228\maze_0228\test.c(115): warning C4047: “函数”:“int”与“char [20]”的间接级别不同
-f:\c_exercise\xiaomaze\maze_0228\maze_0228\test.c(115): warning C4024: “strchr”: 形参和实参 2 的类型不同
-  maze_0228.vcxproj -> F:\c_exercise\xiaomaze\maze_0228\Debug\maze_0228.exe
