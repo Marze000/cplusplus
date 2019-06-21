@@ -3,7 +3,7 @@
 #include <stdlib.h>
 using namespace std;
 
-Ç³¿½±´
+//Ç³¿½±´
 class String
 {
 public:
