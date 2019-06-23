@@ -15,16 +15,19 @@ public:
 //双向非循环链表
 class SList {
 public:
-	SList() {
+	SList(){
+		_head = new Node;
+		
 		_head->_pre = nullptr;
 		_head->_next = nullptr;
+		_head->_data = 0;
 	}
 	~SList() {
-
+		delete _head;
 	}
 	//尾插
 	void SListPushBack(int data) {
-		Node* node;
+		Node* node = new Node;
 		node->_data = data;
 
 		//只存在头结点
@@ -33,21 +36,23 @@ public:
 			node->_next = nullptr;
 			_head->_next = node;
 		}
+		else {
 
-		//找到最后一个结点
-		Node* cur = _head->_next;
-		while (cur->_next != nullptr) {
-			cur = cur->_next;
+			//找到最后一个结点
+			Node* cur = _head->_next;
+			while (cur->_next != nullptr) {
+				cur = cur->_next;
+			}
+			//进行插入
+			node->_next = nullptr;
+			node->_pre = cur;
+			cur->_next = node;
 		}
-		//进行插入
-		cur->_next = nullptr;
-		cur->_pre = cur;
-		cur->_next = node;
 	}
 	//尾删
 	void SListPopBack() {
 		if (_head->_next == nullptr) {
-			_head = nullptr;
+			return;
 		}
 
 		//找到倒数第二个结点
@@ -57,13 +62,14 @@ public:
 		}
 		Node* node = cur->_next;
 		node->_pre = nullptr;
+		delete node;
 		cur->_next = nullptr;
 	}
 	//头插
 	void SListPushFront(int data) {
-		//先构造一个结点
-		Node* node;
+		Node* node = new Node;
 		node->_data = data;
+	
 		//如果只有头结点 
 		if (_head->_next == nullptr) {
 			node->_next = nullptr;
@@ -78,9 +84,13 @@ public:
 	}
 	//头删
 	void SListPopFront() {
-		assert(_head->_next == nullptr);
+		if (_head->_next == nullptr) {
+			return;
+		}
 		if (_head->_next->_next == nullptr) {
-			_head->_next->_pre = nullptr;
+			Node* cur = _head->_next;
+			cur->_pre = nullptr;
+			delete cur;
 			_head->_next = nullptr;
 		}
 
@@ -90,6 +100,7 @@ public:
 		_head->_next = node;
 		node->_pre = _head;
 		cur->_next = cur->_pre = nullptr;
+		delete cur;
 	}
 
 	//在 pos 结点前面插入
@@ -115,14 +126,12 @@ public:
 
 	//删除 pos 结点
 	void SListErase(Node* pos) {
-		//只有头结点
-		if (pos->_next = nullptr) {
-			return;
-		}
-
-		pos->_pre->_next = pos->_next;
-		pos->_next->_pre = pos->_pre;
+		//只有头结点或只剩下最后一个结点
+		Node* pre = pos->_pre;
+		pre->_next = pos->_next;
+		pos->_next->_pre = pre;
 		pos->_next = pos->_pre = nullptr;
+		delete pos;
 	}
 
 	//查找结点
@@ -150,7 +159,8 @@ public:
 	void Print() {
 		Node* node = _head->_next;
 		while (node != nullptr) {
-			cout << node->_data;
+			cout << node->_data<<" ";
+			node = node->_next;
 		}
 		cout << endl;
 	}
