@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maze_0705多态", "maze_0705多态\maze_0705多态.vcxproj", "{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Debug|x64.ActiveCfg = Debug|x64
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Debug|x64.Build.0 = Debug|x64
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Debug|x86.ActiveCfg = Debug|Win32
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Debug|x86.Build.0 = Debug|Win32
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Release|x64.ActiveCfg = Release|x64
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Release|x64.Build.0 = Release|x64
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Release|x86.ActiveCfg = Release|Win32
+		{332BE3BE-D603-4F87-B7C7-9AE8FDCC540B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {543E2DE2-530A-4F7D-A343-CA8D48BFBB1C}
+	EndGlobalSection
+EndGlobal
