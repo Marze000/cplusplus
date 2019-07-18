@@ -1,6 +1,6 @@
 #include "SmartPtr.h"
 
-#if 1
+#if 0
 void Test() {
 	UniquPtr<int> p1(new int);
 	*p1 = 10;
@@ -94,7 +94,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#endif
 
 struct ListNode{
 	int _data;
@@ -105,16 +104,18 @@ struct ListNode{
 	}
 };
 
+#endif
+
 int main() {
 
-	shared_ptr<ListNode> node1(new ListNode);
-	shared_ptr<ListNode> node2(new ListNode);
-	cout << node1.use_count() << endl;
-	cout << node2.use_count() << endl;
-	node1->_next = node2;
-	node2->_prev = node1;
-	cout << node1.use_count() << endl;
-	cout << node2.use_count() << endl;
+	//shared_ptr<ListNode> node1(new ListNode);
+	//shared_ptr<ListNode> node2(new ListNode);
+	//cout << node1.use_count() << endl;
+	//cout << node2.use_count() << endl;
+	//node1->_next = node2;
+	//node2->_prev = node1;
+	//cout << node1.use_count() << endl;
+	//cout << node2.use_count() << endl;
 
 	return 0;
 }

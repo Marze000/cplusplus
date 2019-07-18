@@ -3,6 +3,7 @@
 #include <stdlib.h>
 using namespace std;
 
+#if 0
 template<class T>
 class UniquPtr {
 public:
@@ -188,3 +189,108 @@ public:
 	int _month;
 	int _days;
 };
+
+// new 资源的释放
+template<class T>
+struct DFDel {
+	void operator()(const T& ptr) {
+		if (ptr) {
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
+};
+
+// malloc 资源的释放
+template<class T>
+struct Free {
+	void operator()(T& ptr) {
+		if (ptr) {
+			free(ptr);
+			ptr = nullptr;
+		}
+	}
+};
+
+struct Fclose {
+	void operator()(FILE* pf) {
+		if (pf) {
+			fclose(pf);
+			pf = nullptr;
+		}
+	}
+};
+
+namespace bite {
+	template<class T>
+	class shared_ptr {
+	public:
+		shared_ptr(T* ptr = nullptr)
+			:_ptr(ptr)
+			,_pCount(nullptr)
+		{
+			if (_ptr) {
+				_pCount = new int(1);
+			}
+		}
+		
+		~shared_ptr() {
+			if (_ptr && --*_pCount == 0) {
+				delete _ptr;
+				delete _pCount;
+			}
+		}
+
+		T& operator*() {
+			return *_ptr;
+		}
+		T* operator->() {
+			return _ptr;
+		}
+
+		//解决浅拷贝的问题
+		
+	private:
+		T* _ptr;
+		int* _pCount;
+	};
+	// shared_ptr 的缺陷
+	// 1. 不能管理任意类型的指针，比如文件指针，析构函数中资源释放
+	// 2. 线程不安全
+	// 3. 循环引用
+
+}
+#endif
+
+#include <memory>
+
+// 循环引用
+struct ListNode {
+public:
+	ListNode(int data)
+		:_data(data)
+		, _pPre(nullptr)
+		, _pNext(nullptr)
+	{
+		cout << "ListNode(int)" << this << endl;
+	}
+
+	~ListNode() {
+		cout << "~ListNode(int)" << this << endl;
+	}
+private:
+	int _data;
+	shared_ptr<ListNode> _pPre;
+	shared_ptr<ListNode> _pNext;
+
+	//ListNode* _pPre;
+	//ListNode* _pNext;
+};
+
+void TestSharedPtr(){
+	shared_ptr<ListNode> sp1(new ListNode(10));
+	shared_ptr<ListNode> sp2(new ListNode(20));
+
+	cout << sp1.use_count() << endl;
+	cout << sp2.use_count() << endl;>_pNext = sp2;
+}
