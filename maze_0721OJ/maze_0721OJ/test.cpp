@@ -1,4 +1,4 @@
-#if 1
+#if 0
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
@@ -16,7 +16,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#endif
 
 #include <iostream>
 #include <cstdio>
@@ -106,5 +105,57 @@ int main(){
 			printf("Ignore\n"); // 找到了
 		}
 	}
+	return 0;
+}
+#endif
+
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+//通过一套快速排序将数列分为两部分
+int Partion(int* arr, int left, int right) {
+	int key = arr[right - 1];
+	int begin = left;
+	int end = right - 1;
+	while (begin < end) {
+		while (begin < end && arr[begin] <= key) {
+			++begin;
+		}
+		while (begin < end && arr[end] >= key) {
+			--end;
+		}
+
+		if (begin < end) {
+			swap(arr[end], arr[begin]);
+		}
+	}
+
+	if (begin != right - 1) {
+		swap(arr[end], arr[right -1]);
+	}
+
+	return begin;
+}
+
+void QuickSort(int* array, int left, int right) {
+	if (right - left > 1) {
+		//划分基准值
+		int div = Partion(array, left, right);
+
+		QuickSort(array, left, div);
+		QuickSort(array, div + 1, right);
+	}
+}
+
+int main() {
+	int a[10] = { 3,5,1,6,9,0,7,2,8,4 };
+	QuickSort(a, 0, 10);
+	for (int i = 0; i < 10; ++i) {
+		cout << a[i] << " ";
+	}
+	cout << endl;
+
+	system("pause");
 	return 0;
 }
