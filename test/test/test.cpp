@@ -68,6 +68,37 @@ public:
 	void CutView() {
 
 	}
+
+	//用cmd发命令
+	void GenerateGifWithPic() {
+		//获取当前工程路径 --> ffmpeg完整路径
+		CDuiString strFFmpegPath = CPaintManagerUI::GetInstancePath() + 
+			_T("ffmpeg\\ffmpeg");
+		//1. 初始化结构体
+		SHELLEXECUTEINFO strSEInfo;
+		memset(&strSEInfo, 0, sizeof(SHELLEXECUTEINFO));
+		strSEInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+		strSEInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+		strSEInfo.lpFile = _T("C:/Windows/System32/cmd.exe");
+
+		//构造命令
+		CDuiString strPictruePath = CPaintManagerUI::GetInstancePath() + 
+			_T("ffmpeg\\Pictrue\\%d.jpg ");
+
+		CDuiString strOutPath = CPaintManagerUI::GetInstancePath() +
+			_T("ffmpeg\\Pictrue\\out.gif");
+
+		CDuiString strCMD(_T("/c"));
+		strCMD += strFFmpegPath + _T(" -r 1 -i ") + 
+			strPictruePath + strOutPath;
+
+		strSEInfo.lpParameters = strCMD;
+		strSEInfo.nShow = SW_HIDE; //隐藏cmd'窗口
+
+		//2. 发送cmd命令
+		ShellExecuteEx(&strSEInfo);
+		WaitForSingleObject(strSEInfo.hProcess, INFINITE);
+	}
 };
 
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
