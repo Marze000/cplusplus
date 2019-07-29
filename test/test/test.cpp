@@ -93,7 +93,7 @@ public:
 			strPictruePath + strOutPath;
 
 		strSEInfo.lpParameters = strCMD;
-		strSEInfo.nShow = SW_HIDE; //Òþ²Øcmd'´°¿Ú
+		strSEInfo.nShow = SW_HIDE; //Òþ²Ø cmd ´°¿Ú
 
 		//2. ·¢ËÍcmdÃüÁî
 		ShellExecuteEx(&strSEInfo);
