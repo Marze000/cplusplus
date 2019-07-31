@@ -55,7 +55,7 @@ public:
 		memset(&ofn, 0, sizeof(OPENFILENAME));
 		memset(FileName, 0, sizeof(char)*MAX_PATH);
 		ofn.lStructSize = sizeof(OPENFILENAME);
-		ofn.lpstrFilter = "文本文档\0*.TXT";
+		ofn.lpstrFilter = _T("文本文档\0*.TXT");
 		ofn.lpstrFile = FileName;
 		ofn.nMaxFile = MAX_PATH;
 		ofn.Flags = OFN_FILEMUSTEXIST;
@@ -69,35 +69,71 @@ public:
 
 	}
 
-	//用cmd发命令
-	void GenerateGifWithPic() {
-		//获取当前工程路径 --> ffmpeg完整路径
-		CDuiString strFFmpegPath = CPaintManagerUI::GetInstancePath() + 
-			_T("ffmpeg\\ffmpeg");
+	//调用 cmd 发送命令
+	void SendCMD(const CDuiString& strCMD) {
+
 		//1. 初始化结构体
 		SHELLEXECUTEINFO strSEInfo;
 		memset(&strSEInfo, 0, sizeof(SHELLEXECUTEINFO));
 		strSEInfo.cbSize = sizeof(SHELLEXECUTEINFO);
 		strSEInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
-		strSEInfo.lpFile = _T("C:/Windows/System32/cmd.exe");
+		strSEInfo.lpFile = _T("C:\\Windows\\System32\\cmd.exe");
 
-		//构造命令
-		CDuiString strPictruePath = CPaintManagerUI::GetInstancePath() + 
-			_T("ffmpeg\\Pictrue\\%d.jpg ");
-
-		CDuiString strOutPath = CPaintManagerUI::GetInstancePath() +
-			_T("ffmpeg\\Pictrue\\out.gif");
-
-		CDuiString strCMD(_T("/c"));
-		strCMD += strFFmpegPath + _T(" -r 1 -i ") + 
-			strPictruePath + strOutPath;
-
+		// IpParameters 响应的是用户的命令
 		strSEInfo.lpParameters = strCMD;
 		strSEInfo.nShow = SW_HIDE; //隐藏 cmd 窗口
 
 		//2. 发送cmd命令
 		ShellExecuteEx(&strSEInfo);
 		WaitForSingleObject(strSEInfo.hProcess, INFINITE);
+	}
+private:
+	CEditUI* m_pEditStart;
+	CEditUI* m_pEditFinish;
+public:
+	//获取当前工程路径
+	void GenerateGifWithPic() {
+		CDuiString strFFmpegPath = CPaintManagerUI::GetInstancePath();
+
+		//构造命令
+		CDuiString strCMD;
+		strCMD += _T("/c ");
+		strCMD += strFFmpegPath;
+		//生成图片的命令
+		strCMD += (_T("ffmprg\\ffmpeg -r 1 -i"));
+		strCMD += strFFmpegPath;
+		strCMD += (_T("ffmpeg\\Picture\\%d.jpg output.gif"));
+
+		//发送命令
+		SendCMD(strCMD);
+	}
+
+	void GenerateGifWithView() {
+		CDuiString strPath = CPaintManagerUI::GetInstancePath();
+		CDuiString strCMD;
+		strCMD += _T("/c ");
+		strCMD += strPath;
+		//
+		strCMD += _T("ffmpeg\\output.avi .\\..\\debug\\ffmpeg\\viewgif.gif");
+		SendCMD(strCMD);
+	}
+
+	bool IsValidTime(const CDuiString& strTime) {
+		if (8 != strTime.GetLength()) {
+			return false;
+		}
+		for (int i = 0; i < 8; ++i) {
+			if (':' == strTime[i]) {
+				continue;
+			}
+			else if (isdigit(strTime[i])) {
+				continue;
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
 	}
 };
 
