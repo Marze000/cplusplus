@@ -2,7 +2,7 @@
 #include <stdlib.h>
 using namespace std;
 
-#if 1
+#if 0
 void Test()
 {
 	int i = 1;
@@ -206,33 +206,29 @@ public:
 
 	//销毁
 	~BSTree() {
-		if (_pRoot == nullptr) {
-			return;
-		}
-		void Destroy(PNode _pRoot) {
-			if (_pRoot->_pLeft) {
-				Destroy(_pRoot->_pLeft);
+		void _Destroy(Node*& pRoot) {
+			if (pRoot) {
+				_Destroy(pRoot->_pLeft);
+				_Destroy(pRoot->_pRight);
+				delete pRoot;
+				pRoot = nullptr;
 			}
-			if (_pRoot->_pRight) {
-				Destroy(_pRoot->_pRight);
-			}
-			delete _pRoot;
-			_pRoot = nullptr;
 		}
 	}
 
 	// 根据二叉搜索树的性质查找：找到值为data的节点在二叉搜索树中的位置
 	PNode Find(const T& data) {
-		if (data == *_pRoot) {
-			return _pRoot;
-		}
-		else if (data > *_pRoot) {
-			_pRoot = _pRoot->_pRight;
-			Find(data);
-		}
-		else {
-			_pRoot = _pRoot->_pLeft;
-			Find(data);
+		Node* pCur = _pRoot;
+		while (pCur) {
+			if (data == pCur->_data) {
+				return pCur;
+			}
+			else if (data > _pRoot->_data) {
+				_pRoot = _pRoot->_pRight;
+			}
+			else {
+				_pRoot = _pRoot->_pLeft;
+			}
 		}
 		return false;
 	}
@@ -270,6 +266,7 @@ public:
 		return true;
 	}
 
+	//删除树中的某一个节点
 	bool Erase(const T& data){
 		// 如果树为空，删除失败
 		if (nullptr == _pRoot) {
@@ -294,36 +291,123 @@ public:
 		if (nullptr == pCur) {
 			return false;
 		}
-		if (nullptr == pCur->_pRight){
+
+		if (nullptr == pCur->_pRight) {
 			// 当前节点只有左孩子或者左孩子为空---可直接删除
-			if (pCur->_pLeft) {
-				pParent->_pLeft = pCur->_pLeft;
-				delete pCur;
-				Cur = nullptr;
+			if (pParent == nullptr) {
+				_pRoot = pCur->_pLeft;
 			}
 			else {
-				delete pCur;
-				Cur = nullptr;
+				if (pCur == pParent->_pLeft) {
+					pParent->_pLeft = pCur->_pLeft;
+				}
+				else {
+					pParent->_pRight = pCur->_pLeft;
+				}
 			}
-		}
-		else if (pCur->_pRight && pCur->_pLeft == nullptr){
-			// 当前节点只有右孩子---可直接删除
-			pParent->_pRight = pCur->_pRight;
 			delete pCur;
-			Cur = nullptr;
+		}
+		else if (pCur->_pLeft == nullptr){
+			// 当前节点只有右孩子---可直接删除
+			if (pParent == nullptr) {
+				_pRoot = pCur->_pRight;
+			}
+			else {
+				if (pCur == pParent->_pLeft){
+					pParent->_pLeft = pCur->_pRight;
+				}
+				else {
+					pParent->_pRight = pCur->_pRight;
+				}
+			}
+			delete pCur;
 		}
 		else{
-			// 当前节点左右孩子都存在，直接删除不好删除，、
+			// 当前节点左右孩子都存在，直接删除不好删除，
 			//可以在其子树中找一个替代结点，比如：
 			// 找其左子树中的最大节点，即左子树中最右侧的节点，
 			//或者在其右子树中最小的节点，即右子树中最小的节点
 			// 替代节点找到后，将替代节点中的值交给待删除节点，
 			//转换成删除替代节点
+			Node* pMostLeft = pCur->_pRight;
+			pParent = pMostLeft;
+			while (pMostLeft->_pLeft) {
+				pParent = pMostLeft;
+				pMostLeft = pMostLeft->_pLeft;
+			}
+
+			pCur->_data = pMostLeft->_data;
+			//删除替代节点
+
+			if (pMostLeft == pParent->_pLeft) {
+				pParent->_pLeft = pMostLeft->_pRight;
+			}
+			else {
+				pParent->_pRight = pMostLeft->_pRight;
+			}
+			delete pMostLeft;
 		}
 		return true;
 	}
 
-	void InOrder();
+	Node* LeftMost() {
+		if (_pRoot == nullptr) {
+			return nullptr;
+		}
+
+		Node* pCur = _pRoot;
+		while (pCur->_pLeft) {
+			pCur = pCur->_pLeft;
+		}
+		return pCur;
+	}
+
+	Node* RightMost() {
+		if (_pRoot == nullptr) {
+			return nullptr;
+		}
+
+		Node* pCur = _pRoot;
+		while (pCur->_pRight) {
+			pCur = pCur->_pRight;
+		}
+		return pCur;
+	}
+
+	//封装简单
+	void InOrder() {
+		_InOrder(_pRoot);
+	}
+
+private:
+	void _InOrder(Node* pRoot) {
+		if (pRoot) {
+			_InOrder(pRoot->_pLeft);
+			cout << pRoot->_data << " ";
+			_InOrder(pRoot->_pRight);
+		}
+	}
 private:
 	PNode _pRoot;
 };
+ 
+void TestBsTree() {
+	int a[] = { 5,3,4,1,7,8,2,6,0,9 };
+	BSTree<int>t;
+	for (auto e : a) {
+		t.Insert(e);
+	}
+	cout << t.LeftMost() << endl;
+	cout << t.RightMost() << endl;
+	t.InOrder();
+
+	//删除的测试
+	t.Erase(8);
+	t.InOrder();
+}
+
+int main() {
+	TestBsTree();
+
+	return 0;
+}
