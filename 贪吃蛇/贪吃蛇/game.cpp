@@ -414,100 +414,100 @@ void get_input()
 //
 //
 ////蛇的移动
-//snake *_move(snake *head)
-//{
-//	snake *str, *ptr, *ptr2;
-//	int m, n;
-//	m = head->x;
-//	n = head->y;
-//	switch (s_dir)
-//	{
-//	case 1:
-//		m -= 20;
-//		break;
-//	case 2:
-//		n -= 20;
-//		break;
-//	case 3:
-//		m += 20;
-//		break;
-//	case 4:
-//		n += 20;
-//		break;
-//	default:
-//		break;
-//	}
-//	str = (snake *)malloc(sizeof(snake));
-//	str->x = m;
-//	str->y = n;
-//	str->next = head;
-//	head = str;
-//	ptr = head->next->next;
-//	while (ptr != NULL)
-//	{
-//		if (ptr->x == str->x&&ptr->y == str->y)
-//		{
-//			live = 0;
-//			return str;
-//		}
-//		ptr = ptr->next;
-//	}
-//	if (str->x <= -1 || str->x >= 1190 || str->y <= -1 || str->y >= 690)
-//	{
-//		live = 0;
-//		return str;
-//	}
-//	if (str->x == food[0] && str->y == food[1])
-//	{
-//		score += 2;
-//		if (score > 28 && speed < 300)
-//			speed += 5;
-//
-//		setfillcolor(BLACK);
-//		bar(food[0], food[1], food[0] + 20, food[1] + 20);
-//		appear_food(str);
-//	}
-//	else
-//	{
-//		ptr = ptr2 = str;
-//		while (ptr->next != NULL)
-//		{
-//			ptr2 = ptr;
-//			ptr = ptr->next;
-//		}
-//		ptr2->next = NULL;
-//		setfillcolor(BLACK);
-//		bar(ptr->x, ptr->y, (ptr->x) + 20, (ptr->y) + 20);
-//		free(ptr);
-//	}
-//	return head;
-//}
-////画图形界面
-//void draw_interface(snake *head)
-//{
-//	snake *p = head;
-//	printf("score:%d  speed:%d", score, speed);
-//	setfillcolor(YELLOW);
-//	bar(food[0], food[1], food[0] + 20, food[1] + 20);
-//	while (p != NULL)
-//	{
-//		if (p == head)
-//		{
-//			setfillcolor(LIGHTGREEN);
-//			bar(p->x, p->y, (p->x) + 20, (p->y) + 20);
-//			setfillcolor(BLACK);
-//			circle((p->x) + 10, (p->y) + 10, 3);
-//		}
-//		else
-//		{
-//			setfillcolor(GREEN);
-//			bar(p->x, p->y, (p->x) + 20, (p->y) + 20);
-//		}
-//		p = p->next;
-//	}
-//}
-//
-//
+snake *_move(snake *head)
+{
+	snake *str, *ptr, *ptr2;
+	int m, n;
+	m = head->x;
+	n = head->y;
+	switch (s_dir)
+	{
+	case 1:
+		m -= 20;
+		break;
+	case 2:
+		n -= 20;
+		break;
+	case 3:
+		m += 20;
+		break;
+	case 4:
+		n += 20;
+		break;
+	default:
+		break;
+	}
+	str = (snake *)malloc(sizeof(snake));
+	str->x = m;
+	str->y = n;
+	str->next = head;
+	head = str;
+	ptr = head->next->next;
+	while (ptr != NULL)
+	{
+		if (ptr->x == str->x&&ptr->y == str->y)
+		{
+			live = 0;
+			return str;
+		}
+		ptr = ptr->next;
+	}
+	if (str->x <= -1 || str->x >= 1190 || str->y <= -1 || str->y >= 690)
+	{
+		live = 0;
+		return str;
+	}
+	if (str->x == food[0] && str->y == food[1])
+	{
+		score += 2;
+		if (score > 28 && speed < 300)
+			speed += 5;
+
+		setfillcolor(BLACK);
+		bar(food[0], food[1], food[0] + 20, food[1] + 20);
+		appear_food(str);
+	}
+	else
+	{
+		ptr = ptr2 = str;
+		while (ptr->next != NULL)
+		{
+			ptr2 = ptr;
+			ptr = ptr->next;
+		}
+		ptr2->next = NULL;
+		setfillcolor(BLACK);
+		bar(ptr->x, ptr->y, (ptr->x) + 20, (ptr->y) + 20);
+		free(ptr);
+	}
+	return head;
+}
+//画图形界面
+void draw_interface(snake *head)
+{
+	snake *p = head;
+	printf("score:%d  speed:%d", score, speed);
+	setfillcolor(YELLOW);
+	bar(food[0], food[1], food[0] + 20, food[1] + 20);
+	while (p != NULL)
+	{
+		if (p == head)
+		{
+			setfillcolor(LIGHTGREEN);
+			bar(p->x, p->y, (p->x) + 20, (p->y) + 20);
+			setfillcolor(BLACK);
+			circle((p->x) + 10, (p->y) + 10, 3);
+		}
+		else
+		{
+			setfillcolor(GREEN);
+			bar(p->x, p->y, (p->x) + 20, (p->y) + 20);
+		}
+		p = p->next;
+	}
+}
+
+
 //void reward_food(snake *head)
 //{
 //	snake *p = head;
