@@ -310,107 +310,107 @@ void Finish()
 	gotoxy(0, 27);
 	system("pause");
 }
-//#include<conio.h>
-//#include<graphics.h>
-//#include <time.h>//随机函数头文件
-//#include<windows.h>
-//#include <stdlib.h>
-//#include <stdio.h>
-//
-//#define N 4//开始蛇节点个数
-//#define S 260
-//typedef struct node
-//{
-//	int x;
-//	int y;
-//	struct node *next;
-//} snake; //关于蛇身的结构体
-//
-//int food[5] = { 200,200 }; //食物坐标food[0],food[1]
-//int re_food[5];
-//int live = 1;//代表蛇的生死
-//int score = 0;
-//int speed = 210;
-//int s_dir = 3;//初始移动方向
-////1,2,3,4分别代表蛇的左，上，右，下四个移动方向
-//int index;
-//int temp = 0;
-//int flag = 0;
-////创建一条蛇（链表）
-//snake *Creat_node(){
-//	int num = N;
-//	int n = S;
-//	snake *head = NULL, *tail = NULL, *p;
-//	while (num--){
-//		p = (snake *)malloc(sizeof(snake));
-//		p->x = n;
-//		n -= 20;
-//		p->y = S;
-//		p->next = NULL;
-//		if (head == NULL)
-//			head = p;
-//		else
-//			tail->next = p;
-//		tail = p;
-//	}
-//	return head;
-//}
-////随机出现食物
-//void appear_food(snake *head)
-//{
-//	snake *p = head;
-//loop:
-//	srand(time(0));//设定随机数种子
-//	food[0] = rand()%1100+1;
-//	food[1] = rand()%600+1;
-//	while (food[0] % 20 != 0)//食物随机出现后必须让食物能够在整格内,这样才可以让蛇吃到
-//		food[0]++;
-//	while (food[1] % 20 != 0)
-//		food[1]++;
-//	//检验是否与蛇所在位置一致
-//	while (p != NULL)
-//	{
-//		if (p->x == food[0] && p->y == food[1])
-//			goto loop;
-//		p = p->next;
-//	}
-//}
-////从键盘获取输入，即蛇的移动方向
-//void get_input()
-//{
-//	char key;
-//	if (kbhit())
-//	{
-//		key = getch();//接收对应的ASCII码
-//		switch (key)
-//		{
-//		case 37://左
-//			if (s_dir != 3)
-//				s_dir = 1;
-//			break;
-//		case 38://上
-//			if (s_dir != 4)
-//				s_dir = 2;
-//			break;
-//		case 39://右
-//			if (s_dir != 1)
-//				s_dir = 3;
-//			break;
-//		case 40://下
-//			if (s_dir != 2)
-//				s_dir = 4;
-//			break;
-//		case 27://Esc(退出)
-//			s_dir = 27;
-//			break;
-//		case 32://空格(暂停)
-//			s_dir = 32;
-//			break;
-//		default:
-//			break;
-//		}
-//	}
-//}
+#include<conio.h>
+#include<graphics.h>
+#include <time.h>//随机函数头文件
+#include<windows.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#define N 4//开始蛇节点个数
+#define S 260
+typedef struct node
+{
+	int x;
+	int y;
+	struct node *next;
+} snake; //关于蛇身的结构体
+
+int food[5] = { 200,200 }; //食物坐标food[0],food[1]
+int re_food[5];
+int live = 1;//代表蛇的生死
+int score = 0;
+int speed = 210;
+int s_dir = 3;//初始移动方向
+//1,2,3,4分别代表蛇的左，上，右，下四个移动方向
+int index;
+int temp = 0;
+int flag = 0;
+//创建一条蛇（链表）
+snake *Creat_node(){
+	int num = N;
+	int n = S;
+	snake *head = NULL, *tail = NULL, *p;
+	while (num--){
+		p = (snake *)malloc(sizeof(snake));
+		p->x = n;
+		n -= 20;
+		p->y = S;
+		p->next = NULL;
+		if (head == NULL)
+			head = p;
+		else
+			tail->next = p;
+		tail = p;
+	}
+	return head;
+}
+//随机出现食物
+void appear_food(snake *head)
+{
+	snake *p = head;
+loop:
+	srand(time(0));//设定随机数种子
+	food[0] = rand()%1100+1;
+	food[1] = rand()%600+1;
+	while (food[0] % 20 != 0)//食物随机出现后必须让食物能够在整格内,这样才可以让蛇吃到
+		food[0]++;
+	while (food[1] % 20 != 0)
+		food[1]++;
+	//检验是否与蛇所在位置一致
+	while (p != NULL)
+	{
+		if (p->x == food[0] && p->y == food[1])
+			goto loop;
+		p = p->next;
+	}
+}
+//从键盘获取输入，即蛇的移动方向
+void get_input()
+{
+	char key;
+	if (kbhit())
+	{
+		key = getch();//接收对应的ASCII码
+		switch (key)
+		{
+		case 37://左
+			if (s_dir != 3)
+				s_dir = 1;
+			break;
+		case 38://上
+			if (s_dir != 4)
+				s_dir = 2;
+			break;
+		case 39://右
+			if (s_dir != 1)
+				s_dir = 3;
+			break;
+		case 40://下
+			if (s_dir != 2)
+				s_dir = 4;
+			break;
+		case 27://Esc(退出)
+			s_dir = 27;
+			break;
+		case 32://空格(暂停)
+			s_dir = 32;
+			break;
+		default:
+			break;
+		}
+	}
+}
 //
 //
 ////蛇的移动
