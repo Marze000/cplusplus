@@ -183,6 +183,10 @@ public:
 };
 #endif
 
+///////////////////////////////////////////
+//// 二叉搜索树
+///////////////////////////////////////////
+
 template<class T>
 struct BSTNode{
 	BSTNode(const T& data = T())
@@ -205,14 +209,12 @@ public:
 	{}
 
 	//销毁
-	~BSTree() {
-		void _Destroy(Node*& pRoot) {
-			if (pRoot) {
-				_Destroy(pRoot->_pLeft);
-				_Destroy(pRoot->_pRight);
-				delete pRoot;
-				pRoot = nullptr;
-			}
+	void _Destroy(Node*& pRoot) {
+		if (pRoot) {
+			_Destroy(pRoot->_pLeft);
+			_Destroy(pRoot->_pRight);
+			delete pRoot;
+			pRoot = nullptr;
 		}
 	}
 
@@ -324,11 +326,11 @@ public:
 		}
 		else{
 			// 当前节点左右孩子都存在，直接删除不好删除，
-			//可以在其子树中找一个替代结点，比如：
+			// 可以在其子树中找一个替代结点，比如：
 			// 找其左子树中的最大节点，即左子树中最右侧的节点，
-			//或者在其右子树中最小的节点，即右子树中最小的节点
+			// 或者在其右子树中最小的节点，即右子树中最小的节点
 			// 替代节点找到后，将替代节点中的值交给待删除节点，
-			//转换成删除替代节点
+			// 转换成删除替代节点
 			Node* pMostLeft = pCur->_pRight;
 			pParent = pMostLeft;
 			while (pMostLeft->_pLeft) {
@@ -350,28 +352,30 @@ public:
 		return true;
 	}
 
-	Node* LeftMost() {
+	int LeftMost() {
 		if (_pRoot == nullptr) {
-			return nullptr;
+			return 0;
 		}
 
 		Node* pCur = _pRoot;
 		while (pCur->_pLeft) {
 			pCur = pCur->_pLeft;
 		}
-		return pCur;
+		int cur = pCur->_data;
+		return cur;
 	}
 
-	Node* RightMost() {
+	int RightMost() {
 		if (_pRoot == nullptr) {
-			return nullptr;
+			return 0;
 		}
 
 		Node* pCur = _pRoot;
 		while (pCur->_pRight) {
 			pCur = pCur->_pRight;
 		}
-		return pCur;
+		int cur = pCur->_data;
+		return cur;
 	}
 
 	//封装简单
@@ -400,6 +404,7 @@ void TestBsTree() {
 	cout << t.LeftMost() << endl;
 	cout << t.RightMost() << endl;
 	t.InOrder();
+	cout << endl;
 
 	//删除的测试
 	t.Erase(8);
@@ -409,5 +414,6 @@ void TestBsTree() {
 int main() {
 	TestBsTree();
 
+	system("pause");
 	return 0;
 }

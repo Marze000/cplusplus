@@ -152,7 +152,7 @@ protected:
 
 	void _RotateR(Node* pParent) {
 		Node* pSubL = pParent->_pLeft;
-		Node* pSubLR = pParent->_pRight;
+		Node* pSubLR = pSubL->_pRight;
 		
 		//更新孩子指针域
 		pParent->_pLeft = pSubL;
@@ -168,6 +168,7 @@ protected:
 		if (nullptr == pPParent) {
 			_pRoot = pSubL;
 		}
+		//使父节点 pParent指向 pSubL
 		else {
 			if (pParent == pPParent->_pLeft) {
 				pPParent->_pLeft = pSubL;
