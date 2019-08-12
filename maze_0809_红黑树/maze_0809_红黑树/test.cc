@@ -28,8 +28,10 @@ struct RBTreeNode{
 template<class ValueType>
 class RBTree{
 	//……
+	typedef RBTreeNode<ValueType> Node;
+
 	bool Insert(const ValueType& data){
-		PNode& pRoot = GetRoot();
+		Node* pRoot = GetRoot();
 		if (nullptr == pRoot){
 			pRoot = new Node(data, BLACK);
 			// 根的双亲为头节点
@@ -38,8 +40,34 @@ class RBTree{
 		}
 		else{
 			// 1. 按照二叉搜索的树方式插入新节点
+			Node* cur = pRoot;
+			Node* parent = nullptr;
+			while (cur) {
+				parent = cur;
+				if (data > pRoot->_data) {
+					cur = cur->_pRight;
+				}
+				else if(data < pRoot->_data）{
+					cur = cur->_pLeft;
+				}
+				else {
+					return false;
+				}
+			}
+			//此时 cur 就是要插入的位置，他的父节点是parent
+			cur = new Node(data);
+			if (data > parent->_data) {
+				parent->_pRight = cur;
+			}
+			else if (data < parent->_data) {
+				parent->_pLeft = cur;
+			}
+			else {
+				return true;
+			}
 			// 2. 检测新节点插入后，红黑树的性质是否造到破坏，
 			// 若满足直接退出，否则对红黑树进行旋转着色处理
+			IsValidRBTree();
 		}
 		// 根节点的颜色可能被修改，将其改回黑色
 		pRoot->_color = BLACK;
@@ -47,6 +75,8 @@ class RBTree{
 		_pHead->_pRight = RightMost();
 		return true;
 	}
+	
+	
 private:
 	PNode& GetRoot() {
 		return _pHead->_pParent;
@@ -132,5 +162,5 @@ private:
 	}
 	
 private:
-	PNode _pHead;
+	Node* _pHead;
 };

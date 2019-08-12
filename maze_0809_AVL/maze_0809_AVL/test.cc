@@ -98,9 +98,50 @@ public:
 		return true;
 	}
 
+	////////////////////////////////////////////
+	//检测平衡树
+	////////////////////////////////////////////
+	//计算深度
+	int _Height(Node* pRoot){
+		if (root == NULL){
+			return 0;
+		}
+		if (root->left == NULL && root->right == NULL){
+			return 1;
+		}
+		int left = GetHeight(root->left);
+		int right = GetHeight(root->right);
+		if (left > right){
+			return left + 1;
+		}else{
+			return right + 1;
+		}
+	}
+
+	//判断是否平衡
+	bool _IsBalanceTree(Node* pRoot){
+		// 空树也是AVL树
+		if (nullptr == pRoot) {
+			return true;
+		}
+		// 计算pRoot节点的平衡因子：即pRoot左右子树的高度差
+		int leftHeight = _Height(pRoot->_pLeft);
+		int rightHeight = _Height(pRoot->_pRight);
+		int diff = rightHeight - leftHeight;
+		// 如果计算出的平衡因子与pRoot的平衡因子不相等，或者
+		// pRoot平衡因子的绝对值超过1，则一定不是AVL树
+		if (diff != pRoot->_bf || (diff > 1 || diff < -1))
+			return false;
+		// pRoot的左和右如果都是AVL树，则该树一定是AVL树
+		return _IsBalanceTree(pRoot->_pLeft) 
+			&& _IsBalanceTree(pRoot->_pRight);
+	}
+	//////////////////////////////////////////////////////
+
 	void InOrder() {
 		_InOrder(_pRoot);
 	}
+
 protected:
 
 	void _InOrder(Node* pRoot) {
