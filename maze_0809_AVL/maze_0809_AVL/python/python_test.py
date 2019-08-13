@@ -1,2 +1,2 @@
-print("hehe")
-
+a = 10
+print a

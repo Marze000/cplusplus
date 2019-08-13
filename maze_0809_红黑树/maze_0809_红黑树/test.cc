@@ -2,12 +2,14 @@
 #include <stdlib.h>
 using namespace std;
 
+//思考：为什么红黑树的最长路径不会大于最短路径的两倍
+
 // 节点的颜色
 enum Color { RED, BLACK };
 // 红黑树节点的定义
-template<class ValueType>
+template<class T>
 struct RBTreeNode{
-	RBTreeNode(const ValueType& data = ValueType(),Color color = RED)
+	RBTreeNode(const T& data = T(),Color color = RED)
 		: _pLeft(nullptr)
 		, _pRight(nullptr)
 		, _pParent(nullptr)
@@ -15,30 +17,37 @@ struct RBTreeNode{
 		, _color(color)
 	{}
 
-	RBTreeNode<ValueType>* _pLeft; // 节点的左孩子
-	RBTreeNode<ValueType>* _pRight; // 节点的右孩子
+	RBTreeNode<T>* _pLeft; // 节点的左孩子
+	RBTreeNode<T>* _pRight; // 节点的右孩子
 	// 节点的双亲(红黑树需要旋转，
 	//为了实现简单给出该字段)
-	RBTreeNode<ValueType>* _pParent; 
+	RBTreeNode<T>* _pParent; 
 
-	ValueType _data; // 节点的值域
+	T _data; // 节点的值域
 	Color _color; // 节点的颜色
 };
 
-template<class ValueType>
+template<class T>
 class RBTree{
 	//……
-	typedef RBTreeNode<ValueType> Node;
+	typedef RBTreeNode<T> Node;
+	RBTree() {
+		_pHead = new Node;
+		_pHead->_pLeft = _pHead;
+		_pHead->_pRight = _pHead;
+	}
 
-	bool Insert(const ValueType& data){
+	bool Insert(const T& data){
 		Node* pRoot = GetRoot();
 		if (nullptr == pRoot){
 			pRoot = new Node(data, BLACK);
 			// 根的双亲为头节点
 			pRoot->_pParent = _pHead;
-			_pHead->_pParent = pRoot;
+			_pHead->_pLeft = pRoot;
+			_pHead->_pRight = pRoot;
+			return true;
 		}
-		else{
+		else {
 			// 1. 按照二叉搜索的树方式插入新节点
 			Node* cur = pRoot;
 			Node* parent = nullptr;
@@ -47,43 +56,87 @@ class RBTree{
 				if (data > pRoot->_data) {
 					cur = cur->_pRight;
 				}
-				else if(data < pRoot->_data）{
+				else if (data < pRoot->_data）{
 					cur = cur->_pLeft;
-				}
+					}
 				else {
 					return false;
 				}
 			}
 			//此时 cur 就是要插入的位置，他的父节点是parent
 			cur = new Node(data);
-			if (data > parent->_data) {
-				parent->_pRight = cur;
-			}
-			else if (data < parent->_data) {
-				parent->_pLeft = cur;
-			}
-			else {
-				return true;
-			}
+				if (data > parent->_data) {
+					parent->_pRight = cur;
+				}
+				else {
+					parent->_pLeft = cur;
+				}
+			cur->_pParent = parent;
+
 			// 2. 检测新节点插入后，红黑树的性质是否造到破坏，
 			// 若满足直接退出，否则对红黑树进行旋转着色处理
-			IsValidRBTree();
+			// 可能违反性质3
+			while (parent != _pHead && RED == parent->_color) {
+				Node* granderFather = parent->_pParent;
+				if (parent == granderFather->_pLeft) {
+					Node* uncle = granderFather->_pRight;
+					// 情况1：叔叔节点存在 且为红
+					if (uncle && uncle->_color == RED) {
+						parent->_color = BLACK;
+						uncle->_color = BLACK;
+						granderFather->_color = RED;
+						cur = granderFather;
+						parent = cur->_pParent;
+					}
+					else {
+						// 情况三
+						if (cur = parent->_pRight) {
+							RoteteLeft(parent);
+							swap(parent, cur);
+						}
+						//情况二
+						parent->_color = BLACK;
+						granderFather->_color = RED;
+						RotateRight(granderFather);
+					}
+				}
+				else {
+					Node* uncle = granderFather->_pLeft;
+					if (uncle && uncle->_color == RED) {
+						parent->_color = BLACK;
+						uncle->_color = BLACK;
+						granderFather->_color = RED;
+						cur = granderFather;
+						parent = cur->_pParent;
+					}
+					else {
+						if (cur == parent->_pLeft) {
+							RotateRight(parent);
+							swap(parent, cur);
+						}
+						parent->_color = BLACK;
+						granderFather->_color = RED;
+						RotateLeft(granderFather);
+					}
+				}
+
+			}
+			// 根节点的颜色可能被修改，将其改回黑色
+			pRoot->_color = BLACK;
+			_pHead->_pLeft = LeftMost();
+			_pHead->_pRight = RightMost();
+			return true;
 		}
-		// 根节点的颜色可能被修改，将其改回黑色
-		pRoot->_color = BLACK;
-		_pHead->_pLeft = LeftMost();
-		_pHead->_pRight = RightMost();
-		return true;
 	}
 	
 	
 private:
-	PNode& GetRoot() {
+	Node*& GetRoot() {
 		return _pHead->_pParent;
 	}
 	// 获取红黑树中最小节点，即最左侧节点
-	PNode LeftMost() {
-		PNode cur = GetRoot();
+	Node* LeftMost() {
+		Node* cur = GetRoot();
 		if (cur == nullptr) {
 			return;
 		}
@@ -93,8 +146,8 @@ private:
 		return cur;
 	}
 	// 获取红黑树中最大节点，即最右侧节点
-	PNode RightMost() {
-		PNode cur = GetRoot();
+	Node* RightMost() {
+		Node* cur = GetRoot();
 		if (cur == nullptr) {
 			return;
 		}
