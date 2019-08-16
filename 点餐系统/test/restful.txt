@@ -1,0 +1,99 @@
+使用HTTP 方法表示操作的语义
+  POST 代表插入
+  GET  代表查找
+  PUT  代表修改
+  DELETE 代表删除
+
+/dish 操作菜    /order 操作订单
+
+使用 body 表示操作过程中的一些具体数据
+通常使用 json 格式来组织数据---可以让我们用一个字符串来表示一个结构化的数据
+json 是一种数据组织格式
+
+1.新增菜品
+POST /dish
+{
+  "name":"烧鸡",
+  "price":2000
+}
+
+HTTP/1.1 200 OK
+{
+  "ok":true,
+  "reason":""
+}
+
+2.查看所有菜名
+  请求:GET /dish 
+
+  响应: HTTP/1.1 200 OK
+        [
+          {
+            "dish_id":1,
+            "name":"红烧里脊",
+            "price":2000
+          },
+          {
+
+          }
+        ]
+        
+3.查看指定菜名
+  GET /dish/dish_id
+
+响应:
+HTTP/1.1 200 OK
+{
+  "dish_id":1,
+  "name":"红烧里脊",
+  "price":2000
+}
+
+4. 修改菜名
+请求 PUT /dish/:dish_id
+{
+  "name":"毛家红烧里脊",
+  "price":8000,
+}
+响应
+{
+  "ok":true
+}
+
+5.删除菜品
+请求 DELETE /dish/:dish_id
+
+响应
+HTTP/1.1 200 OK
+{
+  "ok":true,
+}
+
+6.新增订单
+POST /order
+{
+  "table_id":"梅花厅",
+  "time":"2019-01-01 12:00",
+  "dish_ids":[1,3,4]
+}
+
+7.查看订单
+GET /order
+
+HTTP/1.1 200 OK
+[
+  {
+    order_id:1,
+    table_id:"梅花厅",
+    time:"2019-01-01 14:00",
+    status:1,
+    dishes:
+    [
+      1,2,3
+    ]
+  },
+  {
+    //TOOD
+  }
+]
+

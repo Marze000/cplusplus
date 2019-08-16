@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>点餐页面</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-icon-style.css">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+</head>
+
+<body> 
+
+<!--====================================================
+                        PAGE CONTENT
+======================================================-->
+    <div class="page-content d-flex align-items-stretch">
+
+        <div class="content-inner chart-cont" id = "app">
+
+            <!--插值表达式-->
+            <h2>{{author}}</h2>
+            <!--***** CONTENT *****-->     
+            <div class="row">
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="bg-info text-white">
+                      <th>鸡名</th>
+                      <th>价格</th>
+                      <th>选取</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="dish in dishes">
+                      <td>{{dish.name}}</td>
+                      <td>{{dish.price/100}}元</td>
+                      <td>
+                            <p>
+                            <input type="checkbox">
+                            <label>选择</label>
+                            </p>
+                      </td>
+                    </tr>
+                </tbody>
+                </table>
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">总价
+                    <span class="caret">
+                    </span>
+                </button>
+            </div> 
+        </div>
+    </div> 
+
+    <!--foot-->
+    <div class="box">
+            <li>
+                <a href="mailto:info@example.com">联系方式：usermaze@163.com</a>
+            </li>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <p> 客户点餐页面 <div id="timenow"></div></p>
+            </div>
+    </div>
+   <!--Global Javascript -->
+    <script>src="https://code.jquery.com/jquery-3.1.1.min.js"</script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.validate.min.js"></script> 
+    <script src="js/chart.min.js"></script> 
+    <script src="js/front.js"></script> 
+    <script>setInterval("timenow.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);</script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+          el: '#app',
+          data: {
+            author:'菜单',
+            dishes:[]
+          },
+          methods:{
+              get_dishes(){
+                 //从服务器获取菜名数据
+                 $.ajax({
+                    type:"get",
+                    url:"http://148.70.188.107:9094/dish",
+                    context:this,
+                    success:function(data,status){
+                      this.dishes = data;
+                    }
+                 });
+              }
+          },
+        })
+        app.get_dishes();
+      </script>
+    </body>
+</html>
