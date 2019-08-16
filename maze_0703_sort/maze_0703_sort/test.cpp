@@ -5,8 +5,8 @@ void test() {
 	//≤Â»Î≈≈–Ú
 	//InsertSort(array, 10);
 	//QuickSort(array, 0,10);
-	QuickSortNor(array, 10);
-
+	//QuickSortNor(array, 10);
+	MergeSort(array, 10);
 
 	for (int i = 0; i < 10; ++i) {
 		cout << array[i] << " ";
