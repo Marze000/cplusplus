@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "algorithm_算法总结", "algorithm_算法总结\algorithm_算法总结.vcxproj", "{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Debug|x64.ActiveCfg = Debug|x64
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Debug|x64.Build.0 = Debug|x64
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Debug|x86.ActiveCfg = Debug|Win32
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Debug|x86.Build.0 = Debug|Win32
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Release|x64.ActiveCfg = Release|x64
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Release|x64.Build.0 = Release|x64
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Release|x86.ActiveCfg = Release|Win32
+		{B4B1E9C3-9456-4354-B1DE-0674BC106E4C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47F196FA-267B-4A50-AC14-7242B262BA08}
+	EndGlobalSection
+EndGlobal
