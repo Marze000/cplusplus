@@ -5,7 +5,6 @@
 using namespace std;
 
 
-#if 1
 bool myfunction(int i, int j) {
 	return (i == j);
 }
@@ -428,7 +427,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#endif
 int main() {
 	int myints[] = { 10,20,30,40,50,60,70,20,20 ,30};
 	vector<int>v(myints,myints+10);
@@ -440,6 +438,11 @@ int main() {
 	}
 	std::cout << '\n';
 
+	system("pause");
+	system("pause");
+	system("pause");
+	system("pause");
+	system("pause");
 	system("pause");
 	return 0;
 }
