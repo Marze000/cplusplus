@@ -3,6 +3,7 @@
 #include <stdlib.h>
 using namespace std;
 
+#if 1
 //打印100 -200 之间的素数
 void print() {
 	for (int i = 100; i <= 200; ++i) {
@@ -240,7 +241,15 @@ void printWater() {
 //实现reverse（）函数完成数组元素的逆置。
 //要求：自己设计函数的参数，返回值。
 
-int main() {
+void init(int* arr) {
+	for(int i = 0;i < 10;++i)
+		arr[i] = 0;
+}
+void reverse(int* arr) {
+	for (int i = 9; i > 0; --i)
+		arr[i] = 0;
+}
+void create() {
 	int result = 0;
 	int a = 0;
 	cout << "请输入 a 数字的值" << endl;
@@ -252,7 +261,216 @@ int main() {
 	}
 	cout << result << endl;
 
+
+	int array[10];
+	init(array);
+	reverse(array);
+}
+
+
+//1.递归和非递归分别实现求第n个斐波那契数。
+int FeiBo(int n) {
+	if (n == 1) {
+		return 1;
+	}
+	if (n == 2) {
+		return 1;
+	}
+	return FeiBo(n - 1) + FeiBo(n - 2);
+}
+
+int FeiBoNor(int n) {
+	int first = 1;
+	int second = 1;
+	int last = 2;
+	for (int i = 3; i < n; ++i) {
+		first = second;
+		second = last;
+		last = first + second;
+	}
+	return last;
+}
+void test() {
+	cout << FeiBo(12) << endl;
+	cout << FeiBoNor(12) << endl;
+}
+//2.编写一个函数实现n^k，使用递归实现
+int zhishu(int n,int k) {
+	if (k == 1) {
+		return n;
+	}
+	else {
+		return n * zhishu(n, k - 1);
+	}
+}
+
+int zhishuNor(int n, int k) {
+	int result = 1;
+	for (int i = 0; i < k; ++i) {
+		result = result * n;
+	}
+	return result;
+}
+void test() {
+	int n = 2;
+	int k = 10;
+	cout << zhishu(n, k) << endl;
+	cout << zhishuNor(n, k) << endl;
+}
+
+//3. 写一个递归函数DigitSum(n)，输入一个非负整数，返回组成它的数字之和，
+//例如，调用DigitSum(1729)，则应该返回1 + 7 + 2 + 9，它的和是19
+int DigitSum(int n) {
+	if (n < 10) {
+		return n;
+	}
+	return DigitSum(n / 10) + (n%10);
+}
+
+int DigitSumNor(int n) {
+	int res = n % 10;
+	while (n) {
+		n = n / 10;
+		res += n % 10;
+	}
+	return res;
+}
+
+void test() {
+	int a = 1729;
+	cout << DigitSum(a) << endl;
+	cout << DigitSumNor(a) << endl;
+}
+//4. 编写一个函数 reverse_string(char * string)（递归实现）
+//实现：将参数字符串中的字符反向排列。
+//要求：不能使用C函数库中的字符串操作函数。
+char* reverse_string(char*string) {
+	char* q = string;
+	int n = strlen(string);
+	if (n > 1) {
+		char tmp = q[0];
+		q[0] = q[n - 1];
+		q[n - 1] = '\0';
+		reverse_string(string + 1);
+		q[n - 1] = tmp;
+	}
+	return q;
+}
+void test() {
+	char str[] = "hehemaze";
+	printf("%s\n", str);
+	char* ret = reverse_string(str);
+	printf("%s\n", ret);
+}
+//5.递归和非递归分别实现strlen
+int Strlen(char* string ) {
+	int count = 0;
+	while (*string != '\0') {
+		string++;
+		count++;
+	}
+	return count;
+}
+int strlenNor(char* str) {
+	if (*str == '\0') {
+		return 0;
+	}
+	return 1 + strlenNor(str + 1);
+}
+void test() {
+	char str[] = "hehehe";
+	cout << Strlen(str) << endl;
+	cout << strlenNor(str) << endl;
+}
+//6.递归和非递归分别实现求n的阶乘
+int jiechen(int n) {
+	if (n == 1) {
+		return 1;
+	}
+	return n * jiechen(n - 1);
+}
+int jiechengxunhuan(int n) {
+	int result = 1;
+	for (int i = 1; i <= n; ++i) {
+		result *= i;
+	}
+	return result;
+}
+void test() {
+	cout<<jiechen(5);
+	cout << endl;
+	cout << jiechengxunhuan(5) << endl;
+}
+//7.递归方式实现打印一个整数的每一位
+void print(int n) {
+	if (n > 9) {
+		print(n / 10);
+	}
+	printf("%d ", n % 10);
+}
+void Print(int n) {
+	if (n < 10) {
+		printf("%d ", n);
+	}
+	else {
+		Print(n / 10);
+		printf("%d ", n % 10);
+	}
+}
+
+void test() {
+	print(1729);
+	printf("\n");
+	Print(1729);
+	printf("\n");
+}
+
+#endif
+/*
+1.
+5位运动员参加了10米台跳水比赛，有人让他们预测比赛结果
+A选手说：B第二，我第三；
+B选手说：我第二，E第四；
+C选手说：我第一，D第二；
+D选手说：C最后，我第三；
+E选手说：我第四，A第一；
+比赛结束后，每位选手都说对了一半，请编程确定比赛的名次。
+*/
+int partion() {
+	for (int);
+}
+/*
+2.
+日本某地发生了一件谋杀案，警察通过排查确定杀人凶手必为4个
+嫌疑犯的一个。以下为4个嫌疑犯的供词。
+A说：不是我。
+B说：是C。
+C说：是D。
+D说：C在胡说
+已知3个人说了真话，1个人说的是假话。
+现在请根据这些信息，写一个程序来确定到底谁是凶手。
+*/
+void mudder() {
+	char muder = 'A';
+	for (muder = 'A'; muder < 'D'; ++muder) {
+		if ((muder != 'A') + (muder == 'C') + (muder == 'D') + (muder != 'D') == 3) {
+			printf("熊搜是 %c\n", muder);
+		}
+	}
+}
+void test() {
+	mudder();
+}
+/*
+3.在屏幕上打印杨辉三角。
+1
+1 1
+1 2 1
+1 3 3 1
+
+*/
+int main() {
+	test();
 	system("pause");
 	return 0;
 }
-
