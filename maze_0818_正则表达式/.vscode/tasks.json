@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+        "taskName": "test build",
+        "type": "shell",
+        "command": "${workspaceRoot}/build.bat",
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    }]
+}

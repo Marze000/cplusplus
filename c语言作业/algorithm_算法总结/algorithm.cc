@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <stdlib.h>
+#include <list>
 using namespace std;
 
 #if 1
@@ -425,7 +426,7 @@ void test() {
 	printf("\n");
 }
 
-#endif
+
 /*
 1.
 5位运动员参加了10米台跳水比赛，有人让他们预测比赛结果
@@ -461,6 +462,71 @@ void mudder() {
 void test() {
 	mudder();
 }
+
+#endif
+
+
+#if 0
+int main(){
+	std::list<int> l1; // 构造空的l1
+	// l2中放4个值为100的元素
+	std::list<int> l2(4, 100); 
+	// 用l2的[begin(), end()）左闭右开的区间构造l3
+	std::list<int> l3(l2.begin(), l2.end()); 
+	std::list<int> l4(l3); // 用l3拷贝构造l4
+
+	// 以数组为迭代器区间构造l5
+	int array[] = { 16,2,77,29 };
+	std::list<int> l5(array, array + sizeof(array) / sizeof(int));
+	// 用迭代器方式打印l5中的元素
+	for (std::list<int>::iterator it = l5.begin(); it != l5.end(); it++)
+		std::cout << *it << " ";
+	std::cout << endl;
+	for (auto& e : l5)
+		std::cout << e << " ";
+	std::cout << endl;
+
+	system("pause");
+	return 0;
+}
+
+void TestListIterator1(){
+	int array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+	list<int> l(array, array + sizeof(array) / sizeof(array[0]));
+	auto it = l.begin();
+	while (it != l.end()){
+		// erase()函数执行后，it所指向的节点已被删除，
+		// 因此it无效，在下一次使用it时，必须先给其赋值
+		l.erase(it);
+		++it;
+	}
+}
+
+// 改正
+void TestListIterator(){
+	int array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+	list<int> l(array, array + sizeof(array) / sizeof(array[0]));
+	auto it = l.begin();
+	while (it != l.end()){
+		l.erase(it++); // it = l.erase(it);
+	}
+}
+
+#endif
+namespace List {
+	template<class T>
+	struct ListNode {
+		ListNode(const T& val = T())
+			:_pre(nullptr)
+			,_next(nullptr)
+			,_value(0)
+		{}
+	private:
+		ListNode<T>* _pre;
+		ListNode<T>* _next;
+		T _value;
+	};
+}
 /*
 3.在屏幕上打印杨辉三角。
 1
@@ -468,9 +534,9 @@ void test() {
 1 2 1
 1 3 3 1
 
-*/
 int main() {
 	test();
 	system("pause");
 	return 0;
 }
+*/
