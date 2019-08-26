@@ -4,7 +4,7 @@
 #include <list>
 using namespace std;
 
-#if 1
+#if 0
 //打印100 -200 之间的素数
 void print() {
 	for (int i = 100; i <= 200; ++i) {
@@ -512,7 +512,6 @@ void TestListIterator(){
 	}
 }
 
-#endif
 namespace List {
 	template<class T>
 	struct ListNode {
@@ -540,3 +539,19 @@ int main() {
 	return 0;
 }
 */
+static int a = 10;
+
+int main() {
+	printf("%d\n", a);
+	test();
+
+	system("pause");
+	return 0;
+}
+#endif
+
+int main(void){
+	fun();
+
+	return 0;
+}
