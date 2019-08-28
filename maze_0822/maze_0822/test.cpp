@@ -250,7 +250,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#endif
 template<class T, class Con = deque<T>>
 class Stack
 {
@@ -281,3 +280,20 @@ public:
 private:
 	Con _c;
 };
+
+int add(int x, int y) {
+	return x + y;
+}
+
+double add(int x, int y) {
+	return x + y;
+}
+
+int main() {
+	cout << add(10, 20) << endl;
+	cout << add(10.0, 20) << endl;
+
+	system("pause");
+	return 0;
+}
+
