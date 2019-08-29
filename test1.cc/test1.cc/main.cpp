@@ -3,7 +3,7 @@
 #include <stdlib.h>
 using namespace std;
 
-#if 1
+#if 0
 namespace bite{
 	template<class K, class V>
 	class map{
