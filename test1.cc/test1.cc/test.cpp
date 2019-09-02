@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+#if 0
 class CFather{
 public:
 	virtual void AA(){
@@ -27,3 +28,4 @@ int main(){
 	system("pause");
 	return 0;
 }
+#endif

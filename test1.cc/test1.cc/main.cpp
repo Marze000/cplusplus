@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <algorithm>
 using namespace std;
 
 #if 0
@@ -130,3 +131,18 @@ public:
 
 
 #endif
+struct Goods{
+	string _name;
+	double _price;
+};
+
+int main(){
+	Goods gds[] = { { "苹果", 2.1 }, { "相交", 3 }, { "橙子", 2.2 }, {"菠萝", 1.5} };
+	sort(gds, gds + sizeof(gds) / sizeof(gds[0]), 
+		[](const Goods& l, const Goods& r){
+		return l._price < r._price;}
+	);
+
+	system("pause");
+	return 0;
+}
