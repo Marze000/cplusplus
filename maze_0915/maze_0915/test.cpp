@@ -3,6 +3,108 @@
 #include <set>
 #include <vector>
 using namespace std;
+int post[4][2] = { {0,-1},{0,1},{1,0},{-1,0} };
+class Solution {
+public:
+	int Csum = 4;
+	int dfs(vector<vector<int>>& grid, int row, int col,
+		vector<vector<int>>& map, int i, int j) {
+		map[i][j] = 1;
+		for (int k = 0; k < 4; ++k) {
+			int newi = i + post[k][0];
+			int newj = j + post[k][1];
+			if (newi >= row || newi < 0 ||
+				newj >= col || newj < 0) {
+				continue;
+			}
+			if (grid[newi][newj] == 1 &&
+				map[newi][newj] == 0) {
+				Csum += 2;
+			}
+		}
+		return Csum;
+	}
+	int islandPerimeter(vector<vector<int>>& grid) {
+		if (grid.empty()) {
+			return 0;
+		}
+		int row = grid.size();
+		int col = grid[0].size();
+		vector<vector<int>>map(row, vector<int>(col, 0));
+		for (int i = 0; i < row; ++i) {
+			for (int j = 0; j < col; ++j) {
+				if (grid[i][j] == 1) {
+					return dfs(grid, row, col, map, i, j);
+				}
+			}
+		}
+	}
+};
+//你现在在(0, 0)，需要到(x, y)去，路上有n个障碍物。
+//给出每个障碍物的坐标，你只能平行于坐标轴走整数步，
+//问你最少需要多少步才能走到目的地。
+//第一行三个数x, y, n
+// 接下来n行，每行描述一个障碍物的坐标x_i, y_i  - 500≤x, y, x_i, y_i≤500
+//n≤10000 保证有解
+int main() {
+	int x, y, n;
+	int x1, y1;
+	vector<vector<int>>map(500, vector<int>(500, 0));
+	while (cin >> x >> y >> n) {
+		for (int i = 0; i < n; ++i) {
+			cin >> x1 >> y1;
+			map[x1][y1] = 1;
+		}
+		
+	}
+
+	system("pause");
+	return 0;
+}
+#if 1
+int main() {
+	int a[10] = { 1,2,3,4,5,6,7,8,9,0 };
+	for (auto o : a) {
+		cout << o << ' ';
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
+
+void Dfs(int index, int n, vector<int>& boxs, vector<int>& book){
+	if (index == n + 1){
+		for (int i = 1; i <= n; i++)
+			cout << boxs[i] << " ";
+
+		cout << endl;
+		return; //向上回退
+	}
+	for (int i = 1; i <= n; i++){
+		//第i号牌仍在手上
+		if (book[i] == 0){
+			boxs[index] = i;
+			//现在第i号牌已经被用了
+			book[i] = 1;
+			//处理下一个盒子
+			Dfs(index + 1, n, boxs, book);
+			//从下一个盒子回退到当前盒子，取出当前盒子的牌，
+			//尝试放入其它牌。
+			book[i] = 0;
+		}
+	}
+}
+
+int main(){
+	int n;
+	vector<int> boxs;
+	vector<int> books;
+	cin >> n;
+	boxs.resize(n + 1, 0);
+	books.resize(n + 1, 0);
+	Dfs(1, n, boxs, books);
+	return 0;
+}
 
 int Partion(int* input, int n ,int start, int end) {
 	if (input == nullptr || n <= 0 || start < 0 || end >= n) {
@@ -57,7 +159,6 @@ int main() {
 	return 0;
 }
 
-#if 1
 typedef multiset<int, greater<int>> inSet;
 typedef multiset<int,greater<int>>::iterator setIterator;
 //typedef multiset<int> inSet;
