@@ -3,6 +3,32 @@
 #include <set>
 #include <vector>
 using namespace std;
+
+class Solution {
+public:
+	int islandPerimeter(vector<vector<int>>& grid) {
+		if (grid.empty()) {
+			return 0;
+		}
+		int rsp = 0;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[i].size(); j++) {
+				if (grid[i][j] == 1) {
+					rsp += 4;
+					if (i > 0 && grid[i - 1][j] == 1) {
+						rsp -= 2;
+					}
+					if (j > 0 && grid[i][j - 1] == 1) {
+						rsp -= 2;
+					}
+				}
+			}
+		}
+		return rsp;
+	}
+};
+
+#if 0
 int post[4][2] = { {0,-1},{0,1},{1,0},{-1,0} };
 class Solution {
 public:
@@ -61,7 +87,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#if 1
 int main() {
 	int a[10] = { 1,2,3,4,5,6,7,8,9,0 };
 	for (auto o : a) {
