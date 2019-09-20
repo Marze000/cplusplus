@@ -1,5 +1,73 @@
 #include "head.h"
+#define N 54
 
+
+int main() {
+	int cnt = 0;
+	for (int i = 0; i < 1000; ++i) {
+		cnt = rand() % (9-1);
+		cout << cnt << " ";
+	}
+	cout << endl;
+
+	system("pause");
+	return 0;
+}
+
+#if 1
+void xipai(vector<int>&data) {
+	int cnt;
+	for (int i = 0; i < N; ++i) {
+		cnt = rand() % (N - i);
+		swap(data[cnt], data[N - i - 1]);
+	}
+}
+
+int main() {
+	vector<int>data(N);
+	for (int i = 0; i < N; ++i) {
+		data[i] = i + 1;
+	}
+	xipai(data);
+	for (int i = 0; i < N; ++i) {
+		cout << data[i] << " ";
+	}
+
+	system("pause");
+	return 0;
+}
+
+
+bool isNumberNotOnce(int a[], int length) {
+	for (int i = 0; i < length; ++i) {
+		while(a[i] != i){
+			if (a[i] == a[a[i]]) {
+				return true;
+			}
+			else {
+				swap(a[i], a[a[i]]);
+			}
+		}
+	}
+	return false;
+}
+
+int main() {
+	int a[] = { 1,4,5,2,7,8,6,3,0 };
+	int len = sizeof(a)/sizeof(a[0]);
+	if (isNumberNotOnce(a, len)) {
+		cout << "有重复的数字" << endl;
+	}
+	else {
+		cout << "没有重复的数字" << endl;
+	}
+
+	system("pause");
+	return 0;
+}
+
+#endif
+#if 0
 bool IsDuplicateNumber(int *array, int n){
 	if (array == NULL) 
 		return false;
@@ -44,7 +112,6 @@ TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin){
 	return root;
 }
 
-#if 0
 void replaceSpace(const char *str, int length) {
 	if (str == nullptr || length <= 0) {
 		return;
@@ -101,7 +168,6 @@ void replaceSpace(const char *str, int length) {
 	}
 	cout << endl;
 }
-#endif
 int main() {
 	const char* str = "hello world";
 	int length = strlen(str);
@@ -110,6 +176,7 @@ int main() {
 	system("pause");
 	return 0;
 }
+#endif
 #if 0
 int main(){
 	int n;
