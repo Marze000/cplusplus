@@ -1,4 +1,21 @@
 #include "head.h"
+
+
+int main() {
+	int *a = new int[5]{ 1,2,3,4,5 };
+	for (int i = 0; i < 5; ++i) {
+		cout << *(a + i) << ' ';
+	}
+	cout << endl;
+	delete[] a; 
+
+	system("pause");
+	return 0;
+}
+
+
+
+#if 0
 #define N 54
 
 
@@ -14,7 +31,6 @@ int main() {
 	return 0;
 }
 
-#if 1
 void xipai(vector<int>&data) {
 	int cnt;
 	for (int i = 0; i < N; ++i) {
@@ -66,8 +82,6 @@ int main() {
 	return 0;
 }
 
-#endif
-#if 0
 bool IsDuplicateNumber(int *array, int n){
 	if (array == NULL) 
 		return false;
