@@ -1,7 +1,157 @@
 #include "head.h"
 
 
+int minNumberInRotateArray(vector<int>&nums) {
+	if (nums.size() == 1) {
+		return nums[0];
+	}
+	int l = 0;
+	int r = nums.size() - 1;
+	// 3 4 5 1 2
+	while (l <= r) {
+		int mid = l + (r - l) / 2;
+		if (nums[l] < nums[r]) {
+			return nums[l];
+		}
+		if (nums[mid] > nums[mid + 1]) {
+			return nums[mid + 1];
+		}
+		if (nums[mid] < nums[mid - 1]) {
+			return nums[mid];
+		}
+		if (nums[mid] > nums[0]) {
+			l = mid + 1;
+		}
+		else {
+			r = mid - 1;
+		}
+	}
+	return 0;
+}
+
 #if 1
+int minNumberInRotateArray(vector<int> rotateArray) {
+	if (rotateArray.size() == 0) {
+		return 0;
+	}
+	int end = rotateArray.size() - 1;
+	int start = 0;
+	int mid = start + (end - start) / 2;
+	// 3 4 5 1 2
+	while (start < end) {
+		if (rotateArray[mid] > rotateArray[start]) {
+			start = mid + 1;
+		}
+		if (rotateArray[mid] < rotateArray[end]) {
+			end = mid;
+		}
+		mid = start + (end - start) / 2;
+	}
+	return rotateArray[start];
+}
+
+int main() {
+	vector<int>vec{ 3,4,5,1,2 };
+	minNumberInRotateArray(vec);
+
+	system("pause");
+	return 0;
+}
+void replaceSpace(char *str, int length) {
+	if (str == "" || length == 0) {
+		return;
+	}
+	int count = 0;
+	for (int i = 0; i < length; ++i) {
+		if (str[i] == ' ') {
+			++count;
+		}
+	}
+	for (int i = length - 1; i >= 0; --i) {
+		while (str[i] != ' ') {
+			str[i + 2 * count] = str[i];
+			--i;
+		}
+		if (str[i] == ' ') {
+			str[i + 2 * count] = '0';
+			str[i + 2 * count - 1] = '2';
+			str[i + 2 * count - 2] = '%';
+		}
+		--count;
+	}
+}
+int main() {
+	char a[] = ""  ;
+	int length = strlen(a);
+	replaceSpace(a,length);
+
+	system("pause");
+	return 0;
+}
+
+int main(){
+	char * str = "";
+	int length = strlen(str);
+	int count = 0;
+	for (int i = 0; i < length; ++i) {
+		if (str[i] == ' ') {
+			++count;
+		}
+	}
+	int newlen = length + 2 * count;
+	for (int i = length - 1; i >= 0; --i) {
+		while (str[i] != ' ') {
+			str[i + 2 * count] = str[i];
+			--i;
+		}
+		if (str[i] == ' ') {
+			str[i + 2 * count] = '0';
+			str[i + 2 * count - 1] = '2';
+			str[i + 2 * count - 2] = '%';
+		}
+		--count;
+	}
+	system("pause");
+	return 0;
+}
+int main() {
+	const char* str = "";
+	int length = strlen(str);
+	replaceSpace(str, length);
+
+	system("pause");
+	return 0;
+}
+
+int main() {
+	const char* str = "";
+	int n =strlen(str);
+
+	cout << n << endl;
+	system("pause");
+	return 0;
+}
+
+void replaceSpace(char *str, int length) {
+	int count = 0;
+	for (int i = 0; i < length; i++) {
+		if (str[i] == ' ')
+			count++;
+	}
+	for (int i = length - 1; i >= 0; i--) {
+		if (str[i] != ' ') {
+			str[i + 2 * count] = str[i];
+		}
+		else {
+			count--;
+			str[i + 2 * count] = '%';
+			str[i + 2 * count + 1] = '2';
+			str[i + 2 * count + 2] = '0';
+		}
+	}
+}
+#endif
+#if 0
 class String {
 public:
 	// ¹¹Ôìº¯Êı
