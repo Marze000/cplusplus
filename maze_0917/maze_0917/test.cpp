@@ -1,6 +1,227 @@
 #include "head.h"
 
 
+#if 1
+class String {
+public:
+	// 构造函数
+	String(const char* str = ""){
+		if (str == nullptr) {
+			str = "";
+		}
+		_str = new char[strlen(str) + 1];
+		strcpy(_str, str); 
+	}
+	
+	// 拷贝构造函数
+	String(const String& str) {
+		//str 已经是是一个对象了
+		_str = new char[strlen(str._str) + 1];
+		strcpy(_str, str._str);
+	}
+	//赋值函数
+	String& operator=(const String& str) {
+		//注意点1 函数的返回值类型
+		//注意点2 是不是自己给自己赋值 
+		//注意点3 函数的参数是引用
+		//注意点4 函数返回的 *this
+		if (&str != this) {
+			char* temp = new char[strlen(str._str) + 1];
+			strcpy(temp, str._str);
+			// _str 代表的是 str2对象
+			delete[] _str;
+			_str = temp;
+		}
+		return *this;
+	}
+
+	~String() {
+		if (_str) {
+			delete[]  _str;
+			_str = nullptr;
+		}
+	}
+
+
+	String(String&& s)
+		: _str(s._str)
+	{
+		s._str = nullptr;
+	}
+private:
+	char* _str;
+};
+
+String&& GetString(const char* pStr){
+	String strTemp(pStr);
+	return strTemp;
+}
+int main(){
+	String s1("hello");
+	String s2(GetString("world"));
+
+	system("pause");
+	return 0;
+}
+
+
+class Info {
+public:
+	Info() : _type(0), _name('a') {
+		InitRSet();
+	}
+	Info(int type) : _type(type), _name('a') {
+		InitRSet();
+	}
+	Info(char a) : _type(0), _name(a) {
+		InitRSet();
+	}
+private:
+	void InitRSet() {
+		//初始化其他变量
+	}
+private:
+	int _type;
+	char _name;
+};
+
+class Info {
+public:
+	// 目标构造函数
+	Info() : _type(0), _a('a'){
+		InitRSet();
+	}
+	// 委派构造函数
+	Info(int type) : Info(){
+		_type = type;
+	}
+	// 委派构造函数
+	Info(char a) : Info(){
+		_a = a;
+	}
+private:
+	void InitRSet() { 
+		//初始化其他变量
+	}
+private:
+	int _type = 0;
+	char _a = 'a';
+	//...
+};
+
+void* GetMemory(size_t size) {
+	return malloc(size);
+}
+
+	int main() {
+	// 如果没有带参数，推导函数的类型
+	cout << typeid(decltype(GetMemory)).name() << endl;
+	// 如果带参数列表，推导的是函数返回值的类型,
+	// 注意：此处只是推演，不会执行函数
+	cout << typeid(decltype(GetMemory(0))).name() << endl;
+	int a = 0;
+	cout << typeid(a).name();
+
+	system("pause");
+	return 0;
+}
+//多个对象想要支持列表初始化，需给该类(模板类)添加一个
+//带有initializer_list类型参数的构造函数即可。
+//注意：initializer_list是系统自定义的类模板，
+//	  该类模板中主要有三个方法：begin()、end()迭代器
+//	  以及获取区间中元素个数的方法size()。
+template<class T>
+class Vector {
+public:
+	Vector(initializer_list<T> l) 
+		: _capacity(l.size())
+		, _size(0)
+	{
+		_array = new T[_capacity];
+
+		for (auto e : l) {
+			_array[_size++] = e;
+		}
+	}
+
+	Vector<T>& operator=(initializer_list<T> l) {
+		delete[] _array;
+		size_t i = 0;
+		for (auto e : l) {
+			_array[i++] = e;
+		}
+		return *this;
+	}
+// ...
+private:
+	T* _array;
+	size_t _capacity;
+	size_t _size;
+};
+
+class Point{
+public:
+	Point(int x = 0, int y = 0)
+		: _x(x)
+		, _y(y)
+	{}
+private:
+	int _x;
+	int _y;
+};
+int main(){
+	//标准库支持单个对象的列表初始化
+	Point p{ 1, 2 };
+
+	system("pause");
+	return 0;
+}
+#endif
+
+#if 0
+class TreeNode {
+public:
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+};
+class Solution {
+public:
+	TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin) {
+		//递归建立，从中序中分开分别又是子树
+		//注意递归结束的条件
+		if (pre.empty())
+			return nullptr;
+
+		//pre的第一个可能是用过的。所以find也需要反复的找
+
+		vector<int>::iterator iter = pre.begin();
+		vector<int>::const_iterator VauleIter;
+
+		//括号问题
+		while ((VauleIter = find(vin.begin(), vin.end(), *iter)) == pre.end()) {
+			iter++;
+		}
+		if (VauleIter == pre.end()) {
+			return nullptr;
+		}
+		//int k = *(pre.begin());
+		TreeNode*root = new TreeNode(*VauleIter);
+		//vector<int>::iterator index = find(vin.begin(), vin.end(),*VauleIter);
+
+		//右开区间
+		vector<int> newLeftVin(vin.begin(), VauleIter + 1);
+		vector<int> newRigthVin(VauleIter + 1, vin.end());
+
+		//vector<int> newLeftVin(vin.begin(),);
+			  //pre的应该和iter有关
+		vector<int> newPre(iter + 1, pre.end());
+		root->left = reConstructBinaryTree(newPre, newLeftVin);
+		root->right = reConstructBinaryTree(newPre, newRigthVin);
+
+		return root;
+	}
+};
 int main() {
 	int *a = new int[5]{ 1,2,3,4,5 };
 	for (int i = 0; i < 5; ++i) {
@@ -15,7 +236,6 @@ int main() {
 
 
 
-#if 0
 #define N 54
 
 
