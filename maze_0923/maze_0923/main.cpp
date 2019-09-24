@@ -6,7 +6,81 @@
 #include <algorithm>
 using namespace std;
 
-#if 1
+class A {
+	A() {
+		printf("A()\n");
+	}
+public:
+	static A& get() {
+		static A a;
+		return a;
+	}
+};
+
+// 696609771
+int main() {
+	A::get();
+	// 要求1：声明一个指向含有10个元素的数组指针
+	// 要球2：其中每一个元素是一个函数指针
+	// 要求3：该函数的返回值是 int 
+	// 要求4：参数类型是 int*
+	// int (*(*p)[10])(int*);
+
+	char s[] = "\\123456\123456\t";
+	printf("%d\n", strlen(s));
+
+	int c[4][5] = {
+		{0, 1, 2, 3, 8 },
+		{4, 7, 6, 7, 9 },
+		{10,11,12,13,14},
+		{15,16,17,18,19}
+	};
+	cout << (*c)[1] + 1 << endl;
+
+	int(*pc)[5] = c;
+	cout << (*pc[1]+2) << endl;
+	cout << *(*(pc+1) + 2) << endl;
+
+	 char str[20];
+	str = gets();
+	 可以一次性读取输出流的字符，直到遇到回车才结束
+	 gets(str);
+	 语法错误
+	str[] = getch();
+	 不接受空格，空格会被放到缓冲区等待下一次被取出
+	scanf("%s", str);
+	 cout << str << endl;
+	char a[80] = "0123\1399";
+	cout << sizeof(a) << endl;
+	// 看看\后面的数字能否被转移，如果不能被转移则就已经是末尾了
+	cout << strlen(a) << endl;
+
+	在 C语言是可以通过编译的，但是C++中不可以，
+	 因为sp的类型是char* 但是hello的类型是 const char*
+	char* sp;
+	char s[10];
+	sp = "hello";
+
+	 因为数组名知识数组的首地址，无法作为指针去指向hello
+	char* sp, s[10];
+	s = "hello";
+
+	char str1[10] = "computer";
+	char str2[10];//没有被初始化 “烫烫烫”
+	// 由于str1是首地址，内存中的值是computer
+	// 所以得需要要一个指针去指向，而str2也是一个数组名，不是指针
+	str2 = str1;
+
+	/* 数组初始化错误
+	char mark[];
+	mark = "program";
+	*/
+
+	system("pause");
+	return 0;
+}
+
+#if 0
 struct Goods{
 	string _name;
 	double _price;
