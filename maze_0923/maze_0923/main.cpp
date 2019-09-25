@@ -6,6 +6,46 @@
 #include <algorithm>
 using namespace std;
 
+void reOrderArray(vector<int>& array) {
+	//相对位置不变，稳定性
+	//插入排序的思想
+	int m = array.size();
+
+	//记录已经摆好位置的奇数的个数
+	int k = 0;
+	// 在 k 之前的数据都已经调整好了
+
+	for (int i = 0; i < m; i++) {
+		if (array[i] % 2 == 1) {
+			int j = i;
+			// 找到奇数后把奇数放到偶数的前面
+			while (j > k) {
+				int tmp = array[j];
+				array[j] = array[j - 1];
+				array[j - 1] = tmp;
+				j--;
+			}
+			k++;
+		}
+	}
+}
+
+int main() {
+	vector<int>array{ 1,4,5,6,2,3,8,9,4 };
+	for (auto& e : array) {
+		cout << e << ' ';
+	}
+	cout << endl;
+	reOrderArray(array);
+	for (auto& e : array) {
+		cout << e << ' ';
+	}
+	cout << endl;
+
+	system("pause");
+	return 0;
+}
+#if 0
 class A {
 	A() {
 		printf("A()\n");
@@ -80,7 +120,6 @@ int main() {
 	return 0;
 }
 
-#if 0
 struct Goods{
 	string _name;
 	double _price;
