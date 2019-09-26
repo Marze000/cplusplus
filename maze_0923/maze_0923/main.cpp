@@ -6,6 +6,70 @@
 #include <algorithm>
 using namespace std;
 
+struct ListNode {
+	int val;
+	ListNode *next;
+}; 
+
+int main() {
+	ListNode* p1 = new ListNode;
+	ListNode* p2 = new ListNode;
+	ListNode* p3 = new ListNode;
+	ListNode* p4 = new ListNode;
+	ListNode* p5 = nullptr;
+	p1->next = p2; p2->next = p3;
+	p3->next = p4; p4->next = p5;
+	p1->val = 1; p2->val = 2;
+	p3->val = 3; p4->val = 4;
+	ListNode* Node = p1;
+	while (Node != nullptr) {
+		cout << Node->val << ' ';
+		Node = Node->next;
+	}
+	cout << endl;
+	delete p1;
+	delete p2;
+	delete p3;
+	delete p4;
+	system("pause");
+	return 0;
+}
+
+#if 0
+
+void reOrderArray(vector<int> &array) {
+	vector<int>::iterator even = array.begin();
+	int size = array.size();
+	while (size){
+		if (*even % 2 == 0){
+			int tmp = *even;
+			even = array.erase(even);
+			array.push_back(tmp);
+		}
+		else {
+			even++;
+		}
+		size--;
+	}
+}
+
+void reOrderArray(vector<int> &array) {
+	int size = array.size();
+	vector<int>::iterator it = array.begin();
+	for (int i = 0; i < size; ++i) {
+		if ((*it & 1) == 0) {
+			int temp = *it;
+			it = array.erase(it);
+			array.push_back(temp);
+		}
+		else {
+			++it;
+		}
+	}
+}
+#endif
+
+#if 0
 void reOrderArray(vector<int>& array) {
 	//相对位置不变，稳定性
 	//插入排序的思想
@@ -45,7 +109,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#if 0
 class A {
 	A() {
 		printf("A()\n");
