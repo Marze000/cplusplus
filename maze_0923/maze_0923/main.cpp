@@ -4,9 +4,40 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stack>
 using namespace std;
 
-#if 1
+bool IsPopOrder(vector<int> pushV, vector<int> popV) {
+	stack<int>s;
+	int index = 0;int outdex = 0;s.push(pushV[index]);
+		// pushV 1,2,3,4,5 Index
+		// popV  4,5,3,2,1 Outdex 
+	while (outdex < popV.size()) {
+		if (s.empty()) {
+			s.push(pushV[index]);
+		}
+		if (s.top() == popV[outdex]) {
+			++outdex;
+			s.pop();
+		}
+		else {
+			while (pushV[index] != popV[outdex] && index < pushV.size()) {
+				++index;
+				s.push(pushV[index]);
+			}
+			if (index >= pushV.size()) {
+				return false;
+			}
+			if (pushV[index] == popV[outdex]) {
+				++outdex;
+				s.pop();
+			}
+		}
+	}
+	return true;
+}
+
+#if 0
 
 vector<int> printMatrix(vector<vector<int> > matrix) {
 	int row = matrix.size();
