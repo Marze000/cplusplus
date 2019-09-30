@@ -7,6 +7,106 @@
 #include <stack>
 using namespace std;
 
+bool VerifySquenceOfBST(vector<int> sequence) {
+	int end = sequence.size() - 1;
+	vector<int>left_temp;
+	vector<int>right_temp;
+	int left_temp_end = 0;
+	for (int i = 0; i < end; ++i) {
+		if (sequence[i] < sequence[end]) {
+			left_temp_end = i;
+			left_temp.push_back(sequence[i]);
+		}
+		if (sequence[i] > sequence[end]) {
+			right_temp.push_back(sequence[i]);
+		}
+	}
+	for (int i = left_temp_end + 1; i < end; ++i) {
+		right_temp.push_back(sequence[i]);
+		if (sequence[i] < end) {
+			return false;
+		}
+	}
+	return true;
+	return VerifySquenceOfBST(left_temp) &&
+		VerifySquenceOfBST(right_temp);
+}
+
+int main() {
+	vector<int> sequence{ 2,4,3,6,8,7,5 };
+	if (VerifySquenceOfBST(sequence)) {
+		cout << "true";
+	}
+	else{
+		cout << "false";
+	}
+	
+
+	system("pause");
+	return 0;
+}
+
+#if 1
+bool VerifySquenceOfBST(vector<int> sequence) {
+	int size = sequence.size();
+	if (0 == size) {
+		return false;
+	}
+
+	int i = 0;
+	while (--size){
+		while (sequence[i++] < sequence[size]);
+		while (sequence[i++] > sequence[size]);
+
+		if (i < size) {
+			return false;
+		}
+		i = 0;
+	}
+	return true;
+}
+def PrintFromTopToBottom(self, root) :
+	if not root :
+		return[]
+	currentStack = [root]
+	res = []
+	while currentStack :
+		nextStack = []
+		for i in currentStack :
+			if i.left : nextStack.append(i.left)
+			if i.right : nextStack.append(i.right)
+			res.append(i.val)
+		currentStack = nextStack
+	return res
+
+int main() {
+	vector<int>vec;
+	for (int i = 0; i < 10; ++i) {
+		vec.append(i);
+	}
+	for (int i = 0; i < 10; ++i) {
+		cout<<vec[i]<<' ';
+	}
+	cout << endl;
+
+	system("pause");
+	return 0;
+}
+bool IsPopOrder(vector<int> pushV, vector<int> popV) {
+	if (pushV.size() == 0){
+		return false;
+	}
+	vector<int> stack;
+	for (int i = 0, j = 0; i < pushV.size();) {
+		stack.push_back(pushV[i++]);
+		while (j < popV.size() && stack.back() == popV[j]) {
+			stack.pop_back();
+			j++;
+		}
+	}
+	return stack.empty();
+}
+
 bool IsPopOrder(vector<int> pushV, vector<int> popV) {
 	stack<int>s;
 	int index = 0;int outdex = 0;s.push(pushV[index]);
@@ -37,7 +137,6 @@ bool IsPopOrder(vector<int> pushV, vector<int> popV) {
 	return true;
 }
 
-#if 0
 
 vector<int> printMatrix(vector<vector<int> > matrix) {
 	int row = matrix.size();
