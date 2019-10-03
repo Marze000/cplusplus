@@ -6,7 +6,49 @@
 #include <algorithm>
 #include <stack>
 using namespace std;
+#if 1
 
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+		val(x), left(NULL), right(NULL) {
+	}
+}; 
+
+class Solution {
+	vector<vector<int> >allRes;
+	vector<int> tmp;
+	void dfsFind(TreeNode * node, int left) {
+		tmp.push_back(node->val);
+		if ((left - node->val) == 0 
+			&& node->left==nullptr 
+			&& node->right==nullptr)
+		{
+			allRes.push_back(tmp);
+		}
+		else {
+			if (node->left != nullptr) {
+				dfsFind(node->left, left - node->val);
+			}
+			if (node->right != nullptr) {
+				dfsFind(node->right, left - node->val);
+			}
+		}
+		tmp.pop_back();
+	}
+public:
+	vector<vector<int> > FindPath(TreeNode* root, int expectNumber) {
+		if (root) {
+			dfsFind(root, expectNumber);
+		}
+		return allRes;
+	}
+};
+
+#endif
+#if 0
 bool VerifySquenceOfBST(vector<int> sequence) {
 	int end = sequence.size() - 1;
 	vector<int>left_temp;
@@ -46,7 +88,6 @@ int main() {
 	return 0;
 }
 
-#if 1
 bool VerifySquenceOfBST(vector<int> sequence) {
 	int size = sequence.size();
 	if (0 == size) {
