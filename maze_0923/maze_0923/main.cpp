@@ -6,7 +6,69 @@
 #include <algorithm>
 #include <stack>
 using namespace std;
-#if 1
+class RandomListNode {
+public:
+	int label;
+	RandomListNode* next;
+	RandomListNode* random;
+};
+
+RandomListNode* Clone(RandomListNode* pHead) {
+	if (pHead == nullptr) {
+		return nullptr;
+	}
+	// 合并两个链表
+	RandomListNode* node = pHead;
+	while (pHead) {
+		RandomListNode* Head = new RandomListNode;
+		Head->label = pHead->label;
+		Head->next = pHead->next;
+		pHead->next = Head;
+		pHead = Head->next;
+	}
+	// 完成 randow 指针的拷贝
+	RandomListNode* temp = node->next;
+	while (node) {
+		if (node->random != nullptr) {
+			node->next->random = node->random->next;
+			node = node->next->next;
+		}
+		else {
+			node = node->next->next;
+		}
+	}
+	// 拆分链表
+	RandomListNode* cut = temp;
+	RandomListNode* ret = cut;
+	RandomListNode* cutNe = temp->next;
+	while (cutNe) {
+		cut->next = cutNe->next;
+		cut = cut->next;
+		cutNe = cut->next;
+	}
+	return ret;
+}
+
+int main() {
+	RandomListNode* p1 = new RandomListNode[1];
+	RandomListNode* p2 = new RandomListNode[2];
+	RandomListNode* p3 = new RandomListNode[3];
+	RandomListNode* p4 = new RandomListNode[4];
+	p1->next = p2; p2->next = p3; p3->next = p4; p4->next = nullptr;
+	p1->random = p3; p3->random = p2;
+	p2->random = nullptr; p4->random = nullptr;
+	RandomListNode* ret = Clone(p1);
+	while (ret->next) {
+		cout << "当前节点为值为:" << ret->label<<' ';
+		cout << "当前节点的next值为:" << ret->next->label<<' ';
+		cout << "当前节点的random 值为:" << ret->random->label<<' ';
+		ret = ret->next;
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
+#if 0
 
 struct TreeNode {
 	int val;
