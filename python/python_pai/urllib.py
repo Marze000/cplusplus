@@ -1,6 +1,6 @@
 from urllib import request
 from urllib import parse
-'''
+
 # 爬取一张网页的源代码
 resp = request.urlopen('http://www.baidu.com')
 print(resp.getcode())
@@ -42,7 +42,6 @@ print('fragment:',result.fragment)
 url = 'http://www.baidu.com/s?wd=python&username=abc#1'
 result = parse.urlsplit(url)
 print(result)
-'''
 
 # 定制 User-Agent 构造一个反爬虫请求
 url = 'https://www.lagou.com/jobs/positionAjax.json?px=default&city=%E5%8E%A6%E9%97%A8&needAddtionalResult=false'
@@ -60,7 +59,7 @@ Headers = {
 Data = {
    'first':'true',
    'pn':1,
-   'kd':'python'
+   'kd':'python后端'
 }
 
 req = request.Request(url,headers=Headers,
