@@ -6,6 +6,113 @@
 #include <algorithm>
 #include <stack>
 using namespace std;
+
+
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+};
+
+class Solution {
+public:
+	TreeNode* Convert(TreeNode* pRootOfTree) {
+		if (pRootOfTree == nullptr) {
+			return nullptr;
+		}
+		if (pRootOfTree->left == nullptr &&
+			pRootOfTree->right == nullptr)
+		{
+			return pRootOfTree;
+		}
+
+		// 1.将左子树构造成双链表，并返回链表头节点
+		TreeNode* left = Convert(pRootOfTree->left);
+		TreeNode* p = left;
+		// 2.定位至左子树双链表最后一个节点
+		while (p != nullptr  && p->right != nullptr) {
+			p = p->right;
+		}
+		// 3.如果左子树链表不为空的话，将当前root追加到左子树链表
+		if (left != nullptr) {
+			p->right = pRootOfTree;
+			pRootOfTree->left = p;
+		}
+		// 4.将右子树构造成双链表，并返回链表头节点
+		TreeNode* right = Convert(pRootOfTree->right);
+		// 5.如果右子树链表不为空的话，将该链表追加到root节点之后
+		if (right != nullptr) {
+			right->left = pRootOfTree;
+			pRootOfTree->right = right;
+		}
+
+		return left != nullptr ? left : pRootOfTree;
+	}
+};
+
+class Solution {
+public:
+	void ListNode(TreeNode* pRootOfTree, TreeNode* pLast) {
+		if (pRootOfTree == nullptr) {
+			return;
+		}
+		TreeNode* pCurrent = pLast;
+
+		// 先遍历左子树
+		if (pCurrent->left != nullptr) {
+			ListNode(pCurrent->left, pLast);
+		}
+		// 再遍历根节点，进行相关的指针调整
+		pCurrent->left = pLast;
+		if (pLast != nullptr) {
+			pLast->right = pCurrent;
+		}
+		pLast = pCurrent;
+		// 最后遍历右子树
+		if (pCurrent->right != nullptr) {
+			ListNode(pCurrent->right, pLast);
+		}
+	}
+	TreeNode* Convert(TreeNode* pRootOfTree) {
+		if (pRootOfTree == nullptr) {
+			return nullptr;
+		}
+		TreeNode* head = pRootOfTree;
+		TreeNode* pLastNode = nullptr;
+		//调整节点
+		ListNode(pRootOfTree, pLastNode);
+
+		//找到链表结构头部，正确输出
+		while (head != nullptr && head->left != nullptr) {
+			head = head->left;
+		}
+		return head;
+	}
+};
+#if 0
+//扩展欧几里得算法
+int x, y;
+int exgcd(int a, int b){                      
+	if (b == 0){
+		x = 1;
+		y = 0;
+		return a;
+	}
+	int r = exgcd(b, a%b);
+	int t = x;
+	x = y;
+	y = t - a / b * y;
+	return r;
+}
+
+int main() {
+	int a = 2947;
+	int b = 3997;
+	cout << exgcd(a, b) << endl;
+
+	system("pause");
+	return 0;
+}
 class RandomListNode {
 public:
 	int label;
@@ -68,7 +175,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#if 0
 
 struct TreeNode {
 	int val;
