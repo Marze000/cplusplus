@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{9F7A5FFE-A762-4B31-AACD-1B56799A2C6C}</ProjectGuid>
-    <RootNamespace>strcc</RootNamespace>
+    <ProjectGuid>{DA473DDC-03F2-41B9-BE8C-F355E18B307D}</ProjectGuid>
+    <RootNamespace>maze1009</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,8 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="test.c" />
-    <ClCompile Include="test.cc" />
+    <ClCompile Include="test11.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
