@@ -4,6 +4,91 @@
 #include <string>
 using namespace std;
 
+#if 0
+void LoopMove(char* pStr,int steps){
+	if (pStr == nullptr) {
+		return;
+	} 
+	int len = strlen(pStr);
+	char temp[1024];
+	strcpy(temp, pStr + len - steps);
+	strcpy(temp + steps, pStr);
+	*(temp + len) = '\0';
+	strcpy(pStr, temp);
+}
+#endif
+
+// 编写一个函数作用是把一个char组成
+// 的字符串循环右移n个
+// 比如：原来的abcdefghi 如果n = 2,
+// 移位后 应该是 hiabcdefg 
+#if 1
+void LoopMove(char* pStr,int steps){
+	if (pStr == nullptr) {
+		return;
+	} 
+	char temp[1024];
+	int len = strlen(pStr);
+	memcpy(temp, pStr + len-steps, steps);
+	memcpy(temp + steps, pStr, len - steps);
+	memcpy(pStr, temp, len);
+}
+#endif
+int main() {
+	char a[1024] = "abcdefghi";
+	char* str = a;
+	LoopMove(str, 2);
+	cout << str << endl;
+
+	//char p[10] = "abcd";
+	//char m[10] = "ef";
+	//strcat(p, m);
+	//printf("%s\n", p);
+
+	system("pause");
+	return 0;
+}
+
+#if 0
+int  a = 10;
+class {
+	int a = 10;
+}
+//#ifndef  __INCvxWorksh
+
+//
+//#define __INCvxWorksh
+//
+//#ifdef __cplusplus
+//
+//extern "C" {
+//
+//}
+//#endif // __cplusplus
+//
+//#endif // ! __INC
+
+void Func(char str[100]) {
+	//输出多少？
+	printf("%d\n",sizeof(str));
+
+	char string[100] = { 0 };
+	//输出多少？
+	printf("%d\n", sizeof(string));
+
+	void* p = malloc(100);
+	//输出多少？
+	printf("%d\n", sizeof(p));
+	free(p);p = nullptr;
+}
+
+
+int main() {
+
+	system("pause");
+	return 0;
+}
+
 char* Strcpy(char* pStrDest,const char* pStrSrc) {
 	//代码的鲁棒性判断
 	if (pStrDest == nullptr || pStrSrc == nullptr) {
@@ -74,7 +159,6 @@ int main() {
 	return 0;
 }
 
-#if 0
 union temp{
 	int a;
 	char b;
