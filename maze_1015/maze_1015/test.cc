@@ -84,21 +84,23 @@ void IPTest(){
 
 
 int main() {
-
-	string regex_str = "runoo+b";
-	std::regex pattern(regex_str, std::regex::icase);
-	string id = "ruoooob";
-	smatch res;
-	if (std::regex_match(id,res, pattern)) {
-		cout << "匹配成功" << endl;
-		for (size_t i = 0; i < res.size(); ++i) {
-			cout << res[i] << ' ';
-		}
-		cout << endl;
-	}
-	else {
-		cout << "没有匹配结果" << endl;
-	}
+	string str = "123143";
+	string regex = "^[0-9]*&";
+	regex_match(str,)
+	//string regex_str = "runoo+b";
+	//std::regex pattern(regex_str, std::regex::icase);
+	//string id = "runoooob";
+	//smatch res;
+	//if (std::regex_match(id,res, pattern)) {
+	//	cout << "匹配成功" << endl;
+	//	for (size_t i = 0; i < res.size(); ++i) {
+	//		cout << res[i] << ' ';
+	//	}
+	//	cout << endl;
+	//}
+	//else {
+	//	cout << "没有匹配结果" << endl;
+	//}
 
 	system("pause");
 	return 0;
