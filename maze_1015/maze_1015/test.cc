@@ -9,6 +9,47 @@
 using namespace std;
 
 
+bool IsContinuous(vector<int> numbers) {
+	int size = numbers.size();
+	sort(numbers.begin(), numbers.end());
+	int zero_count = 0;
+	for (int i = 0; i < size; ++i) {
+		if (numbers[i] == 0) {
+			++zero_count;
+		}
+	}
+	int j = 0;
+	for (int i = 0; i < size; ++i) {
+		if (numbers[i] != 0) {
+			j = i;
+			break;
+		}
+	}
+	int start = numbers[j];
+	int end = numbers[size - 1];
+	int nozero_num = end - start + 1;
+	int shi_num = size - zero_count;
+	if ((nozero_num - shi_num) <= zero_count) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+//  0 0  5 6 8 10 11
+int main() {
+	vector<int>vec{0,0,0,1,1};
+	if (IsContinuous(vec)) {
+		cout << "有顺子" << endl;
+	}
+	else {
+		cout << "没有顺子" << endl;
+	}
+	system("pause");
+	return 0;
+}
+
+#if 0
 int main() {
 	string str = "i am a student!";
 	string s = str;
@@ -19,7 +60,6 @@ int main() {
 	return 0;
 }
 
-#if 0
 class TreeNode {
 public:
 	TreeNode* left;
