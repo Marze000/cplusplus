@@ -8,47 +8,114 @@
 #include <assert.h>
 using namespace std;
 
+#if 0
+class Solution {
+public:
+	Solution() {
+		++n;
+		sum += n;
+	}
+	void request() {
+		n = 0;
+		sum = 0;
+	}
+	int Sum_Solution(int n) {
+		request();
+		Solution a = new Solution[n];
+		delete[] a;
+		a = nullptr;
+		return sum;
+	}
+private:
+	int sum;
+	int n;
+};
+#endif
 
-bool IsContinuous(vector<int> numbers) {
-	int size = numbers.size();
-	sort(numbers.begin(), numbers.end());
-	int zero_count = 0;
-	for (int i = 0; i < size; ++i) {
-		if (numbers[i] == 0) {
-			++zero_count;
-		}
-	}
-	int j = 0;
-	for (int i = 0; i < size; ++i) {
-		if (numbers[i] != 0) {
-			j = i;
-			break;
-		}
-	}
-	int start = numbers[j];
-	int end = numbers[size - 1];
-	int nozero_num = end - start + 1;
-	int shi_num = size - zero_count;
-	if ((nozero_num - shi_num) <= zero_count) {
-		return true;
-	}
-	else {
-		return false;
-	}
+// n = 5
+int Sum_Solution(int n) {
+	int ans = n;
+	ans && (ans+=Sum_Solution(n - 1));
+
+	return ans;
 }
-//  0 0  5 6 8 10 11
+
 int main() {
-	vector<int>vec{0,0,0,1,1};
-	if (IsContinuous(vec)) {
-		cout << "有顺子" << endl;
-	}
-	else {
-		cout << "没有顺子" << endl;
-	}
+	cout << Sum_Solution(5) << endl;
+
 	system("pause");
 	return 0;
 }
 
+//int LastRemaining_Solution(int n, int m) {
+//	if (n == 0 || m == 0) {
+//		return -1;
+//	}
+//	vector<int>vec;
+//	for (int i = 0; i < n; ++i) {
+//		vec.push_back(i);
+//	}
+//	int index = -1;
+//	auto iter = vec.begin();
+//	while (vec.size() > 1) {
+//		iter = vec.begin();
+//		index = (index + m) % vec.size();
+//		vec.erase(iter + index);
+//		--index;
+//	}
+//	return vec[0];
+//}
+//
+//
+//int main() {
+//	int n = 10;
+//	int m = 5;
+//	LastRemaining_Solution(n, m);
+//
+//	system("pause");
+//	return 0;
+//}
+//
+//bool IsContinuous(vector<int> numbers) {
+//	int size = numbers.size();
+//	sort(numbers.begin(), numbers.end());
+//	int zero_count = 0;
+//	for (int i = 0; i < size; ++i) {
+//		if (numbers[i] == 0) {
+//			++zero_count;
+//		}
+//	}
+//	int j = 0;
+//	for (int i = 0; i < size; ++i) {
+//		if (numbers[i] != 0) {
+//			j = i;
+//			break;
+//		}
+//	}
+//	int start = numbers[j];
+//	int end = numbers[size - 1];
+//	int nozero_num = end - start + 1;
+//	int shi_num = size - zero_count;
+//	if ((nozero_num - shi_num) <= zero_count) {
+//		return true;
+//	}
+//	else {
+//		return false;
+//	}
+//}
+////  0 0  5 6 8 10 11
+//int main() {
+//	vector<int>vec{0,0,0,1,1};
+//	if (IsContinuous(vec)) {
+//		cout << "有顺子" << endl;
+//	}
+//	else {
+//		cout << "没有顺子" << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+//
 #if 0
 int main() {
 	string str = "i am a student!";
