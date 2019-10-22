@@ -6,7 +6,211 @@
 #include <string>
 #include <regex>
 #include <assert.h>
+#include <string>
 using namespace std;
+//
+//int StrToInt(string str) {
+//	if (str.empty()) {
+//		return 0;
+//	}
+//	int symbol = 1;
+//	//处理负号
+//	if (str[0] == '-') {
+//		symbol = -1;
+//		str[0] = '0';
+//		//这里是‘0’ 不是0
+//	}
+//	//处理正号
+//	else if (str[0] == '+') {
+//		symbol = 1;
+//		str[0] = '0';
+//	}
+//	long long  sum = 0;
+//	for (int i = 0; i < str.size(); ++i) {
+//		if (str[i] < '0' || str[i] > '9') {
+//			sum = 0;
+//			break;
+//		}
+//		sum = sum * 10 + str[i] - '0';
+//		if (sum > 2147483647) {
+//			return 0;
+//		}
+//	}
+//	return symbol * sum;
+//}
+//
+//int StrToInt(string str) {
+//	if (str.empty()) {
+//		return 0;
+//	}
+//	int symbol = 1;
+//	//处理负号
+//	if (str[0] == '-') {
+//		symbol = -1;
+//		str[0] = '0'; 
+//		//这里是‘0’ 不是0
+//	}
+//	//处理正号
+//	else if (str[0] == '+') {
+//		symbol = 1;
+//		str[0] = '0';
+//	}
+//	int sum = 0;
+//	for (int i = 0; i < str.size(); ++i) {
+//		if (str[i] < '0' || str[i] > '9') {
+//			sum = 0;
+//			break;
+//		}
+//		sum = sum * 10 + str[i] - '0';
+//	}
+//	if (sum < INT_MIN || sum > INT_MAX) {
+//		return 0;
+//	}
+//	return symbol * sum;
+//}
+//
+//
+//int StrToInt(string str) {
+//	if (str.empty()) {
+//		return 0;
+//	}
+//
+//	// 如果字符串正有正负号则zhengfu为 true;
+//	// 如果是 '+' 则zhe为true
+//	// 如果是 '-' 则zhe为false
+//	bool zhengfu = false;
+//	bool zhe = true;
+//	if (str[0] == '-' ||str[0] =='+') {
+//		zhengfu = true;
+//		if(str[0] == '-'){
+//			zhe = false;
+//		}
+//	}
+//
+//	//字符转十进制的数
+//	bool nul = true;
+//	// nul 表示字符串是否有效，默认为有效
+//	int size = str.size();
+//	int n = size;
+//	long long num = 0;
+//
+//	//为了跳过第一个字符
+//	int j = 0;
+//	if (zhengfu) {
+//		j = 1;
+//	}
+//	for (int i = j; i < str.size(); ++i) {
+//		if (str[i] >= '0' && str[i] <= '9') {
+//			long long a = pow(10, size - 1);
+//			num += (str[i] - '0')*a;
+//			--size;
+//		}
+//		else {
+//			nul = false;
+//			break;
+//		}
+//	}
+//	// 字符串无效直接返回0 
+//	if (!nul) {
+//		return 0;
+//	}
+//	if (num / 10 == 2147483648) {
+//		return 0;
+//	}
+//	//如果有正号 则返回的值/10
+//	if (zhengfu && zhe) {
+//		return num/10;
+//	}
+//	if (!zhengfu && zhe) {
+//		return num;
+//	}
+//	if (zhengfu && !zhe) {
+//		return -(num / 10);
+//	}
+//	if (!zhengfu && zhe) {
+//		-num;
+//	}
+//}
+//
+
+//int StrToInt(string str) {
+//	if (str.empty()) {
+//		return 0;
+//	}
+//	int symbol = 1;
+//	//处理负号
+//	if (str[0] == '-') {
+//		symbol = -1;
+//		str[0] = '0';
+//		//这里是‘0’ 不是0
+//	}
+//	//处理正号
+//	else if (str[0] == '+') {
+//		symbol = 1;
+//		str[0] = '0';
+//	}
+//	long long sum = 0;
+//	for (int i = 0; i < str.size(); ++i) {
+//		if (str[i] < '0' || str[i] > '9') {
+//			sum = 0;
+//			break;
+//		}
+//		sum = sum * 10 + str[i] - '0';
+//		if (symbol && sum > 2147483647) {
+//			return 0;
+//		}
+//		if (!symbol && sum > 2147483649) {
+//			return 0;
+//		}
+//	}
+//	return symbol * sum;
+//}
+//
+int StrToInt(string str) {
+	if (str.empty()) {
+		return 0;
+	}
+	int symbol = 1;
+	//处理负号
+	if (str[0] == '-') {
+		symbol = -1;
+		str[0] = '0';
+		//这里是‘0’ 不是0
+	}
+	//处理正号
+	else if (str[0] == '+') {
+		symbol = 1;
+		str[0] = '0';
+	}
+	long long sum = 0;
+	for (int i = 0; i < str.size(); ++i) {
+		if (str[i] < '0' || str[i] > '9') {
+			sum = 0;
+			break;
+		}
+		sum = sum * 10 + str[i] - '0';
+	}
+	if ((symbol == 1) && sum > 2147483647) {
+		return 0;
+	}
+	if ((symbol ==-1) && sum >= 2147483649) {
+		return 0;
+	}
+
+	return symbol * sum;
+}
+int main() {
+	string str = "-2147483649";
+	//for (int i = 0; i < str.size(); ++i) {
+	//	str[i] = str[i] - 0;
+	//}
+	//cout << str << endl;
+
+	cout << StrToInt(str);
+
+	system("pause");
+	return 0;
+}
 
 #if 0
 class Solution {
@@ -40,13 +244,13 @@ int Sum_Solution(int n) {
 	return ans;
 }
 
-int main() {
-	cout << Sum_Solution(5) << endl;
-
-	system("pause");
-	return 0;
-}
-
+//int main() {
+//	cout << Sum_Solution(5) << endl;
+//
+//	system("pause");
+//	return 0;
+//}
+//
 //int LastRemaining_Solution(int n, int m) {
 //	if (n == 0 || m == 0) {
 //		return -1;
