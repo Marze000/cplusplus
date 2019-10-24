@@ -8,7 +8,146 @@
 #include <assert.h>
 #include <string>
 using namespace std;
-//
+
+#if 0
+class Object;
+class SmartPointer;
+
+// 智能指针是一种资源管理类，通过对原始指针的封装，
+// 在资源管理类对象进行析构的时候对指针指向的内存
+// 进行释放，通常使用引用计数方式进行管理
+
+class Counter {
+	friend class SmartPointer;
+public:
+	Counter() {
+		ptr = nullptr;
+		cnt = 0;
+	}
+	Counter(Object*p) {
+		ptr = p;
+		cnt = 1;
+	}
+	~Counter() {
+		delete ptr;
+	}
+private:
+	Object*ptr;
+	int cnt;
+};
+
+class SmartPointer {
+public:
+	SmartPointer(Object* p) {
+		ptr_counter = new Counter(p);
+	}
+	SmartPointer(const SmartPointer&sp) {
+		ptr_counter = sp.ptr_counter;
+		++ptr_counter->cnt;
+	}
+	SmartPointer& operator = (const SmartPointer& sp) {
+		++sp.ptr_counter->cnt;
+		--ptr_counter->cnt;
+		if (ptr_counter->cnt == 0) {
+			delete ptr_counter;
+		}
+		ptr_counter = sp.ptr_counter;
+	}
+	~SmartPointer() {
+		--ptr_counter->cnt;
+		if (ptr_counter->cnt == 0) {
+			delete ptr_counter;
+		}
+	}
+private:
+	Counter* ptr_counter;
+};
+
+
+bool duplicate(int numbers[], int length, int* duplication) {
+	// 2,3,1,0,2,5,3 
+	for (int i = 0; i < length; ++i) {
+		int index = numbers[i] % length;
+		if (numbers[index] >= length) {
+			*duplication = index;
+			return true;
+		}
+		numbers[index] += length;
+	}
+	return false;
+}
+
+int find_dup(int numbers[], int length) {
+	// 2,3,1,0,2,5,3 
+	for (int i = 0; i < length; i++) {
+		int index = numbers[i];
+		if (index >= length) {
+			index -= length;
+			return index;
+		}
+		numbers[index] += length;
+	}
+	return -1;
+}
+#endif
+
+#if 0
+vector<int> multiply(const vector<int>& A) {
+	vector<int>B;
+	if (A.empty()) {
+		return B;
+	}
+	for (int i = 0; i < A.size(); ++i) {
+		int temp = 1;
+		for (int j = 0; j < A.size(); ++j) {
+			if (i == j && j < A.size()-1) {
+				++j;
+			}
+			temp *= A[j];
+		}
+		B.push_back(temp);
+	}
+	return B;
+}
+#endif
+
+void multiply(const vector<double>&array1, vector<double>& array2) {
+	int length1 = array1.size();
+	int length2 = array2.size();
+
+	if (length1 == length2 && length2 > 1) {
+		array2[0] = 1;
+		for (int i = 1; i < length1; ++i) {
+			array2[i] = array2[i - 1] * array1[i - 1];
+		}
+		double temp = 1;
+		for (int i = length1 - 2; i >= 0; --i) {
+			temp *= array1[i + 1];
+			array2[i] *= temp;
+		}
+	}
+}
+
+int main() {
+	const vector<double>A{ 1,2,3,4,5};
+	vector<double>B{ 1,1,1,1,1};
+	multiply(A,B);
+
+	system("pause");
+	return 0;
+}
+
+//1、在经常需要搜索的列上，可以加快搜索的速度。 
+//2、在作为主键的列上，强制该列的唯一性和组织表中数据的排列结构。
+//3、在经常用于连接两张表的列上，这些列主要是一些外键，
+//   可以加快连接的速度。
+//4、在经常需要根据范围进行搜索的列上创建索引，
+//   因为索引已经排序，其指定的范围是连续的。
+//5、在经常需要排序的列上创建索引，因为索引已经排序，
+//   这样查询可以利用索引的排序，加快排序查询时间。
+//6、在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。
+
+
 //int StrToInt(string str) {
 //	if (str.empty()) {
 //		return 0;
@@ -199,6 +338,8 @@ int StrToInt(string str) {
 
 	return symbol * sum;
 }
+
+#if 0
 int main() {
 	string str = "-2147483649";
 	//for (int i = 0; i < str.size(); ++i) {
@@ -212,7 +353,6 @@ int main() {
 	return 0;
 }
 
-#if 0
 class Solution {
 public:
 	Solution() {
