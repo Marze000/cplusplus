@@ -41,7 +41,6 @@ print(a%b)
 a = input("input:")
 print(type(a))
 print(a)
-'''
 al = all([1,2,3,0,4])
 print(al) # Flase
 
@@ -53,3 +52,11 @@ if all(a) == True:
     print('数组a 中没有空值或者None')
 else:
     print('在数组中存在空值或0')
+
+a = ['a','b','c']
+for i,e in enumerate(a):
+    print(i,e)
+
+'''
+a = (1,2,3,5)
+print(type(str(a)))
