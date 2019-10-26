@@ -128,10 +128,88 @@ void multiply(const vector<double>&array1, vector<double>& array2) {
 	}
 }
 
+//bool isNumeric(const char* string) {
+//	if (!(*string == '+' || *string == '-' || (*string <= '9' && *string >= 0))) {
+//		return false;
+//	}
+//	++string;
+//	while (*string != '\0') {
+//		while (*string != '\0' && !(*string == 'e' || *string == 'E')) {
+//			if (!(*string >= '0' && *string <= '9')) {
+//				return false;
+//			}
+//			++string;
+//		}
+//		if (*string != '\0') {
+//			++string;
+//		}
+//		if (*string >= '0' && *string <= '9') {
+//			while (*string != '\0') {
+//				if (*string <= '9' && *string >= '0') {
+//					++string;
+//				}
+//				else {
+//					return false;
+//				}
+//			}
+//		}
+//	}
+//	return true;
+//}
+
+bool isNumeric(const char* string) {
+	if (!(isdigit(*string) || *string == '+' || *string == '-')) {
+		return false;
+	}
+	// 字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。 
+	// 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
+	++string;
+	while (*string != '\0' && *string != 'e' && *string != 'E') {
+		if (!(isdigit(*string) || *string == '.')) {
+			return false;
+		}
+		++string;
+	}
+	if (*string != '\0') {
+		++string;
+	}
+	else {
+		return true;
+	}
+	if (*string == '-' || *string == '+') {
+		++string;
+	}
+	if (isdigit(*string)) {
+		while (*string != '\0') {
+			if (!isdigit(*string)) {
+				return false;
+			}
+			++string;
+		}
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 int main() {
-	const vector<double>A{ 1,2,3,4,5};
-	vector<double>B{ 1,1,1,1,1};
-	multiply(A,B);
+
+	// 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
+	if (isNumeric("123.45e+6")) {
+		cout << "表示数值" << endl;
+	}
+	else {
+		cout << "不是数值" << endl;
+	}
+
+
+	//if (isNumeric("100")) {
+	//	cout << "true" << endl;
+	//}
+	//else {
+	//	cout << "false" << endl;
+	//}
 
 	system("pause");
 	return 0;
@@ -305,6 +383,7 @@ int main() {
 //	return symbol * sum;
 //}
 //
+#if 0
 int StrToInt(string str) {
 	if (str.empty()) {
 		return 0;
@@ -339,7 +418,6 @@ int StrToInt(string str) {
 	return symbol * sum;
 }
 
-#if 0
 int main() {
 	string str = "-2147483649";
 	//for (int i = 0; i < str.size(); ++i) {
