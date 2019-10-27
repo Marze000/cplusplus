@@ -158,28 +158,53 @@ void multiply(const vector<double>&array1, vector<double>& array2) {
 //}
 
 bool isNumeric(const char* string) {
-	if (!(isdigit(*string) || *string == '+' || *string == '-')) {
+	// 如果第一个字符不是 +、- 、[0-9]直接返回false
+	if (!(isdigit(*string)
+		|| *string == '+' 
+		|| *string == '-')) {
 		return false;
 	}
-	// 字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。 
-	// 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
+
+	// 第一个字符符合题意，接着往下走
 	++string;
+
+	// poilt 作为小数点的计数
+	// 如果大于 1 则返回false 
+	// 因为整个部分最多只可以出现一个小数点
+	int poilt = 0;
+
+	// 该循环的结束条件就是：
+	// (1)遇到 字符e、E   例：+123e   -12.34E
+	// (2)是一个正常的数字 例：123  +12.2   -12.3
 	while (*string != '\0' && *string != 'e' && *string != 'E') {
-		if (!(isdigit(*string) || *string == '.')) {
+		if (*string == '.') {
+			// 出现小数点便加1
+			poilt++;
+		}
+		// 如果小数点个数 > 1 或者当前字符不是数字或小说点则返回false
+		if ((poilt > 1) || !(isdigit(*string) || *string=='.')) {
 			return false;
 		}
 		++string;
 	}
+
+	//这里我们需要判断上一个while 循环跳出的原因是什么？
 	if (*string != '\0') {
+		// 遇到了e
 		++string;
 	}
 	else {
+		// 是一个正常的数字
 		return true;
 	}
+	// 在 e 后面如果出现了 +、- 符号则直接跳过即可
 	if (*string == '-' || *string == '+') {
 		++string;
 	}
+
+	// 如果是数字则进行判断
 	if (isdigit(*string)) {
+		// 此时后面的字符必须全部都是数字,否则返回false
 		while (*string != '\0') {
 			if (!isdigit(*string)) {
 				return false;
@@ -189,28 +214,22 @@ bool isNumeric(const char* string) {
 		return true;
 	}
 	else {
+		// 如果e 后面不是数字，不满足要求
 		return false;
 	}
 }
 
+class ListNode {
+public:
+	int val;
+	ListNode* next;
+};
+
 int main() {
+	//ListNode* Head = new ListNode*[1];
 
-	// 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
-	if (isNumeric("123.45e+6")) {
-		cout << "表示数值" << endl;
-	}
-	else {
-		cout << "不是数值" << endl;
-	}
-
-
-	//if (isNumeric("100")) {
-	//	cout << "true" << endl;
-	//}
-	//else {
-	//	cout << "false" << endl;
-	//}
-
+	int* p = new int(10);
+	cout << *p;
 	system("pause");
 	return 0;
 }
