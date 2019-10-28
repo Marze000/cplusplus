@@ -9,6 +9,7 @@
 #include <string>
 using namespace std;
 
+
 #if 0
 class Object;
 class SmartPointer;
@@ -157,6 +158,7 @@ void multiply(const vector<double>&array1, vector<double>& array2) {
 //	return true;
 //}
 
+#if 0
 bool isNumeric(const char* string) {
 	// 如果第一个字符不是 +、- 、[0-9]直接返回false
 	if (!(isdigit(*string)
@@ -226,7 +228,8 @@ public:
 };
 
 int main() {
-	//ListNode* Head = new ListNode*[1];
+	ListNode* pHead = nullptr;
+	ListNode* Head = new ListNode();
 
 	int* p = new int(10);
 	cout << *p;
@@ -234,6 +237,7 @@ int main() {
 	return 0;
 }
 
+#endif
 //1、在经常需要搜索的列上，可以加快搜索的速度。 
 //2、在作为主键的列上，强制该列的唯一性和组织表中数据的排列结构。
 //3、在经常用于连接两张表的列上，这些列主要是一些外键，
