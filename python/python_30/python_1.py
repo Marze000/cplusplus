@@ -122,7 +122,6 @@ def lengthOfLongestSubstring(s):
             usedChar[s[i]] = i
         return max_len
 
-'''
 
 def findMedianSortedArrays(nums1, nums2):
         sum = 0
@@ -149,3 +148,174 @@ if __name__ == "__main__":
     num1 = []
     num2 = [1]
     print(findMedianSortedArrays(num1, num2))
+
+def longestPalindrome(self, s):
+    def expand(s, left, right):
+        while left>=0 and right<len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return right-left-1
+    start = 0
+    end = 0
+    for i in range(len(s)):
+        len1 = expand(s, i, i)
+        len2 = expand(s, i, i+1)
+        max_len = max(len1, len2)
+       
+        if max_len > end - start:
+            start = i - (max_len-1)/2
+            end = i + max_len/2
+    return s[start:end+1]
+''' 
+
+
+'''
+def longestPalindrome(self, s):
+    def expand(s, left, right):
+        while left>=0 and right<len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return right-left-1
+    start = 0
+    end = 0
+    for i in range(len(s)):
+        len1 = expand(s, i, i)
+        len2 = expand(s, i, i+1)
+        max_len = max(len1, len2)
+        if max_len > end - start:
+            start = i - (max_len-1)/2
+            end = i + max_len/2
+    return s[start:end+1]
+
+def longestPalindrome(s):
+    start = 0
+    end = 0
+    for i in range(len(s)):
+        len1 = expend(s,i,i)
+        len2 = expend(s,i,i+1)
+        len_max = max(len1,len2)
+
+        if len_max > end-start:
+            start = i-len1//2
+            end = i+len1//2
+    return s[start:end+1]       
+
+def expend(s,left,right):
+    while left>=0 and right<len(s) and s[left]==s[right]:
+        left -=1
+        right+=1
+    return right-left-1
+
+def longestPalindrome(s):
+    if not s:
+        return ""
+
+    s_len = len(s)
+    mem = [[0]*s_len for _ in range(s_len)]
+
+    left, right, result_len = 0, 0, 0
+    for j in range(s_len):
+        for i in range(j):
+            if s[i] == s[j] and (j-i < 2 or mem[i+1][j-1]):
+                mem[i][j] = 1
+            if mem[i][j] and result_len < j-i+1:
+                result_len = j - i + 1
+                left, right = i, j
+        
+        mem[j][j] = 1
+    return s[left:right+1]
+
+if __name__ == "__main__":
+    s = 'ababc'
+    print(longestPalindrome(s))
+def reverse(x):
+    sign = 1 if x > 0 else -1
+    # 去掉符号
+    x = abs(x)
+    s = str(x)
+    s = s[::-1]
+    ret = int(s) 
+    if sign==-1:
+        return 0-ret
+    else:
+        return ret
+
+def reverse(x):
+    s = str(x)[::-1].rstrip('-')
+    if int(s) < 2**31:
+        if x >=0:
+            return int(s)
+        else:
+            return 0-int(s)
+    return  0
+###
+def myAtoi(str):
+    i = 0
+    if len(str)==0:
+        return 0
+    while i<len(str) and str[i]==' ':
+        i+=1
+
+    if i < len(str) and not ('0'<=str[i]<='9' or str[i]=='+' or str[i]=='-'):
+        return 0
+
+    sign = ''
+    if str[i] == '-':
+        sign = '-'
+        i +=1
+    if str[i] == '+':
+        sign = '+'
+        i +=1
+
+    while i<len(str) and '0'<=str[i]<='9':
+        sign+=str[i]
+        i+=1
+    
+    num = int(sign)
+    if abs(num)<2**31:
+        return num
+    else:
+        if num > 0:
+            return 2147483647
+        else:
+            return -2147483648
+
+'''
+def myAtoi(str):
+    s = str.strip()
+    if not s:
+        return 0
+    sign = 1
+    if s[0] == '-':
+        sign = -1
+        s = s[1:]
+    elif s[0]=='+':
+        s = s[1:]
+    num = ''
+    for c in s:
+        if c.isdigit():
+            num += c
+        else:
+            break
+    if not num:
+        return 0
+    num = int(num)*sign
+
+    if abs(num)<2**31:
+        return num
+    else:
+        if num > 0:
+            return 2**31-1
+        else:
+            return -2**31
+        
+    '''
+    num = int(num)*sign
+    INT_MAX = 2**31
+    return min(max(num,-1*INT_MAX), INT_MAX-1)
+    '''
+
+if __name__ == "__main__":
+    str = '    -42'
+    a = myAtoi(str)
+    print(a)

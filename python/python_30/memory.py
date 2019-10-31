@@ -1,7 +1,5 @@
 
-import sys
 # 检查对象的内存使用情况
-variable = 30
 # chars ='aaa'
 # print(sys.getsizeof(variable))
 # print('10占的字节数:',sys.getsizeof(10))
@@ -14,7 +12,11 @@ print(sys.getsizeof(float))
 print(sys.getsizeof(list))
 print(sys.getsizeof(dict))
 print(sys.getsizeof(set))
-'''
 n = 3
 s = 'python'
 rint(s * n)
+'''
+s = '   12'
+s = s.strip()
+if not s:
+    print('0')
