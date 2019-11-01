@@ -280,7 +280,6 @@ def myAtoi(str):
         else:
             return -2147483648
 
-'''
 def myAtoi(str):
     s = str.strip()
     if not s:
@@ -309,13 +308,144 @@ def myAtoi(str):
         else:
             return -2**31
         
-    '''
     num = int(num)*sign
     INT_MAX = 2**31
     return min(max(num,-1*INT_MAX), INT_MAX-1)
-    '''
 
 if __name__ == "__main__":
     str = '    -42'
     a = myAtoi(str)
     print(a)
+
+def isPalindrome(self, x):
+    x = str(x)
+    return x == x[::-1]
+
+def maxArea(height):
+    if not len(height):
+        return 0
+    max_s = 0
+    for i in range(len(height)):
+        for j in range(i+1,len(height)):
+            s = min(height[i],height[j])*(j-i)
+            if s > max_s:
+                max_s = s
+    return max_s
+
+def maxArea(height):
+    if not len(height):
+        return 0
+    start = 0
+    end = len(height)-1
+    max_s = 0
+    while start < end:
+        s = min(height[start],height[end])*(end-start)
+        if s > max_s:
+            max_s = s
+        if height[start]<height[end]:
+            start+=1
+        else:
+            end-=1
+    return max_s
+def longestCommonPrefix(strs):
+    ret = ''
+    if not len(strs):
+        return ret
+    j = 0
+    falg = 1
+    for i in range(len(strs[0])):
+        for j in range(len(strs)):
+            if strs[j][i] != strs[j+1][i]:
+                falg = 0
+            ret += strs[j][i]
+    if falg:
+        return ret
+    else:
+        return ''
+
+    sample = strs[0]
+    for i in range(len(sample)):
+        for s in strs[1:]:
+            if i<len(s) :
+                if s[i]!=sample[i]:
+                    return sample[:i]
+            else:
+                return s[:i]
+    return sample
+
+if __name__ == "__main__":
+    a = ["flower","flow","flight"]
+    s1 = min(a)
+    s2 = max(a)
+    print(s1,s2)
+    # print(a[1:])
+    # print(longestCommonPrefix(a))
+
+
+# coding:utf-8
+from appium import webdriver
+import time, os
+ 
+def test_call_number():
+    # number是个列表，直接在这里天上你想要骚扰的号码即可
+    number = []
+    # 直接一个for循环，循环号码
+    for num in number:
+        # 使用adb打电话
+        call = os.popen('adb shell am start -a android.intent.action.CALL -d tel:%s' % num)
+        # 这里的sleep时间基本就是你想让通话保持的时间了
+        time.sleep(10)
+        #挂断电话
+        end = os.popen('adb shell input keyevent 6') # code6是挂断
+        time.sleep(4)
+ 
+if __name__ == '__main__':
+    test_call_number()
+
+# Download the helper library from https://www.twilio.com/docs/python/install
+from twilio.rest import Client
+
+
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+account_sid = 'AC3ecb5c84848a200da545bf1dfb8ab9e7'
+auth_token = 'your_auth_token'
+client = Client(account_sid, auth_token)
+
+ 
+# 开始发短信
+def send_msg(message):
+    u'自定义短信内容message'
+    msg = client.messages.create(
+        to='+8618729502326',  # 要给谁发短信, 必须带区号, 中国要加上+86
+        from_='+12013351008', # 你自己twilio网站申请的手机号码, 必须带上+号
+        body=message  # 你的短信内容
+    )
+ 
+
+if __name__ == '__main__':
+    send_msg('haha')
+
+
+import itchat
+# 自动登录方法，hotReload=True可以缓存，
+# 不用每次都登录,但是第一次执行时会出现一个二维码，
+# 需要手机微信扫码登录
+itchat.auto_login(hotReload=True)
+
+# 搜索好友，search_friends("xxx"),
+# 其中"xxx"为好友昵称，备注或微信号不行
+userfinfo = itchat.search_friends("boy")   # "智能群管家014"为好友昵称
+
+# print(userfinfo)，获取userinfo中的UserName参数
+userid = userfinfo[0]["UserName"]   # 获取用户id
+
+# 调用微信接口发送消息
+itchat.send("hello dear", userid)  # 通过用户id发送信息
+# 使用微信接口给微信好友发送消息，
+
+'''
+import itchat
+ 
+itchat.auto_login()
+itchat.send('Hello, filehelper', toUserName='filehelper')
