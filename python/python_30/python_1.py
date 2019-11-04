@@ -445,7 +445,3 @@ itchat.send("hello dear", userid)  # 通过用户id发送信息
 # 使用微信接口给微信好友发送消息，
 
 '''
-import itchat
- 
-itchat.auto_login()
-itchat.send('Hello, filehelper', toUserName='filehelper')
