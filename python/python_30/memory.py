@@ -157,6 +157,9 @@ if __name__ == "__main__":
     nums = [1,1,2]
     print(removeDuplicates(nums))
 '''
-nums = [1,1,1,2,2,3,4]
-a = set(nums)
-print(list(range(1,len(a)+1)))
+
+# nums = [3,2,2,3], val = 3,
+nums = [1,2,3,4,5,6,7,8,9]
+# i, n = 0, len(nums)
+for j in range(0, len(nums),2):            
+    print(nums[j],end=' ')
