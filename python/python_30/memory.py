@@ -156,10 +156,70 @@ def removeDuplicates(nums):
 if __name__ == "__main__":
     nums = [1,1,2]
     print(removeDuplicates(nums))
-'''
 
 # nums = [3,2,2,3], val = 3,
 nums = [1,2,3,4,5,6,7,8,9]
-# i, n = 0, len(nums)
 for j in range(0, len(nums),2):            
     print(nums[j],end=' ')
+
+def nextPermutation(nums):
+    last = len(nums)-1
+    left_last = last-1
+    if nums[left_last]<nums[last]:
+        nums[left_last],nums[last] = nums[last],nums[left_last]
+        return
+    if nums[left_last]>nums[last]:
+        while left_last >= 0 and nums[left_last]>nums[last]:
+            left_last-=1
+        j = left_last-1
+        if j >=0:
+            nums[left_last],nums[last] = nums[last],nums[left_last]
+            l = left_last+1
+            r = len(nums)-1
+        while l<r:
+            nums[l],nums[r]=nums[r],nums[l]
+            l+=1
+            r-=1
+        
+if __name__ == "__main__":
+    nums = [2,3,1]
+    nextPermutation(nums)
+    print(nums)
+
+def searchInsert(nums, target):
+    left = 0
+    right = len(nums)
+    while left<right:
+        mid = (left+right)//2
+        if nums[mid]>=target:
+            right = mid
+        else:
+            left = mid + 1
+    return left 
+
+if __name__ == "__main__":
+    nums = [1,3,5,6]
+    searchInsert(nums,0)
+
+'''
+def combinationSum(candidates, target):
+    length = len(candidates)
+    res = []
+    
+    def combinationSum_in(target,index,maybe):
+        if target<0:
+            return
+        if target==0:
+            res.append(maybe)
+        
+        for i in range(index,length):
+            combinationSum_in(target-candidates[i],i,maybe+[candidates[i]])
+                    
+    combinationSum_in(target,0,[])
+    return res
+
+if __name__ == "__main__":
+    candidates = [2,3,5]
+    target = 8
+    a = combinationSum(candidates, target)
+    print(a)
