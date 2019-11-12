@@ -201,7 +201,6 @@ if __name__ == "__main__":
     nums = [1,3,5,6]
     searchInsert(nums,0)
 
-'''
 def combinationSum(candidates, target):
     length = len(candidates)
     res = []
@@ -222,4 +221,51 @@ if __name__ == "__main__":
     candidates = [2,3,5]
     target = 8
     a = combinationSum(candidates, target)
+    print(a)
+
+
+def combinationSum2(candidates, target):
+    c = sorted(candidates)
+    res = []
+    len_c = len(c)
+    def dfs(target, index, path):
+        if target == 0:
+            res.append(path)
+            return
+        for i in range(index, len_c):
+            if i>index and c[i] == c[i-1]:
+                continue
+            if c[i]>target:
+                break
+            dfs(target-c[i], i+1, path+[c[i]])
+    dfs(target, 0, [])
+    return res
+
+if __name__ == "__main__":
+    candidates = [2,5,2,1,2]
+    target = 5
+    a = combinationSum2(candidates, target)
+    print(a)
+import itertools
+nums = [1,2,3]
+a = list(itertools.permutations(nums))
+
+print(a)
+
+
+'''
+def permute(nums):
+    res = []
+    def dfs(num, path):
+        if not num:
+            res.append(path)
+            return
+        for i in range(len(num)):
+            numss = num[:i]+num[i+1:]
+            dfs(numss, path+[num[i]])
+    dfs(nums, [])
+    return res 
+if __name__ == "__main__":
+    num = [1,2,3]
+    a = permute(num)
     print(a)

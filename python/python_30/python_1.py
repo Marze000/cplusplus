@@ -445,3 +445,7 @@ itchat.send("hello dear", userid)  # 通过用户id发送信息
 # 使用微信接口给微信好友发送消息，
 
 '''
+num = [1,2,3]
+for i in range(len(num)):
+    print(num[:i]+num[i+1:])
+ 
