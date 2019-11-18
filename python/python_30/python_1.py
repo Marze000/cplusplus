@@ -1,4 +1,4 @@
-''' 
+'''
 def intToRoman(num):
     # 代表 千分位单位
     M = ['', 'M', 'MM', 'MMM']
@@ -19,6 +19,9 @@ if __name__ == "__main__":
 '''
 
 
+from collections import Counter
+
+
 def intToRoman(num):
     M = ["", "M", "MM", "MMM"]
     '''
@@ -34,10 +37,10 @@ if __name__ == "__main__":
 
 
 def romanToInt(s):
-    a = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}        
-    ans=0        
-    for i in range(len(s)):            
-        if i<len(s)-1 and a[s[i]]<a[s[i+1]]: 
+    a = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+    ans=0
+    for i in range(len(s)):
+        if i<len(s)-1 and a[s[i]]<a[s[i+1]]:
             ans-=a[s[i]]
         # M CM XC IV
         else:
@@ -47,7 +50,6 @@ def romanToInt(s):
 if __name__ == "__main__":
     s = "III"
     print(romanToInt(s))
-'''
 
 
 def longestValidParentheses(s):
@@ -64,3 +66,112 @@ if __name__ == "__main__":
     s = "()(()"
     a = longestValidParentheses(s)
     print(a)
+
+
+
+def search(nums, left, right, target):
+    res = 0
+    while left < right:
+        mid = (left+right)//2
+        if nums[mid] == target:
+            res = mid
+            break
+        elif nums[mid] < target:
+            left = mid+1
+        else:
+            right = mid
+    return res
+
+
+def searchRange(nums, target):
+    if not nums:
+        return [-1, -1]
+    res = search(nums, 0, len(nums), target)
+    l = r = res
+    if l == 0 and nums[l] != target:
+        return [-1, -1]
+    if r == len(nums)-1 and nums[r] != target:
+        return [-1, -1]
+
+    if nums[l] == target:
+        while l >= 0 and nums[l] == target:
+            l -= 1
+    if nums[r] == target:
+        while r < len(nums) and nums[r] == target:
+            r += 1
+
+    return [l+1, r-1]
+
+
+if __name__ == "__main__":
+    nums = [0, 1, 2, 3, 4, 4, 4]
+    target = 2
+    a = searchRange(nums, target)
+    print(a)
+
+def search_border(nums, target, l, is_left):
+    r = len(nums)
+    while l<r:
+        mid = (l+r)//2
+        if nums[mid]>target or (is_left and target==nums[mid]):
+            r = mid
+        else:
+            l = mid + 1
+    return l
+
+def searchRange(self, nums, target):
+    left = search_border(nums, target, 0, True)
+    if left==len(nums) or nums[left]!=target:
+        return [-1,-1]
+
+    right = search_border(nums, target, left, False) - 1
+    return [left, right]
+
+
+
+def groupAnagrams(strs):
+    res = []
+    for i in range(len(strs)):
+        for j in range(i, len(strs)):
+            if Counter(strs[i]) == Counter(strs[j]):
+                res.append(strs[j])
+            else:
+                res.append(strs[j])
+    print(res)
+
+
+def groupAnagrams(strs):
+    d = {}
+    for s in strs:
+        key = tuple(sorted(s))
+        d[key] = d.get(key, []) + [s]
+    return d.values()
+
+
+if __name__ == "__main__":
+    a = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    print(groupAnagrams(a))
+
+
+
+def groupAnagrams(strs):
+    d = {}
+    for s in strs:
+        # key 应该不可以是一个列表list ，所以进行tuple转换
+        key = str(sorted(s))
+        # get 函数是找出 key 键对应的值
+        d[key] = d.get(key, []) + [s]
+    return d.values()
+
+
+if __name__ == "__main__":
+    a = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    print(groupAnagrams(a))
+
+
+'''
+
+
+dit = {'123': 10, '2': 20, '3': 30}
+a = '123'
+print(dit.get(a, [123]))
