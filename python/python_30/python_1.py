@@ -1,3 +1,4 @@
+import math
 '''
 def intToRoman(num):
     # 代表 千分位单位
@@ -375,4 +376,68 @@ if __name__ == "__main__":
     a = permute([1, 2, 3])
     print(a)
 
+
+
+n = 4
+nums = list(map(str, range(1, n+1)))
+print(nums)
+
+
+
+
+f = math.factorial(0)
+# 4 * 3 * 2 * 1
+print(f)
+
+
+index, k = divmod(10, 0)
+# 一个参数是取余
+print(index)
+# 第二个参数是取模
+print(k)
+
+
+def getPermutation(n, k):
+    kth = ''
+    nums = list(map(str, range(1, n+1)))
+    k -= 1
+    while n > 0:
+        n -= 1
+        f = math.factorial(n)
+        index, k = divmod(k, f)
+        kth += nums.pop(index)
+    return kth
+
+
+if __name__ == "__main__":
+    a = getPermutation(4, 9)
+    print(a)
+
 '''
+
+
+def search(nums, target):
+    left = 0
+    end = len(nums)-1
+    while left < end:
+        mid = (left + end)//2
+        if nums[mid] == target:
+            return mid
+        if nums[mid] > nums[end]:
+            if nums[left] <= target <= nums[mid]:
+                end = mid
+            else:
+                left = mid+1
+        else:
+            if nums[mid] <= target <= nums[end]:
+                left = mid + 1
+            else:
+                end = mid-1
+    return left if nums and nums[left] == target else -1
+
+
+if __name__ == "__main__":
+    nums = [1, 3]
+    target = 2
+    a = search(nums, target)
+    print(a)
