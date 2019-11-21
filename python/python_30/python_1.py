@@ -19,6 +19,7 @@ if __name__ == "__main__":
 '''
 
 
+import itertools
 from collections import Counter
 
 
@@ -254,7 +255,6 @@ if __name__ == "__main__":
     a = getPermutation(3,3)
     print(a)
     
-'''
 # Definition for singly-linked list.
 class ListNode:
     val = x
@@ -295,3 +295,84 @@ if __name__ == "__main__":
     n3 = new ListNode    
     n4 = new ListNode    
     n5 = new ListNode    
+
+def uniquePathsWithObstacles(obstacleGrid):
+    if obstacleGrid[0][0]==1:
+        return 0
+    row = len(obstacleGrid)
+    col = len(obstacleGrid[0])
+    if row ==1 or col ==1:
+        return 1
+    dp = [[0]*col for _ in range(row)]
+    # 判断第一列的障碍
+    for i in range(row):
+        if obstacleGrid[i][0] == 1:
+            break
+        else:
+            dp[i][0]=1
+    for i in range(col):
+        if obstacleGrid[0][i]==1:
+            break
+        else:
+            dp[0][i]=1
+    
+    for i in range(1,row):
+        for j in range(1,col):
+            if obstacleGrid[i][j]==1:
+                dp[i][j]=0
+            else:
+                dp[i][j] =dp[i-1][j]+dp[i][j-1]
+    return dp[row-1][col-1]
+            
+if __name__ == "__main__":
+    obstacleGrid = [[0,0],[1,1],[0,0]]
+    a = uniquePathsWithObstacles(obstacleGrid)
+    print(a)
+
+
+
+def minPathSum(grid):
+    row = len(grid)
+    col = len(grid[0])
+    if row == 0 or col == 0:
+        return 0
+
+    dp = [[0]*col for _ in range(row)]
+    dp[0][0] = grid[0][0]
+    # 初始化第一行的值
+    for i in range(1,col):
+        dp[i][0] = grid[i][0]+dp[i-1][0]
+    # 初始化第一类的值
+    for i in range(1,row):
+        dp[0][i] = grid[0][i] + dp[0][i-1]
+
+    for i in range(1, row):
+        for j in range(1, col):
+            dp[i][j] = grid[i][j] + min(dp[i][j-1], dp[i-1][j])
+    return dp[row-1][col-1]
+
+
+if __name__ == "__main__":
+    grid = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]
+    a = minPathSum(grid)
+    print(a)
+
+
+
+a = [[1, 2], [3, 4], [5, 6]]
+print(len(a))
+print(len(a[0]))
+
+
+
+import itertools
+def permute(nums):
+    a= list(itertools.permutations(nums))
+    return a[2]
+
+
+if __name__ == "__main__":
+    a = permute([1, 2, 3])
+    print(a)
+
+'''
