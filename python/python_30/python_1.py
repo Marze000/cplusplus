@@ -183,7 +183,7 @@ def maxSubArray(nums):
         if res>0:
             res+=nums[i]
         else:
-            res = nums[i] 
+            res = nums[i]
         maxnum = max(res,maxnum)
     return maxnum
 
@@ -250,12 +250,12 @@ def getPermutation(n, k):
         n -= 1
         f = math.factorial(n)
         index, k = divmod(k, f)
-        kth += nums.pop(index)        
+        kth += nums.pop(index)
     return kth
 if __name__ == "__main__":
     a = getPermutation(3,3)
     print(a)
-    
+
 # Definition for singly-linked list.
 class ListNode:
     val = x
@@ -292,10 +292,10 @@ def rotateRight(head,k):
 
 if __name__ == "__main__":
     n1 = new ListNode
-    n2 = new ListNode    
-    n3 = new ListNode    
-    n4 = new ListNode    
-    n5 = new ListNode    
+    n2 = new ListNode
+    n3 = new ListNode
+    n4 = new ListNode
+    n5 = new ListNode
 
 def uniquePathsWithObstacles(obstacleGrid):
     if obstacleGrid[0][0]==1:
@@ -316,7 +316,7 @@ def uniquePathsWithObstacles(obstacleGrid):
             break
         else:
             dp[0][i]=1
-    
+
     for i in range(1,row):
         for j in range(1,col):
             if obstacleGrid[i][j]==1:
@@ -324,7 +324,7 @@ def uniquePathsWithObstacles(obstacleGrid):
             else:
                 dp[i][j] =dp[i-1][j]+dp[i][j-1]
     return dp[row-1][col-1]
-            
+
 if __name__ == "__main__":
     obstacleGrid = [[0,0],[1,1],[0,0]]
     a = uniquePathsWithObstacles(obstacleGrid)
@@ -453,7 +453,6 @@ if __name__ == "__main__":
     a = mySqrt(5)
     print(a)
 
-'''
 
 
 def climbStairs(n):
@@ -472,3 +471,58 @@ def climbStairs(n):
 if __name__ == "__main__":
     a = climbStairs(3)
     print(a)
+
+
+
+
+path = '/a/../../b/../c//.//'
+dirs = path.split('/')
+print(dirs)
+
+
+def simplifyPath(path):
+    dirs = path.split('/')
+    res = []
+    for d in dirs:
+        if d:
+            if d == '..' and res:
+                res.pop(-1)
+            elif d != '.' and d != '..':
+                res.append(d)
+    return '/'+'/'.join(res)
+
+
+if __name__ == "__main__":
+    path = '/a/../../b/../c//.//'
+    a = simplifyPath(path)
+    print(a)
+
+
+
+n = 3
+for i in range(n-1, -1, -1):
+    print(i)
+
+'''
+
+
+def searchMatrix(matrix, target):
+    if not matrix:
+        return 0
+    row = len(matrix)
+    col = len(matrix[0])-1
+    for i in range(row):
+        for j in range(col, -1, -1):
+            if i < row and j >= 0 and matrix[i][j] == target:
+                return True
+            elif i < row and j >= 0 and matrix[i][j] > target:
+                j -= 1
+            elif i < row and j >= 0 and matrix[i][j] < target:
+                i += 1
+    return False
+
+
+if __name__ == "__main__":
+    matrix = [[1, 1]]
+    target = 2
+    searchMatrix(matrix, target)
