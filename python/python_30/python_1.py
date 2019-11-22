@@ -413,7 +413,6 @@ if __name__ == "__main__":
     a = getPermutation(4, 9)
     print(a)
 
-'''
 
 
 def search(nums, target):
@@ -440,4 +439,36 @@ if __name__ == "__main__":
     nums = [1, 3]
     target = 2
     a = search(nums, target)
+    print(a)
+
+
+
+def mySqrt(x):
+    y = x
+    while x**2>y:
+        x = int(x+y/x)/2
+    return x
+
+if __name__ == "__main__":
+    a = mySqrt(5)
+    print(a)
+
+'''
+
+
+def climbStairs(n):
+    dp = [0]*(n+1)
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+    dp[1] = 1
+    dp[2] = 2
+    for i in range(3, n+1):
+        dp[i] = dp[i-1]+dp[i-2]
+    return dp[n]
+
+
+if __name__ == "__main__":
+    a = climbStairs(3)
     print(a)
