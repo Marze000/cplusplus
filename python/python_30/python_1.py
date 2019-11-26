@@ -1,67 +1,61 @@
-import math
-import collections
-
 '''
-s = [2, 5, 8, 3, 6, 9]
-for index,num in enumerate(s, 1):
-    print(index,num)
+def largestRectangleArea(heights):
+    n = len(heights)
+    heights = heights+[0]
+    stack = [-1]
+    max_area = 0
+    for i in range(n+1):
+        while heights[i]<heights[stack[-1]]:
+            h = heights[stack.pop()]
+            w = i - stack[-1] - 1
+            max_area = max(max_area, h*w)
+        stack.append(i)
+    return max_area
 
-def minWindow(s, t):
-    n = len(s)
-    res = ''
-    min_length = n
-    for i in range(n):
-        temp = list(t)
-        for j in range(i, n):
-            if s[j] in temp:
-                temp.remove(s[j])
-            if len(temp) == 0:
-                if j-i <= min_length:
-                    min_length = j-i
-                    res = s[i:j+1]
-                break
+def subsetsWithDup(nums):
+    nums.sort()
+    n = len(nums)
+    res = []
+    def dfs(index, path):
+        if path not in res:
+            res.append(path)
+        for i in range(index, n):
+            dfs(i+1, path+[nums[i]])
+    dfs(0, [])
     return res
 
-
 if __name__ == "__main__":
-    S = "cabwefgewcwaefgcf"
-    T = "cae"
-    s = minWindow(S, T)
-    print(s)
-
-
-
-def minWindow(s, t):
-    need = collections.Counter(t)
-    missing = len(t)
-    start, end = 0, 0
-    left = 0
-    for right, char in enumerate(s, 1):
-        if need[char] > 0:
-            missing -= 1
-        need[char] -= 1
-        if missing == 0:
-            while left < right and need[s[left]] < 0:
-                need[s[left]] += 1
-                left += 1
-            need[s[left]] += 1
-            missing += 1
-            if end == 0 or right-left < end-start:
-                start, end = left, right
-            left += 1
-    return s[start:end]
-
-
-if __name__ == "__main__":
-    s = "ADOBECODEBANC"
-    t = "ABC"
-    minWindow(s, t)
+    nums = [1,2,2]
+    a = subsetsWithDup(nums)
+    print(a)
 
 '''
-nums = [1, 2, 3]
-dp = [[]]
-for num in nums:
-    for item in dp:
-        dp = dp + [item+[num]]
 
-print(dp)
+class TreeNode:
+    def __init__(x):
+        val = x
+        left = None
+        right = None
+def isValidBST(root):
+    if not root:
+        return True
+    res = []
+    def ValidBST(root):
+        if not root.left and not root.right and not root:
+            if root.right.val>root.val > root.left.val:
+                res.append(True)
+            else:
+                res.append(False)
+        if root.left:
+            ValidBST(root.left)
+        if root.right:
+            ValidBST(root.right)
+    ValidBST(root)
+    return all(res)
+
+if __name__ == "__main__":
+    n1 = TreeNode,n1.val = 5
+    n2 = TreeNode,n2.val = 1
+    n3 = TreeNode,n3.val = 4
+    n4 = TreeNode,n4.val = 3
+    n5 = TreeNode,n5.val = 6
