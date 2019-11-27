@@ -1,4 +1,9 @@
-res = [1]*5
-res = res[1::]
-res = str(res)
+res = [
+'''
+res.append([i for i in range(10)])
+print(res)
+'''
+
+for i in range(10):
+    res.append([i])
 print(res)
