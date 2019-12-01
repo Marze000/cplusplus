@@ -40,8 +40,28 @@ res = [[1, 3, 3, 1]]
 res.append(list(map(lambda x, y: x+y, res[-1] + [0], [0] + res[-1])))
 print(res)
 
-'''
 a = [1, 2, 3, 4, 5]
 b = [1, 3, 5, 7, 9]
 c = zip(a, b)
 print(list(c))
+
+def isPalindrome(s):
+    if len(s)==0:
+        return True
+    res = ''
+    for i in s:
+        # isalpha判断是否字母
+        if i.isalpha():
+            res+=i 
+    # 转换大小为小写
+    res = res.lower()
+    return res==res[::-1]
+if __name__ == "__main__":
+    s = 'OP'
+    a = isPalindrome(s)
+    print(a)
+    
+'''
+a = '12345'
+res = '@'.join(a)
+print(res)
