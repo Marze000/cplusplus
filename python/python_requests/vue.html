@@ -3,10 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>点餐页面</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
-    <!--引入style.cc文件-->
+    <!--引入本地文件-->
     <link href="./style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="./jstest.js"></script>
+
 </head>
 <body>
 
@@ -35,73 +38,66 @@
     <!--内容左部内容-->
     <div class="leftcolumn">
         <div class="card">
-            <h2>特色主食 &nbsp; 劲爆让你开心跳起来</h2>
-        <div class="slideshow-container">
-            <div class="mySlides" id="one">
-                <div class="numbertext">1 / 3</div>
-                <div class="text">三成熟 菲力牛排</div>
+            <h2>特色主食</h2>
+            <div class="slideshow-container">
+                <div class="mySlides" id="one">
+                    <div class="numbertext">1 / 3</div>
+                    <div class="text">菲力牛排</div>
+                </div>
+
+                <div class="mySlides" id="two">
+                    <div class="numbertext">2 / 3</div>
+                    <div class="text">叉扎Fruits</div>
+                </div>
+
+                <div class="mySlides" id="three">
+                    <div class="numbertext">3 / 3</div>
+                    <div class="text">泸州拼肉酱饭</div>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
             </div>
 
-            <div class="mySlides" id="two">
-                <div class="numbertext">2 / 3</div>
-                <div class="text">叉扎Fruits</div>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
             </div>
-
-            <div class="mySlides" id="three">
-                <div class="numbertext">3 / 3</div>
-                <div class="text">泸州拼肉酱饭</div>
-            </div>
-
-            <a class="prev" onclick="plusSlides(-1)">❮</a>
-            <a class="next" onclick="plusSlides(1)">❯</a>
-        </div>
-
-        <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
         </div><!--中间部分end-->
+
 
         <!--中间右边部分内容start-->
         <div class="card">
-            <h2>价格表</h2>
-            <div class="cardleft">
-                <div class="cardlefttop"></div>
-                <div class="cardleftbottom">
-                    <p>
-                        价格 ：15元
-                        吃它<input type="checkbox" name="sex" value="female">
-                    </p>
-                </div>
-            </div>
-            <div class="cardmid">
-                <div class="cardmidtop"></div>
-                <div class="cardmidbottom">
-                    <p>价格 ：15元</p>
-                </div>
-            </div>
-            <div class="cardright">
-                <div class="cardrighttop"></div>
-                <div class="cardrightbottom">
-                    <p>价格 ：15元</p>
-                </div>
-            </div>
-            <p>总价 &nbsp;&nbsp; 提交</p>
-        </div>
+            <h2>外卖配送</h2>
+            姓名 &nbsp;<input type="text"><br>
+            <br>
+            电话 &nbsp;<input type="text"><br>
+            <br>
+            住址 &nbsp;<input type="text"><br>
+       </div>
     </div>
 
     <!--内容右边信息-->
     <div class="rightcolumn">
-        <div class="card">
-            <h2>甜点饮品</h2>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
-            <div class="fakeimg" style="height:100px;">饮品图片</div>
+        <div class="card" id="app">
+            <h2>价格表  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 消费:{{calc}}元</h2>
+            <table class="customers">
+                <tr>
+                    <th>菜名</th>
+                    <th>价格</th>
+                    <th>选择</th>
+                </tr>
+                <tr v-for="dish in dishes">
+                    <td>{{dish.name}}</td>
+                    <td>{{dish.price}}元</td>
+                    <td>
+                        <p>
+                            <input type="checkbox" class="check" v-model="dish.checked">
+                        </p>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
@@ -110,6 +106,78 @@
 <div class="footer">
     <h2>底部区域</h2>
 </div>
-
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '价格表',
+            dishes:[
+                {
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },
+                {
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },
+                {
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },
+                {
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },{
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },{
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },{
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                },{
+                    dish_id:1,
+                    name:'回锅大鸡炖',
+                    price:28,
+                }
+            ]
+        },
+        methods:{
+            get_dishes(){
+                // ajax 从服务器获取数据
+                $.ajax({
+                    type :'get',
+                    url : 'http://148.70.188.107:9094/dish',
+                    context:this,
+                    // data 就是返回信息
+                    success:function (data,status) {
+                       this.dishes = data;
+                    }
+                });
+            }
+        },
+        computed:{
+            calc(){
+                var total_price = 0;
+                for(var index in this.dishes) {
+                    total_price+=1;
+                    if (this.dishes[index].checked){
+                        total_price+=this.dishes[index].price;
+                    }
+                }
+                return total_price;
+            }
+        },
+    })
+    app.get_dishes();
+</script>
 </body>
 </html>
