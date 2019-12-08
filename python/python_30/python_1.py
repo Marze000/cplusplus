@@ -1,18 +1,17 @@
-def maxProduct(nums):
-    if not nums:
-        return 0
-    max_mult = nums[0]
-    result = nums[0]
-    for i in range(1, len(nums)):
-        result *= nums[i]
-        if result == 0:
-            result = 1
-            max_mult = max(0, max_mult)
-        max_mult = max(result, max_mult)
-    return max_mult
+def trailingZeroes(n):
+    def trailing(n):
+        if n == 1:
+            return 1
+        return n*trailing(n-1)
+    temp = trailing(n)
+    lit = list(''.join(str(temp)))
+    count = 0
+    while lit.pop(-1) == 0:
+        count += 1
+    return count
 
 
 if __name__ == "__main__":
-    nums = [-2, 0, -1]
-    a = maxProduct(nums)
+    n = 5
+    a = trailingZeroes(n)
     print(a)
