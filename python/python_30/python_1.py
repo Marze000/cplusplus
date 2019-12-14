@@ -1,20 +1,18 @@
-'''
-a = 10
-num = ''.join(bin(a))
-# print(list(num[::-1]))
+def minSubArrayLen(s, nums):
+    if not sum or s>sum(nums):
+        return 0
+    left ,right,end = 0,1,len(nums)+1
+    min_num  = len(nums)
+    while right<end:
+        if sum(nums[left:right])>=s:
+            min_num = min(min_num,len(nums[left:right]))
+            left+=1
+        else:
+            right+=1
+    return min_num
 
-n = 10
-m = '{0:032b}'.format(n)[::-1]
-print(m)
-print(int(m, 2))
-
-
-nums = [1, 2, 3, 4, 5]
-num = nums[0:5:2]
-print(num)
-
-'''
-a = 'aac'
-b = 'dde'
-c = set(zip(a, b))
-print(list(c))
+if __name__ == "__main__":
+    s = 7
+    nums = [2,3,1,2,4,3]
+    a = minSubArrayLen(s, nums)
+    print(a)
