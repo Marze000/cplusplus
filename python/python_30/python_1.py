@@ -1,15 +1,31 @@
-def maximalSquare(matrix):
-    if not len(matrix) or not len(matrix[0]):
-        return 0
-    b,row,col = 0,len(matrix)+1,len(matrix[0])+1
-    res = [[0]*row for _ in range(col)]
-    for i in range(1,row):
-        for j in range(1,col):
-            if matrix[i-1][j-1]=='1':
-                res[i][j] = min(res[i-1][j-1],res[i-1][j],res[i][j-1])+1
-                b = max(b,res[i][j])
-    return b**2
+def productExceptSelf(nums):
+    n = len(nums)
+    res = [1]*n
+    for i in range(n-1):
+        res[i+1] = res[i] * nums[i]
+    right = 1
+    for i in range(n-1, -1, -1):
+        res[i] *= right
+        right *= nums[i]
+    return res
+
+
+def maxSlidingWindow(nums, k):
+    n = len(nums)
+    if n < 2 or k == 1:
+        return nums
+    res = []
+    index = [0]
+    queue = [nums[0]]
+    for i in range(1, n):
+        if index[0] <= i-k:
+            index.pop(0)
+        while index and nums[index[-1]] < nums[i]:
+            index.pop()
+        index.append(i)
+        if i >= k-1:
+            res.append(nums[index[0]])
+    return res
+
+
 if __name__ == "__main__":
-    matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
-    a = maximalSquare(matrix)
-    print(a)
