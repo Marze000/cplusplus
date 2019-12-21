@@ -5,6 +5,7 @@
 #include <set>
 #include <vector>
 #include <list>
+#include <queue>
 using namespace std;
 
 #if 0
@@ -152,7 +153,6 @@ int main() {
 	system("pause");
 	return 0;
 }
-#endif
 class Date {
 public:
 	Date(int year,int month,int days)
@@ -175,14 +175,63 @@ private:
 	int _month;
 	int _days;
 };
+#endif
 
-#include <queue>
+class Date {
+public:
+	Date(int year = 2019, int month = 12, int day = 21)
+		:_year(year)
+		,_month(month)
+		,_day(day) {
+		
+	}
+	bool operator <(const Date&d)const {
+		return (_year < d._year) ||
+			(_year == d._year && _month < d._month) ||
+			(_year == d._year && _month == d._month && _day < d._day);
+	}
+	bool operator >(const Date&d)const {
+		return (_year > d._year) ||
+			(_year == d._year && _month > d._month) ||
+			(_year == d._year && _month == d._month && _day > d._day);
+	}
+	// 重载 << 符号
+	friend ostream& operator<<(ostream& _cout, const Date&d) {
+		_cout << d._year << "-" << d._month << "-" << d._day << endl;
+		return _cout;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
 int main() {
 
-	deque<int>d1;
-	deque<int>d2(4, 100);
-	deque<int>d3(d2.begin(), d2.end());
-	deque<int>d4(d2);
+	priority_queue<Date> q1;
+	q1.push(Date(2018, 10, 29));
+	q1.push(Date(2018, 10, 28));
+	q1.push(Date(2018, 10, 30));
+	cout << q1.top() << endl;
+	// 如果要创建小堆，需要用户提供>的重载
+	priority_queue<Date, vector<Date>, greater<Date>> q2;
+	q2.push(Date(2018, 10, 29));
+	q2.push(Date(2018, 10, 28));
+	q2.push(Date(2018, 10, 30));
+	cout << q2.top() << endl;
+
+	//// 默认情况下，创建的是大堆，其底层按照小于号比较
+	//vector<int> v{ 3,2,7,6,0,4,1,9,8,5 };
+	//priority_queue<int> q1(v.begin(),v.end());
+
+	//cout << q1.top() << endl;
+	//// 如果要创建小堆，将第三个模板参数换成greater比较方式
+	//priority_queue<int, vector<int>, greater<int>> q2(v.begin(), v.end());
+	//cout << q2.top() << endl;
+
+	//deque<int>d1;
+	//deque<int>d2(4, 100);
+	//deque<int>d3(d2.begin(), d2.end());
+	//deque<int>d4(d2);
 
 	//list<Date>l2;
 	//Date d(2019, 12, 20);
