@@ -1,16 +1,21 @@
-def moveZeroes(nums):
-    j = 0
-    for i in range(len(nums)):
-        if nums[i] != 0:
-            nums[j] = nums[i]
-            j += 1
-    while j < len(nums):
-        nums[j] = 0
-        j += 1
-    return nums
+def wordPattern(pattern, str):
+    s = str.split()
+    temp = {}
+    pattern = ' '.join(pattern)
+    pattern = list(pattern)
+    if len(set(pattern)) != len(set(s)):
+        return False
+    for i in range(len(pattern)):
+        if pattern[i] not in temp:
+            temp[pattern[i]] = s[i]
+        else:
+            if s[i] != temp[pattern[i]]:
+                return False
+    return True
 
 
 if __name__ == "__main__":
-    nums = [0, 0, 1]
-    a = moveZeroes(nums)
+    pattern = "abba"
+    str = "dog cat cat dog"
+    a = wordPattern(pattern, str)
     print(a)
