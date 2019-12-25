@@ -1,14 +1,16 @@
-def lengthOfLIS(nums):
-    max_cout = 0
-    for i in range(len(nums)):
-        cout = 0
-        temp = nums[i]
-        for j in range(i+1, len(nums)):
-            if nums[j] > temp:
-                temp = nums[j]
-                cout += 1
-        max_cout = max(max_cout, cout)
-    return max_cout
+def lengthOfLIS(self, nums):
+    if not nums:
+        return 0
+    n = len(nums)
+    dp = [1]*n
+    for i in range(1, n):
+        cur_max = 0
+        for j in range(i):
+            if nums[i] > nums[j]:
+                cur_max = max(cur_max, dp[j])
+        if cur_max:
+            dp[i] = cur_max + 1
+    return max(dp)
 
 
 if __name__ == "__main__":

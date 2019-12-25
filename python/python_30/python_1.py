@@ -1,20 +1,7 @@
-def uncommonFromSentences(A, B):
-    dic = {}
-    temp = A.split()+B.split()
-    for s in temp:
-        if s not in dic:
-            dic[s] = 1
-        else:
-            dic[s] += 1
-    res = []
-    for key, value in dic.items():
-        if value == 1:
-            res.append(key)
-    return res
+class Student(obiect):
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
 
-
-if __name__ == "__main__":
-    A = "this apple is sweet"
-    B = "this apple is sour"
-    a = uncommonFromSentences(A, B)
-    print(a)
+    def print_score(self):
+        print("%s: %s" % (self.name, self.score))
