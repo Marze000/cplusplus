@@ -28,7 +28,14 @@ if __name__ == "__main__":
     a = kthSmallest(matrix, k)
     print(a)
 
-'''
 s = 'abcde'
 s = list(s)
 print(s)
+
+'''
+s = 'ababbcccc'
+k = 2
+c = min(set(s), key=s.count)
+n = s.split(c)
+print(n)
+# c = max(self.longestSubstring(t, k) for t in s.split(c))
