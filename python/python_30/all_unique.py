@@ -1,41 +1,61 @@
+import re
+# print(re.match('www', 'www.runoob.com').group())
+# print(re.search('tion', 'functions'))
+# ret = re.sub('\d', '@', 'duiag2dau9hd81dhakl')
+# 先按 @ 分割,再按 a 分割
+# ret = re.split('[@a]', 'dkjas@dak@fa')
+# print(ret)
 '''
-def kthSmallest(matrix, k):
-    n, m = len(matrix), len(matrix[0])
-    l, h = matrix[0][0], matrix[n-1][m-1]
-    while l < h:
-        count = 0
-        mid = l + (h-l)//2
-        for i in range(n):
-            j = m-1
-            while j >= 0 and matrix[i][j] > mid:
-                j -= 1
-            count += j+1
-            print(count, k)
-        if count >= k:
-            h = mid
-        else:
-            l = mid + 1
-    return l
+line = "Cats are smarter than dogs"
 
 
-if __name__ == "__main__":
-    matrix = [
-        [1, 5, 9],
-        [10, 11, 13],
-        [12, 13, 15]
-    ]
-    k = 8
-    a = kthSmallest(matrix, k)
-    print(a)
+matchObj = re.match(r'(.*) are (.*?) than(.*)', line, re.M | re.I)
 
-s = 'abcde'
-s = list(s)
-print(s)
+if matchObj:
+    print('matchObj.group():', matchObj.group())
+    print('matchObj.group(1):', matchObj.group(1))
+    print('matchObj.group(2):', matchObj.group(2))
+    print('matchObj.group(2):', matchObj.group(3))
+else:
+    print("No match!!")
 
 '''
-s = 'ababbcccc'
-k = 2
-c = min(set(s), key=s.count)
-n = s.split(c)
-print(n)
-# c = max(self.longestSubstring(t, k) for t in s.split(c))
+
+
+'''
+匹配 '数字+a+数字'
+print(re.match(r'(\d+)a(\d+)', '381a296').group(0))
+print(re.match(r'\d+a\d+)', '381a296').group(1))
+print(re.match(r'(\d+)a(\d+)', '381a296').group(2))
+'''
+
+'''
+line = "Cats are smarter than dogs"
+matchObj = re.match(r'dogs', line, re.M | re.I)
+
+print(matchObj.group())
+matchObj = re.search(r'dogs', line, re.M | re.I)
+print(matchObj.group())
+# pattern : 正则中的模式字符串。
+# repl : 替换的字符串，也可为一个函数。
+# string : 要被查找替换的原始字符串。
+# count : 模式匹配后替换的最大次数，默认 0 表示替换所有的匹配。
+
+phone = "2004-959-559 # 这是一个国外电话号码"
+# 删除字符串中的 Python注释
+num = re.sub(r'#.*$', "", phone)
+print("电话号码是: ", num)
+
+# 删除非数字(-)的字符串
+num=re.sub(r'\D', "", phone)
+print "电话号码是 : ", num
+'''
+
+
+string = 'saljh{da{39812}84}'
+pattern = r'\{'
+repl = '('
+res = re.sub(pattern, repl, string)
+pattern = r'\}'
+repl = ')'
+print(re.sub(pattern, repl, res))
