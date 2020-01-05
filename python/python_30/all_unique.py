@@ -52,6 +52,7 @@ print "电话号码是 : ", num
 '''
 
 
+'''
 string = 'saljh{da{39812}84}'
 pattern = r'\{'
 repl = '('
@@ -59,3 +60,27 @@ res = re.sub(pattern, repl, string)
 pattern = r'\}'
 repl = ')'
 print(re.sub(pattern, repl, res))
+
+pattern = '.'
+s = ''
+if not len(re.search(s, pattern).group()):
+    print('no')
+'''
+pattern = '..'
+s = ''
+
+
+def match(pattern, s):
+    if pattern == '.' and len(s) != 1:
+        return False
+    if not len(re.sub(pattern, '', s)):
+        return True
+    else:
+        return False
+
+
+if __name__ == "__main__":
+    if match(pattern, s):
+        print('yes')
+    else:
+        print('no')
