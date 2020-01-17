@@ -6,6 +6,7 @@
 
 using namespace std;
 
+#if 0
 int findMinArrowShots(vector<vector<int>>& points) {
 	int res = points.size();
 	sort(points.begin(), points.end());
@@ -76,7 +77,6 @@ int searchInsert(vector<int>& nums, int target) {
 //	return true;
 //}
 
-#if 0
 int lengthOfLastWord(string s) {
 	int left = 0;
 	int right = 0;
@@ -92,9 +92,12 @@ int lengthOfLastWord(string s) {
 	}
 	return right - left;
 }
-#endif
 
 void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+	if (m == 0 && n == 0) {
+		nums1[0] = 1;
+		return;
+	}
 	n = n - 1;
 	int n1 = nums1.size() - 1;
 	for (; n >= 0; --n) {
@@ -116,17 +119,65 @@ void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
 	}
 }
 
+
+int fun(int a) {
+	int b;
+	switch (a) {
+	case 1: b = 30;
+	case 2: b = 20;
+	case 3: b = 10;
+	case 4: b = 0;
+	}
+	return b;
+}
+#endif
+
+vector<int> sortArrayByParity(vector<int>& A) {
+	int start = 0;
+	int end = A.size() - 1;
+	while (start < end) {
+		if (A[start] % 2 == 0) {
+			++start;
+		}
+		if (A[end] % 2 != 0) {
+			--end;
+		}
+		if ((A[start] % 2 != 0) && (A[end] % 2 == 0)) {
+			swap(A[start++], A[end--]);
+		}
+	}
+	return A;
+}
 int main() {
-	vector<int>nums1 = {0};
-	vector<int>nums2 = {1};
-	merge(nums1,0, nums2, 1);
-	for (auto &e : nums1) {
+	vector<int>A = { 0,1 };
+	for (auto&e : sortArrayByParity(A)) {
 		cout << e << ' ';
 	}
 	cout << endl;
-/*	int res = lengthOfLastWord("Hello world");
-	cout << res << endl;
-	*/// N = 2 M = 3  4*3/2 = 6
+
+	//const char *p = "abcdefgh", *r;
+	//long *q = (long*)p;
+	//q++;
+	//r = (char*)q;
+	//printf("%s\n", r);
+
+	//int n = 2;
+	//n += n -= n * n; 
+	//cout << n << endl;
+
+	// cout << fun(1) << endl;
+
+
+//	vector<int>nums1 = {0};
+//	vector<int>nums2 = {1};
+//	merge(nums1,0, nums2, 1);
+//	for (auto &e : nums1) {
+//		cout << e << ' ';
+//	}
+//	cout << endl;
+///*	int res = lengthOfLastWord("Hello world");
+	//cout << res << endl;
+	/// N = 2 M = 3  4*3/2 = 6
 	//if (canConstruct("aa", "aab")) {
 	//	cout << "True" << endl;
 	//}
@@ -134,7 +185,7 @@ int main() {
 	//	cout << "false" << endl;
 	//}
 
-/*	int i = 0, a = 0;
+	/*	int i = 0, a = 0;
 	while (i < 20){
 		for (;;) {
 			if (i % 10 == 0) {
@@ -151,10 +202,12 @@ int main() {
 	//int res = searchInsert(nums,7);
 	//cout << res << endl;
 
-/*	int a = 0;
+	/*
+	int a = 0;
 	int b = a >> 1;
 	cout << b << endl;
-	*///string str = "Hello";
+	*/
+	//string str = "Hello";
 
 	//string res = toLowerCase(str);
 	//cout << res << endl;
