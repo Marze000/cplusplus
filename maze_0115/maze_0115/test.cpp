@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -130,7 +131,6 @@ int fun(int a) {
 	}
 	return b;
 }
-#endif
 
 vector<int> sortArrayByParity(vector<int>& A) {
 	int start = 0;
@@ -148,82 +148,184 @@ vector<int> sortArrayByParity(vector<int>& A) {
 	}
 	return A;
 }
-int main() {
-	vector<int>A = { 0,1 };
-	for (auto&e : sortArrayByParity(A)) {
-		cout << e << ' ';
+#include <algorithm>
+#include <math.h>
+
+vector<int> plusOne(vector<int>& digits) {
+	int n = digits.size() - 1;
+	if (digits[n] < 9) {
+		digits[n] += 1;
+		return digits;
 	}
-	cout << endl;
+	for (int i = digits.size() - 1; i >= 0; --i) {
+		if (digits[i] + 1 == 10) {
+			digits[i] = 0;
+		}
+		else {
+			digits[i] += 1;
+		}
+	}
+	if (digits[0] == 0) {
+		digits[0] = 1;
+		digits.push_back(0);
+	}
+	return digits;
+}
 
-	//const char *p = "abcdefgh", *r;
-	//long *q = (long*)p;
-	//q++;
-	//r = (char*)q;
-	//printf("%s\n", r);
-
-	//int n = 2;
-	//n += n -= n * n; 
-	//cout << n << endl;
-
-	// cout << fun(1) << endl;
-
-
-//	vector<int>nums1 = {0};
-//	vector<int>nums2 = {1};
-//	merge(nums1,0, nums2, 1);
-//	for (auto &e : nums1) {
-//		cout << e << ' ';
-//	}
-//	cout << endl;
-///*	int res = lengthOfLastWord("Hello world");
-	//cout << res << endl;
-	/// N = 2 M = 3  4*3/2 = 6
-	//if (canConstruct("aa", "aab")) {
-	//	cout << "True" << endl;
-	//}
-	//else {
-	//	cout << "false" << endl;
-	//}
-
-	/*	int i = 0, a = 0;
-	while (i < 20){
-		for (;;) {
-			if (i % 10 == 0) {
-				break;
-			}
-			else {
-				i -= 1;
+typedef long long ll;
+int thirdMax(vector<int>& nums) {
+	ll one = LLONG_MIN;
+	ll two = LLONG_MIN;
+	ll three = LLONG_MIN;
+	for (int i = 0; i < nums.size(); ++i) {
+		if (nums[i] > one) {
+			three = two;
+			two = one;
+			one = nums[i];
+		}
+		if (nums[i] < one) {
+			if (nums[i] > two) {
+				three = two;
+				two = nums[i];
 			}
 		}
-		i += 11, a += i;
+		if (nums[i] < two) {
+			three = max(three, (ll)nums[i]);
+		}
 	}
-	printf("%d\n", a);
-	*///vector<int>nums = {1,3,5,6};
-	//int res = searchInsert(nums,7);
-	//cout << res << endl;
 
-	/*
-	int a = 0;
-	int b = a >> 1;
-	cout << b << endl;
-	*/
-	//string str = "Hello";
+	return nums.size() <= 2 ? one : (three != LLONG_MIN ? three : one);
+}
+int f(int n) {
+	if (n) {
+		return n + f(n - 1);
+	}
+	else {
+		return n;
+	}
+}
 
-	//string res = toLowerCase(str);
-	//cout << res << endl;
+int fun(int x, int y){
+	if (x == y) {
+		return (x);
+	}
+	else {
+		return ((x + y) / 2);
+	}
+}
 
-	//vector<vector<int>>arr = { {2,8},{3,6},{10,16},{7,12} };
+#include <map>
+vector<int> twoSum(vector<int>& nums, int target) {
+	map<int, int> m;
+	for (int i = 0; i<nums.size();++i){
+		m[nums[i]] = i;
+		// m.count  存在返回1，不存在返回0
+		if (m.find(target-nums[i])!=m.end()) {
+			return {m[target-nums[i]],i};
+		}
+	}
+	return { -1, -1 };
+}
 
-	//sort(arr.begin(), arr.end());
-	//int row = arr.size();
-	//int col = arr[0].size();
-	//for (int i = 0; i < row; ++i) {
-	//	for (int j = 0; j < col; ++j) {
-	//		cout << arr[i][j] << ',';
-	//	}
-	//	cout << endl;
+
+vector<int> twoSum(vector<int>& nums, int target) {
+	unordered_map<int, int> hash;
+	for (int i = 0; i < nums.size(); i++) {
+		if (hash.count(target - nums[i]))
+			return { hash[target - nums[i]], i };
+		hash[nums[i]] = i;
+	}
+	return { -1, -1 };
+}
+
+string reverse(string& str) {
+	int start = 0;
+	int end = str.size() - 1;
+	while (start < end) {
+		swap(str[start++], str[end--]);
+	}
+	return str;
+}
+string addBinary(string a, string b) {
+	a = reverse(a);
+	b = reverse(b);
+	int i = 0, carry = 0;
+	string res = "";
+	int top,bottom;
+	while (i < a.size() || i < b.size()) {
+		if (i < a.size()) {top = a[i] - '0';}
+		else {top = 0;}
+		if (i < b.size()) {bottom = b[i] - '0';}
+		else {bottom = 0;}
+
+		int sum = top+ bottom + carry;
+
+		carry = sum / 2;
+		res += to_string(sum % 2);
+		i++;
+	}
+	if (carry) {
+		res += to_string(carry);
+	}
+	return reverse(res);
+}
+
+int a, b;
+void fun() {
+	a = 100;
+	b = 200;
+}
+
+struct HAR{ 
+	int x,y;
+	struct HAR *p;
+}h[2];
+#endif
+
+bool isdigit(char s) {
+	if ((s <= '9' && s >= '0') || (s == '-') || (s == '+')) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+int myAtoi(string str) {
+	string res = "";
+	for (size_t i = 0; i < str.size(); ++i) {
+		if (isdigit(str[i])) {
+			res += str[i];
+		}
+	}
+
+	int ret = atoi(res.c_str());
+	return min(ret,max(INT_MIN, ret));
+}
+
+int main() {
+	// string str = "-91283472332";
+	// cout << myAtoi(str) << endl;
+	long long a = LONG_MIN;
+	cout << a << endl;
+
+	//h[0].x = 1; h[0].y = 2;
+	//h[1].x = 3; h[1].y = 4;
+	//h[0].p = &h[1]; 
+	//h[1].p = h;//h 代表的是 h[0]的地址
+	//printf("%d,%d \n", (h[0].p)->x, (h[1].p)->y);
+
+	//int a = 5, b = 7;
+	//fun();
+	//printf("%d %d\n", a, b);
+
+#if 0
+	 // cout << addBinary("11", "1");
+	//vector<int>num{ 3,2,4 };
+	//for (auto&e : twoSum(num, 6)) {
+	//	cout << e << ' ';
 	//}
 	//cout << endl;
+#endif
 
 	system("pause");
 	return 0;
