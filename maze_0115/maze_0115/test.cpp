@@ -1,6 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <string>
 #include <unordered_map>
@@ -280,7 +282,6 @@ struct HAR{
 	int x,y;
 	struct HAR *p;
 }h[2];
-#endif
 
 bool isdigit(char s) {
 	if ((s <= '9' && s >= '0') || (s == '-') || (s == '+')) {
@@ -302,12 +303,145 @@ int myAtoi(string str) {
 	return min(ret,max(INT_MIN, ret));
 }
 
+bool idalphadigit(char c) {
+	if (c <= 'z' && c >= 'a') {
+		return true;
+	}
+	if (c <= 'Z' && c >= 'A') {
+		return true;
+	}
+	if (c <= '9' && c >= '0') {
+		return true;
+	}
+	return false;
+}
+bool ishowen(string str) {
+	int start = 0;
+	int end = str.size() - 1;
+	while (start < end) {
+		if (str[start] != str[end]) {
+			return false;
+		}
+		end--;
+		start++;
+	}
+	return true;
+}
+bool isPalindrome(string s) {
+	string res = "";
+	for (size_t i = 0; i < s.size(); ++i) {
+		if (idalphadigit(s[i])) {
+			if (s[i] <= 'z' && s[i] >= 'a') {
+				s[i] -= 32;
+			}
+			res += s[i];
+		}
+	}
+	return ishowen(res);
+}
+
+#endif
+int func(int i, int j){
+	if (i <= 0 || j <= 0)
+		return 1;
+	return 2 * func(i - 3, j / 2);
+}
+
+#include <stack>
+#include <math.h>
+int min(int a, int b) {if (a < b) {	return a;} return b;}
+int max(int a, int b) {if (a > b) {	return a;} return b;}
+
 int main() {
+	vector<int>nums{2, 6, 4, 8, 10, 9, 15};
+	stack<int>s;
+	int left = nums.size();
+	for (size_t i = 0; i < nums.size(); ++i) {
+		while (!s.empty() && s.top() > nums[i]) {
+			left = min(left, s.size()-1);
+			s.pop();
+			i += 1;
+		}
+		s.push(nums[i]);
+	}
+
+	while (!s.empty()) {
+		s.pop();
+	}
+	int right = 0;
+	for (int i = nums.size()-1; i >= 0; --i) {
+		while (!s.empty() && s.top() < nums[i]) {
+			right = max(right, s.size()-1);
+			s.pop();
+			i -= 1;
+		}
+		s.push(nums[i]);
+	}
+	right = nums.size() - right;
+	cout << right - left +1<< endl;
+
+	// return right - left > 0 ? right - left + 1 : 0;
+	//int a = 1; int b = 2;
+	//for (; a < 8; a++){
+
+	//	b += a; a += 2;
+	//}
+	//printf("%d£¬%d\n", a, b);
+
+	//int a[] = { 2,4,6,8 }, *p = a, i;
+	//for (i = 0; i < 4; i++) {
+	//	a[i] = *p++;
+	//}
+	//printf("%d\n", a[2]);
+
+	// cout << func(15, 20) << endl;
+	//vector<int>v{ 'a','a','a','a','g','g','b','b','c','c','f','f','d','d' };
+	//unordered_map<char, int>mp;
+	//for (auto&e : v) {
+	//	mp[e]++;
+	//}
+	//for (int i = 0; i < v.size(); ++i) {
+	//	cout << mp[v[i];
+	//}
+
+	/*for (auto&e : mp) {
+		cout << e.first << ':' << e.second;
+	}
+	cout << endl;
+*/
+#if 0
+	string s = "A man, a plan, a canal: Panama";
+	if (isPalindrome(s)) {
+		cout << "true";
+	}
+	cout << "false";
+
+
+	//char s[] = "abcdefgh";
+	//char*p = s;
+	//p += 3;
+	//printf("%d\n", strlen(strcpy(p, "ABCD")));
+	//char e[] = "abcdedfas";
+	//strcpy(p, "ABCdajkfhdkajh");
+
+
+	int a, b;
+	scanf("%d,%d", &a, &b);
+	if (a > b) {
+		a = b;
+		b = a;
+	}
+	else {
+		a++;
+		b++;
+	}
+	printf("%d,%d", a, b);
+
 	// string str = "-91283472332";
 	// cout << myAtoi(str) << endl;
-	long long a = LONG_MIN;
+	/*long long a = LONG_MIN;
 	cout << a << endl;
-
+*/
 	//h[0].x = 1; h[0].y = 2;
 	//h[1].x = 3; h[1].y = 4;
 	//h[0].p = &h[1]; 
@@ -318,7 +452,6 @@ int main() {
 	//fun();
 	//printf("%d %d\n", a, b);
 
-#if 0
 	 // cout << addBinary("11", "1");
 	//vector<int>num{ 3,2,4 };
 	//for (auto&e : twoSum(num, 6)) {
@@ -326,7 +459,6 @@ int main() {
 	//}
 	//cout << endl;
 #endif
-
 	system("pause");
 	return 0;
 }
