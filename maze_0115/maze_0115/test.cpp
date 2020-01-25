@@ -1,121 +1,130 @@
-#include<iostream>
-#include<string>
-#include<algorithm>
-#include<vector>
+#include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 class A{
 public:
-	A() :m_iVal(0) {
-		test(); 
+	void foo(){
+		printf("1");
 	}
-	virtual void func() {
-		std::cout << m_iVal <<' '; 
+	virtual void fun(){
+		printf("2");
 	}
-	void test() {
-		func(); 
-	}
-public:
-	int m_iVal;
 };
+
 class B : public A{
 public:
-	B() {
-		test(); 
+	void foo(){
+		printf("3");
 	}
-	virtual void func(){
-		++m_iVal;
-		std::cout << m_iVal << ' ';
+	// fun 为虚函数
+	void fun(){
+		printf("4");
 	}
 };
 
-int main(){
-	A*p = new B;
-	p->test();
+int main(void){
+	A a;
+	B b;
+	A *p = &a;
+	p->foo(); //1
+	p->fun(); //2
+	p = &b;
+	p->foo(); //1
+	p->fun(); //4
+	A *ptr = (A *)&b;
+	ptr->foo(); //1
+	ptr->fun(); //4
 
 	system("pause");
 	return 0;
 }
+
 
 #if 0
-int main(){
-	string str1, str2;
-	while (cin >> str1 >> str2){
-		//以最短的字符串作为s1
-		if (str1.size() > str2.size()) {
-			swap(str1, str2);
-		}
-		int len1 = str1.size(), len2 = str2.size();
-		int i, j, start = 0, max = 0;
-		vector<vector<int>> MCS(len1 + 1, vector<int>(len2 + 1, 0));
-		for (i = 1; i <= len1; i++)
-			for (j = 1; j <= len2; j++){
-				if (str1[i - 1] == str2[j - 1])
-					MCS[i][j] = MCS[i - 1][j - 1] + 1;
-				//如果有更长的公共子串，更新长度
-				if (MCS[i][j] > max){
-					max = MCS[i][j];
-					//以i结尾的最大长度为max, 则子串的起始位置为i - max
-					start = i - max;
-				}
-			}
-		cout << str1.substr(start, max) << endl;
-	}
+int main(int argc, char* argv[]){
+	A*p1 = new A;
+	A*p2 = new B;
+	// B*p3 = new A;    //error
+	B*p3 = reinterpret_cast<B*> (new A);
+	B*p4 = new B;
+	// test()
+	p1->test();    //A->1
+	p2->test();    //A->1
+	p3->test();    //A->1
+	p4->test();    //A->1
+	// func()
+	p1->func();    //A->1
+	p2->func();    //A->1
+	p3->func();    //B->0
+	p4->func();    //B->0
+	
+	//A*p1 = new A;
+	//A*p2 = new B;
+	//// B*p3 = new A;    //error
+	//B*p3 = reinterpret_cast<B*> (new A);
+	//B*p4 = new B;
+
+	//// 基类对象调用成员函数
+	//p1->test();    //A->1
+	//// 静态联编 首先将 val 设为1
+	//p2->test();    //B->1
+	//// p3 被重新编译解释为一个 A类指针
+	//p3->test();    //A->1
+
+	//p4->test();    //B->1
+	////测试func()
+	//p1->func();    //A->1
+	//p2->func();    //B->1
+	//// 首先 val 绑定了0,然后重新编译了
+	//p3->func();    //A->0
+	//p4->func();    //B->0
 
 	system("pause");
 	return 0;
 }
 
-class A{
-public:
-	void print(){
-		cout << "A:print()";
-	}
-};
-class B : private A{
-public:
-	void print(){
-		A::print();
-		cout << "B:print()";
-	}
-};
-class C : public B{
-public:
-	void print(){
-		A::print();
-	}
-};
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(){
-	C b;
-	b.print();
+#define N 9
+int x[N];
 
-	system("pause");
-	return 0;
+int count = 0;
+
+void dump() {
+	int i = 0;
+	for (i = 0; i < N; i++) {
+		printf("%d", x[i]);
+	}
+	printf("\n");
 }
-
-
-int f(int n) {
-	static int i = 1;
-	if (n >= 5) {
-		return n;
-	}
-	n = n + i;
-	i++;
-	return f(n);
+void swap(int a, int b) {
+	int t = x[a];
+	x[a] = x[b];
+	x[b] = t;
 }
-
-//void increment_ints(int p[], int n){
-//	assert(p != NULL);
-//	assert(n >= 0); 
-//	while (n--){
-//		*p++;
-//		p++;
-//	}
-//}
+void run(int n) {
+	int i;
+	if (N - 1 == n) {
+		dump();
+		count++;
+		return;
+	}
+	for (i = n; i < N; i++) {
+		swap(n, i);
+		run(n + 1);
+		swap(n, i);
+	}
+}
 
 int main() {
-	f(1);
+	int i;
+	for (i = 0; i < N; i++) {
+		x[i] = i + 1;
+	}
+	run(0);
+	printf("* Total: %d\n", count);
 
 	system("pause");
 	return 0;
