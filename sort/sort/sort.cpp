@@ -145,23 +145,19 @@ void MergeSort(int* array, int size) {
 	_MergeSort(array, 0, size, temp);
 	free(temp);
 }
-#endif
 
 void CountSort(int *array, int size) {
 	//选择最小的和最大的数字·O（N）	N代表的是数据个数
 	int MaxValue = array[0];
 	int MinValue = array[0];
-
 	for (int i = 1; i < size; ++i) {
 		if (array[i] > MaxValue) {
 			MaxValue = array[i];
 		}
-
 		if (array[i] < MinValue) {
 			MinValue = array[i];
 		}
 	}
-
 	//申请空间·O（M）[辅助空间]·M代表是数据范围
 	int Range = MaxValue - MinValue + 1;
 	int* array2 = (int*)malloc(sizeof(int)*Range);
@@ -169,15 +165,12 @@ void CountSort(int *array, int size) {
 		assert(0);
 		return;
 	}
-
 	//将每一个位置置空
 	memset(array2, 0, sizeof(int)*Range);
-
 	//统计元素出现次数·O(N)
 	for (int i = 0; i < size; ++i) {
 		array2[array[i] - MinValue]++;
 	}
-
 	//往出搬移元素·O（N）
 	int index = 0;
 	for (int i = 0; i < Range; ++i) {
@@ -187,10 +180,11 @@ void CountSort(int *array, int size) {
 	}
 	free(array2);
 }
+#endif
 
 int main() {
 	int arr[] = { 1,3,4,6,2,7,9,0,8,5 };
-	CountSort(arr,10);
+	// CountSort(arr,10);
 	for (int i = 0; i < 10; ++i) {
 		cout << arr[i] << ' ';
 	}
@@ -199,3 +193,29 @@ int main() {
 	system("pause");
 	return 0;
 }
+### 字符串转换为整数
+```c
+C语言字符串转整数
+1.atoi(string num)
+============================
+2.sprintf / sscanf
+char str[] = "100";
+int num = 0;
+sscanf(str, “%d”, &num);
+printf("%d\n", num);
+==========================
+c++字符串转整数
+3.stringstream
+std::stringstream ss;
+std::string str = "100";
+int num = 0;
+ss << str;
+ss >> num;
+4.std::stoi
+std::string str = "100";
+int num = std::stoi(str);
+std::cout << num << std::endl;
+5.boost
+std::string str = "100";
+int num = boost::lexcal_cast<int>(str);
+```
