@@ -183,39 +183,33 @@ void CountSort(int *array, int size) {
 #endif
 
 int main() {
-	int arr[] = { 1,3,4,6,2,7,9,0,8,5 };
-	// CountSort(arr,10);
-	for (int i = 0; i < 10; ++i) {
-		cout << arr[i] << ' ';
-	}
-	cout << endl;
+	printf("%04d\n", 23);
 
 	system("pause");
 	return 0;
 }
-### 字符串转换为整数
-```c
-C语言字符串转整数
-1.atoi(string num)
-============================
-2.sprintf / sscanf
-char str[] = "100";
-int num = 0;
-sscanf(str, “%d”, &num);
-printf("%d\n", num);
-==========================
-c++字符串转整数
-3.stringstream
-std::stringstream ss;
-std::string str = "100";
-int num = 0;
-ss << str;
-ss >> num;
-4.std::stoi
-std::string str = "100";
-int num = std::stoi(str);
-std::cout << num << std::endl;
-5.boost
-std::string str = "100";
-int num = boost::lexcal_cast<int>(str);
-```
+//字符串转换为整数
+
+//C语言字符串转整数
+//1.atoi(string num)
+//============================
+//2.sprintf / sscanf
+//char str[] = "100";
+//int num = 0;
+//sscanf(str, “%d”, &num);
+//printf("%d\n", num);
+//==========================
+//c++字符串转整数
+//3.stringstream
+//std::stringstream ss;
+//std::string str = "100";
+//int num = 0;
+//ss << str;
+//ss >> num;
+//4.std::stoi
+//std::string str = "100";
+//int num = std::stoi(str);
+//std::cout << num << std::endl;
+//5.boost
+//std::string str = "100";
+//int num = boost::lexcal_cast<int>(str);
