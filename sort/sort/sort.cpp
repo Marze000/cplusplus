@@ -1,10 +1,10 @@
+#if 0 
 #include <iostream>
 #include <stdlib.h>
 #include <algorithm>
 #include <assert.h>
 using namespace std;
 
-#if 0
 void Bubble(int *arr, int size) {
 	for (int i = 0; i < size-1; ++i) {
 		for (int j = 1; j < size - i; ++j) {
@@ -180,36 +180,95 @@ void CountSort(int *array, int size) {
 	}
 	free(array2);
 }
-#endif
+enum string {
+	x1,
+	x2,
+	x3 = 10,
+	x4,
+	x5,
+} x;
+
+#include <algorithm>
+
+char *myString(){
+	char buffer[6] = { 0 };
+	const char *s = "Hello World!";
+	for (int i = 0; i < sizeof(buffer) - 1; i++){
+		buffer[i] = *(s + i);
+	}
+	return buffer;
+}
 
 int main() {
-	printf("%04d\n", 23);
+	printf("%s\n", myString());
 
 	system("pause");
 	return 0;
 }
-//字符串转换为整数
 
-//C语言字符串转整数
-//1.atoi(string num)
-//============================
-//2.sprintf / sscanf
-//char str[] = "100";
-//int num = 0;
-//sscanf(str, “%d”, &num);
-//printf("%d\n", num);
-//==========================
-//c++字符串转整数
-//3.stringstream
-//std::stringstream ss;
-//std::string str = "100";
-//int num = 0;
-//ss << str;
-//ss >> num;
-//4.std::stoi
-//std::string str = "100";
-//int num = std::stoi(str);
-//std::cout << num << std::endl;
-//5.boost
-//std::string str = "100";
-//int num = boost::lexcal_cast<int>(str);
+
+int main() {
+	int a = 123;
+	int b = 248;
+	int c = a & b;
+	cout << c << endl;
+
+
+	//int a, b, c;
+	//while (cin >> a >> b >> > c) {
+	//	if ((a + b > c) && (a + c > b) && (c + b > a)) {
+	//		cout << "Yes" << endl;
+	//	}
+	//	else {
+	//		cout << "No" << endl;
+	//	}
+	//}
+	system("pause");
+	return 0;
+}
+#endif
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+int main() {
+	int number1 = 123;
+	string str = to_string(number1);
+	cout << str << endl;
+
+	//字符串转换为整数
+	//char num[] = "123";
+	//int n = atoi(num);
+	//printf("%d\n", n);
+
+	//C语言字符串转整数
+	//============================
+	//2.sprintf / sscanf
+	/*	char str[] = "123";
+	int num = 0;
+	sscanf(str, "%d", &num);
+	printf("%d\n", num);
+	*///==========================
+
+	//c++字符串转整数
+	//3.stringstream
+	//std::stringstream ss;
+	//std::string str = "100";
+	//int num = 0;
+	//ss << str;
+	//ss >> num;
+
+	//4.std::stoi
+	//std::string str = "100";
+	//int num = std::stoi(str);
+	//std::cout << num << std::endl;
+
+	//5.boost
+	//std::string str = "100"; int num = boost::lexcal_cast<int>(str);
+
+	system("pause");
+	return 0;
+}
