@@ -1,67 +1,173 @@
-#if 0
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-void help(int n, int m, vector<int>& v, int beg) {
-	// m == 0 为递归结束条件. 此时 v 中可能已经包含了若干个元素了. 并且 v 中的内容就是一组结果.
-	if (m == 0) {
-		for (int i = 0; i < v.size(); i++) {
-			// 这个 ? : 只是为了让结果的格式能够和要求一样.
-			i == 0 ? cout << v[i] : cout << " " << v[i];
-		}
-		cout << endl;
+struct player {
+	int h;
+	int w;
+};
+bool com_w(player p1, player p2) {
+	if (p1.w == p2.w) {
+		return p1.h > p2.h;
 	}
-	for (int i = beg; i <= n && i <= m; i++) {
-		// 以下几行代码是该题目的关键. 问题的转换.
-		// 为了求 i -> n 有多少种情况和为 m, 则把问题转换为
-		// i + 1 -> n 有多少中情况和为 m - i
-		v.push_back(i);
-		help(n, m - i, v, i + 1);
-		v.pop_back();
+	else {
+		return p1.w < p2.w;
 	}
 }
 
 
 int main() {
-	int n, m;
-	while (cin >> n >> m) {
-		vector<int>v;
-		help(n, m, v, 1);
+	int n, h, w, index;
+	vector<player>p;
+	while (cin >> n) {
+		p.clear();
+		for (int i = 0; i < n; ++i) {
+			player pt;
+			cin >> index >> w >> h;
+			pt.h = h;
+			pt.w = w;
+			p.push_back(pt);
+		}
+		sort(p.begin(), p.end(), com_w);
+		vector<int>v(n);
+		for (int i = 0; i < n; ++i) {
+			v[i] = p[i].h;
+		}
+		// 对容器进行最长上升子序列的算法
+		int cnt, maxnum;
+		for (int i = 0; i < n; ++i) {
+			cnt = 0;
+			for (int j = i + 1; j < n; ++j) {
+				if (v[j] >= v[i]) {
+					v[i] = v[j];
+					++cnt;
+				}
+			}
+			maxnum = max(maxnum, cnt);
+		}
+		cout << maxnum + 1 << endl;
+	}
+	return 0;
+}
+
+#if 0
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include <string>
+using namespace std;
+
+int main() {
+	vector<int>v{ 95,100,80,100,70,102 };
+	int cnt, maxnum;
+	for (int i = 0; i < v.size(); ++i) {
+		cnt = 0;
+		for (int j = i+1; j <v.size(); j++){
+			if (v[j] >= v[i]) {
+				v[i] = v[j];
+				cnt++;
+			}
+		}
+		maxnum = max(maxnum, cnt);
+	}
+	cout << maxnum+1 << endl;
+
+	int n, k, d;
+	cin >> n;
+
+	vector<int> stud(n);
+	for (int i = 0; i < n; i++) {
+		cin >> stud[i];
+	}
+	cin >> k >> d;
+
+	vector<vector<long long>> maxMul(n, vector<long long>(k + 1, 0));
+	vector<vector<long long>> minMul(n, vector<long long>(k + 1, 0));
+
+	for (int i = 0; i < n; i++) {
+		maxMul[i][1] = stud[i];
+		minMul[i][1] = stud[i];
 	}
 
+	for (int i = 2; i <= k; i++) {
+		for (int j = 0; j < n; j++) {
+			for (int m = 1; m <= d && j >= m; m++) {
+				maxMul[j][i] = max(maxMul[j][i],\
+					max(maxMul[j - m][i - 1] * stud[j],\
+						minMul[j - m][i - 1] * stud[j]));
+
+				minMul[j][i] = min(minMul[j][i], \
+					min(minMul[j - m][i - 1] * stud[j],\
+						maxMul[j - m][i - 1] * stud[j]));
+			}
+		}
+	}
+
+	long long maxMulResult = 1LL << 63;
+	for (int i = 0; i < n; i++) {
+		maxMulResult = max(maxMulResult, maxMul[i][k]);
+	}
+	cout << maxMulResult;
+	system("pause");
+	return 0;
+}
+
+// 获取文件名
+string getFileName(string path) {
+	int pos = path.rfind('\\');
+	return path.substr(pos + 1);
+}
+
+// 截取文件名后 16 位
+string modifyName(string name) {
+	if (name.size() > 16) {
+		name = name.substr(name.size() - 16);
+	}
+	return name;
+}
+
+struct ErrRecord {
+	string file;
+	int lineNo;
+	int count;
+	// 构造函数
+	ErrRecord(string file, int lineNo) {
+		this->file = file;
+		this->lineNo = lineNo;
+		count = 1;
+	}
+	// 文件名相等的规则
+	bool operator==(const ErrRecord & a) {
+		return (file == a.file) && (lineNo == a.lineNo);
+	}
+};
+
+int main() {
+	string file;
+	int lineNo;
+	vector<ErrRecord> myvec;
+	while (cin >> file >> lineNo) {
+		ErrRecord record(getFileName(file), lineNo);
+		auto res = find(myvec.begin(), myvec.end(), record);
+		// 如果相等代表没有记录
+		if (res == myvec.end()) {
+			myvec.push_back(record);
+		}
+		else {
+			res->count++;
+		}
+	}
+	int count = 0;
+	for (auto item : myvec) {
+		if (count + 8 >= myvec.size()) {
+			cout << modifyName(item.file)<<" "\
+				 << item.lineNo << " "\
+				 << item.count << endl;
+		}
+		count++;
+	}
 	system("pause");
 	return 0;
 }
 #endif
-
-#include <iostream>
-#include <string>
-#include <algorithm>
-#include <vector>
-using namespace std;
-
-// ABCDFYE CDE
-// ABCDGEAS CDECDE
-int main() {
-	string strA, strB;
-	while (cin >> strA >> strB) {
-		int arr[256] = { 0 };
-		for (int i = 0; i < strA.size(); ++i) {
-			arr[strA[i]]++;
-		}
-		for (int i = 0; i < strB.size(); ++i) {
-			if (arr[strB[i]]) {
-				arr[strB[i]]--;
-			}
-			else {
-				cout << "No" << endl;
-				return 0;
-			}
-		}
-		cout << "Yes" << endl;
-	}
-	system("pause");
-	return 0;
-}
-
