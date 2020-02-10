@@ -17,6 +17,30 @@ bool com_w(player p1, player p2) {
 }
 
 
+vector<int> clockwisePrint(vector<vector<int> > mat, int n, int m) {
+	vector<int>ans;
+	int order[4][2] = { {0,1},{1,0},{0,-1},{-1,0} };//方向数组
+	int i = 0, j = -1, start = 0;
+	while (true) {
+		int a = i + order[start][0];
+		int b = j + order[start][1];
+		if (!(0 <= a && a < n) ||
+			!(0 <= b && b < m) ||
+			mat[a][b] == INT_MAX) {
+			
+			start = (start + 1) % 4;
+		}
+		i = i + order[start][0];
+		j = j + order[start][1];
+		ans.push_back(mat[i][j]);
+		mat[i][j] = INT_MAX;
+		if (ans.size() == n * m) {
+			break;
+		}
+	}
+	return ans;
+}
+
 int main() {
 	int n, h, w, index;
 	vector<player>p;
