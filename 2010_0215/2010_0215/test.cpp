@@ -1,10 +1,52 @@
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
-#include <queue>
 #include <string>
+#include <algorithm>
 using namespace std;
 
+int dict[4][2] = { {0,1},{0,-1},{1,0},{-1,0} };
+void dfs(int x, int y, vector<vector<char>>&grid, \
+	int row, int col) {
+
+	if (x < 0 || y < 0 || x >= row || y >= col || grid[x][y] == '0') {
+		return;
+	}
+	grid[x][y] = '0';
+	for (int i = 0; i < 4; ++i) {
+		dfs(x + dict[i][0], y + dict[i][1], grid, row, col);
+	}
+}
+int numIslands(vector<vector<char>>& grid) {
+	int row = grid.size();
+	int col = grid[0].size();
+	int num = 0;
+	for (int i = 0; i < row; ++i) {
+		for (int j = 0; j < col; ++j) {
+			if (grid[i][j] == '1') {
+				dfs(i, j, grid, row, col);
+
+				++num;
+			}
+		}
+	}
+	return num;
+}
+
+int main() {
+	vector<vector<char>>grid{
+		{'1','1','1','1','0'},
+		{'1','1','0','1','0'},
+		{'1','1','0','0','0'},
+		{'0','0','0','0','0'}
+	};
+
+	cout << numIslands(grid) << endl;
+
+	system("pause");
+	return 0;
+}
+#if 0
 class TreeNode {
 public:
 	TreeNode(int data) {
@@ -64,3 +106,4 @@ int main() {
 	system("pause");
 	return 0;
 }
+#endif
