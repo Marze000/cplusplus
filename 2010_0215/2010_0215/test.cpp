@@ -5,48 +5,56 @@
 #include <algorithm>
 using namespace std;
 
-void MergeData(int* arr, int left, int mid, int right, int* temp) {
-	int begin1 = left;
-	int begin2 = mid;
-	int end1 = mid;
-	int end2 = right;
-	int index = left;
-	while (begin1 < end1 && begin2 < end2) {
-		if (arr[begin1] < arr[begin2]) {
-			temp[index++] = arr[begin1++];
-		}
-		else{
-			temp[index++] = arr[begin2++];
-		}
+
+int dict[4][2] = { {0,1},{0,-1},{1,0},{-1,0} };
+bool ifcount(int i, int j, int k) {
+	int num = 0;
+	while (i) {
+		num += i % 10;
+		i /= 10;
 	}
-	while (begin1 < end1) {
-		temp[index++] = arr[begin1++];
+	while (j) {
+		num += j % 10;
+		j /= 10;
 	}
-	while (begin2 < end2) {
-		temp[index++] = arr[begin2++];
+	if (num > k) {
+		return false;
+	}
+	return true;
+}
+
+void getcount(vector<vector<int>>&v, \
+	int i, int j, int m, int n, int k) {
+	if (i < 0 || i >= m || j < 0 || j >= n || (v[i][j]==1)) {
+		return;
+	}
+	if (ifcount(i, j, k)) {
+		v[i][j] = 1;
+	}
+	else {
+		return;
+	}
+	for (int t = 0; t < 4; ++t) {
+		getcount(v, i + dict[t][0], j + dict[t][1], m, n, k);
 	}
 }
 
-void MergeSort(int *arr, int left, int right, int* temp) {
-	if (right - left <= 1) {
-		return;
+int movingCount(int m, int n, int k) {
+	vector<vector<int>>v(m, vector<int>(n, 0));
+
+	getcount(v, 0, 0, m, n, k);
+	int count = 0;
+	for (int i = 0; i < m; ++i) {
+		for (int j = 0; j < n; ++j) {
+			if (v[i][j] == 1) {
+				++count;
+			}
+		}
 	}
-	int mid = left + (right - left) / 2;
-	MergeSort(arr, left, mid, temp);
-	MergeSort(arr, mid,right, temp);
-	MergeData(arr, left, mid, right, temp);
-	memcpy(arr + left, temp + left, sizeof(arr[0])*(right - left));
+	return count;
 }
 int main() {
-	int arr[10] = { 0,2,4,6,8,1,3,5,7,9 };
-	int size = sizeof(arr) / sizeof(arr[0]);
-	int* temp = new int[sizeof(arr)];
-	MergeSort(arr, 0, size, temp);
-	for (auto&e : arr) {
-		cout << e << ' ';
-	}
-	cout << endl;
-	delete[] temp;
+	cout << movingCount(2, 3, 1) << endl;
 
 	system("pause");
 	return 0;
