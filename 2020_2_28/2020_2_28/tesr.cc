@@ -1,42 +1,35 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
+#include <vector>
 using namespace std;
 
-bool fushu = false;
-string reverse(string res) {
-	int size = res.size();
-	int left = 0, right = size - 1;
-	if (res[0] == '-') {
-		fushu = true;
-		left = 1;
+vector<double> twoSum(int n) {
+	int dp[15][70];
+	memset(dp, 0, sizeof(dp));
+	for (int i = 1; i <= 6; i++) {
+		dp[1][i] = 1;
 	}
-	while (left < right) {
-		swap(res[left++], res[right--]);
+	for (int i = 2; i <= n; i++) {
+		for (int j = i; j <= 6 * i; j++) {
+			for (int cur = 1; cur <= 6; cur++) {
+				if (j - cur <= 0) {
+					break;
+				}
+				dp[i][j] += dp[i - 1][j - cur];
+			}
+		}
 	}
-	return res;
+	int all = pow(6, n);
+	vector<double> ret;
+	for (int i = n; i <= 6 * n; i++) {
+		ret.push_back(dp[n][i] * 1.0 / all);
+	}
+	return ret;
 }
+
 int main() {
-	int n;
-	while (cin >> n) {
-		string str = reverse(to_string(n));
-		bool flag = false;
-		string res;
-		for (int i = 0; i < str.size(); ++i) {
-			if (str[i] != '0' && str[i] != '-') {
-				flag = true;
-			}
-			if (flag) {
-				res += str[i];
-			}
-		}
-		if (!fushu) {
-			cout << res << endl;
-		}
-		else {
-			cout << "-" << res << endl;
-		}
-	}
+	int n = 3;
+	cout << n*1.0 / 60 << endl;
+
 	system("pause");
 	return 0;
 }
