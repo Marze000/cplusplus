@@ -1,34 +1,28 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
 using namespace std;
 
-vector<double> twoSum(int n) {
-	int dp[15][70];
-	memset(dp, 0, sizeof(dp));
-	for (int i = 1; i <= 6; i++) {
-		dp[1][i] = 1;
-	}
-	for (int i = 2; i <= n; i++) {
-		for (int j = i; j <= 6 * i; j++) {
-			for (int cur = 1; cur <= 6; cur++) {
-				if (j - cur <= 0) {
-					break;
-				}
-				dp[i][j] += dp[i - 1][j - cur];
-			}
+int largestRectangleArea(vector<int>& heights) {
+	heights.push_back(0);
+	stack<int> stk;
+	int maxArea = 0;
+	for (int i = 0; i < heights.size(); i++) {
+		while (!stk.empty() && heights[i] < heights[stk.top()]) {
+			int top = stk.top();
+			stk.pop();
+			maxArea = max(maxArea, heights[top] * (stk.empty() ? i : (i - stk.top() - 1)));
 		}
+		stk.push(i);
 	}
-	int all = pow(6, n);
-	vector<double> ret;
-	for (int i = n; i <= 6 * n; i++) {
-		ret.push_back(dp[n][i] * 1.0 / all);
-	}
-	return ret;
+	return maxArea;
 }
-
 int main() {
-	int n = 3;
-	cout << n*1.0 / 60 << endl;
+	vector<int>heights = { 2,1,5,6,2,3 };
+	cout << largestRectangleArea(heights) << endl;
+
 
 	system("pause");
 	return 0;
